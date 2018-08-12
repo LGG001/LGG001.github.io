@@ -12,31 +12,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Text2]]></title>
-    <url>%2F2018%2F07%2F22%2FText2%2F</url>
-    <content type="text"></content>
-      <tags>
-        <tag>life</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Copyright-Text]]></title>
-    <url>%2F2018%2F07%2F22%2FCopyright-Text%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Hexo-Test]]></title>
-    <url>%2F2018%2F07%2F21%2FHexo-Test%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
     <title><![CDATA[Hexo:搭建个人博客]]></title>
     <url>%2F2018%2F07%2F20%2FHexo-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%2F</url>
     <content type="text"><![CDATA[Create Hexo需要环境环境安装是只需一直点Next即可 PC:Windows10 64-bit Git:Download 2.18.0 for Windows Node.js:Windows Installer(.msi)64-bit 安装Hexo安装好Git和Node.js环境后，打开Git Bash，然后输入如下命令安装Hexo1npm install hexo-cli -g 输入如下命令查看是否安装成功1hexo -v 出现下面内容，即为安装成功12345678910111213141516hexo-cli: 1.1.0os: Windows_NT 10.0.16299 win32 x64http_parser: 2.8.0node: 10.6.0v8: 6.7.288.46-node.13uv: 1.21.0zlib: 1.2.11ares: 1.14.0modules: 64nghttp2: 1.32.0napi: 3openssl: 1.1.0hicu: 61.1unicode: 10.0cldr: 33.0tz: 2018c 接下来在G盘新建blog文件夹（可根据个人而定），用于作为hexo博客目录。现在在Git Bash进入到blog文件夹，然后在里面初始化为hexo博客目录123cd g:bloghexo init 初始化成功信息如下1234added 397 packages from 485 contributors and audited 2021 packages in 51.695sfound 0 vulnerabilitiesINFO Start blogging with Hexo! 然后安装依赖包1npm install 出现下面信息即安装完成12audited 2021 packages in 2.965sfound 0 vulnerabilities 下面输入命令来生成静态页面1hexo generate 输入启动服务命令1hexo server 可以看到一下信息12INFO Start processingINFO Hexo is running at http://localhost:4000/. Press Ctrl+C to stop. 现在打开浏览器访问http://localhost:4000/即可看到，在Git Bash按Crl+c就会关闭网站。 note:如果出现防火墙提示，放行就可以了]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F07%2F20%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
 </search>
