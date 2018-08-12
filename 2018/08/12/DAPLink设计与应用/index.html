@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script>
+    (function(){
+        if('123456'){
+            if (prompt('请输入文章密码') !== '123456'){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DAPLink," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="My Hexo" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="DAPLink是ARM官方的一款开源的调试仿真器，之前叫CMSIS-DAP。DAPLink的软件和硬件都在Github上开源：  DAPLink软件地址 :point_right: Github DAPLink硬件地址 :point_right: Github  DAPLink目前源码固件主要使用在LPC11U35以及MK20DX128VFM5的硬件上，并在Github上开源，成熟的DAPLink">
+<meta name="keywords" content="DAPLink">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DAPLink设计与应用">
+<meta property="og:url" content="http://yoursite.com/2018/08/12/DAPLink设计与应用/index.html">
+<meta property="og:site_name" content="My Hexo">
+<meta property="og:description" content="DAPLink是ARM官方的一款开源的调试仿真器，之前叫CMSIS-DAP。DAPLink的软件和硬件都在Github上开源：  DAPLink软件地址 :point_right: Github DAPLink硬件地址 :point_right: Github  DAPLink目前源码固件主要使用在LPC11U35以及MK20DX128VFM5的硬件上，并在Github上开源，成熟的DAPLink">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg">
+<meta property="og:updated_time" content="2018-08-12T05:37:27.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DAPLink设计与应用">
+<meta name="twitter:description" content="DAPLink是ARM官方的一款开源的调试仿真器，之前叫CMSIS-DAP。DAPLink的软件和硬件都在Github上开源：  DAPLink软件地址 :point_right: Github DAPLink硬件地址 :point_right: Github  DAPLink目前源码固件主要使用在LPC11U35以及MK20DX128VFM5的硬件上，并在Github上开源，成熟的DAPLink">
+<meta name="twitter:image" content="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/12/DAPLink设计与应用/"/>
+
+
+
+
+
+  <title>DAPLink设计与应用 | My Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <a href="https://github.com/LGG001" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+      <div class="site-meta-headline">
+        <a>
+          <img class="custom-logo-image" src="/images/avatar.png"
+               alt="My Hexo"/>
+        </a>
+      </div>
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I Can Do It</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/12/DAPLink设计与应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LGG001">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DAPLink设计与应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T13:19:57+08:00">
+                2018-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ARM/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,148 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg" rel="gallery_cjkqf45l3000a1ot2sbmyoltl"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>DAPLink是ARM官方的一款开源的调试仿真器，之前叫CMSIS-DAP。DAPLink的软件和硬件都在Github上开源：</p>
+<ul>
+<li>DAPLink软件地址 :point_right: <a href="https://github.com/ARMmbed/DAPLink" target="_blank" rel="noopener">Github</a></li>
+<li>DAPLink硬件地址 :point_right: <a href="https://github.com/ARMmbed/mbed-HDK" target="_blank" rel="noopener">Github</a></li>
+</ul>
+<p>DAPLink目前源码固件主要使用在LPC11U35以及MK20DX128VFM5的硬件上，并在Github上开源，成熟的DAPLink硬件方案有三个：</p>
+<ul>
+<li>DIPDAP（主芯片：LCP11U35FHI33/501）</li>
+<li>STDAP（主芯片：STM32F103CBT6）</li>
+<li>SWDAP（主芯片：LCP11U35FHI33/501）</li>
+</ul>
+<p>DAPLink可以对ARM Cortex内核（<em>如 Cortex M3</em>）进行仿真调试，并且提供源码和硬件，这样可以使用户可以轻松的集成一个仿真调试器到自己的项目上而无需担心版权问题。DAPLink不仅拥有仿真调试功能，同时它还具备虚拟串口和拖拽式下载功能（<em>拖拽式下载只支持固件上对应的MCU</em>）</p>
+<h1 id="DAPLink介绍"><a href="#DAPLink介绍" class="headerlink" title="DAPLink介绍"></a>DAPLink介绍</h1><h2 id="DAPLink功能介绍"><a href="#DAPLink功能介绍" class="headerlink" title="DAPLink功能介绍"></a>DAPLink功能介绍</h2><ul>
+<li>MSC-拖拽式下载</li>
+<li>CDC-日志打印、追踪和终端仿真的虚拟串口</li>
+<li>HID-CMSIS-DAP兼容式调试接口</li>
+<li>WEBUSB HID-CMSIS-DAP兼容式调试接口</li>
+</ul>
+<h3 id="MSC拖拽式下载"><a href="#MSC拖拽式下载" class="headerlink" title="MSC拖拽式下载"></a>MSC拖拽式下载</h3><p>通过复制或保存一个DAPLink支持的格式文件DAPLink的虚拟U盘中，完成后DAPLink设备就会重启。如果发生错误，错误的信息就会存放在FAIL.TXT中</p>
+<p>DAPLink的MSC功能支持的文件格式如下：</p>
+<ul>
+<li>.bin</li>
+<li>.hex</li>
+</ul>
+<h3 id="CDC-日志打印、追踪和终端仿真的虚拟串口"><a href="#CDC-日志打印、追踪和终端仿真的虚拟串口" class="headerlink" title="CDC-日志打印、追踪和终端仿真的虚拟串口"></a>CDC-日志打印、追踪和终端仿真的虚拟串口</h3><p>CDC虚拟串口功能具备普通的串口IC功能，串行端口直接连接到目标MCU，允许双向通信。它还允许通过在串行端口上发送中断命令来重置目标。</p>
+<p>串口通讯支持的波特率如下：</p>
+<ul>
+<li>9600</li>
+<li>14400</li>
+<li>19200</li>
+<li>28800</li>
+<li>38400</li>
+<li>56000</li>
+<li>57600</li>
+<li>115200<br><em>注：大多数DAPLink还支持这里列出来之外的串口通讯波特率</em></li>
+</ul>
+<h3 id="HID-CMSIS-DAP兼容式调试接口"><a href="#HID-CMSIS-DAP兼容式调试接口" class="headerlink" title="HID-CMSIS-DAP兼容式调试接口"></a>HID-CMSIS-DAP兼容式调试接口</h3><p>CMSIS-DAP接口可以在任何支持CMSISI-DAP协议的IDE中进行调试，其中包括：</p>
+<ul>
+<li><a href="https://github.com/mbedmicro/pyOCD" target="_blank" rel="noopener">pyOCD</a></li>
+<li><a href="http://www.keil.com/" target="_blank" rel="noopener">uVision</a></li>
+<li><a href="https://www.iar.com/" target="_blank" rel="noopener">IAR</a></li>
+</ul>
+<h3 id="WEBUSB-HID-CMSIS-DAP兼容式调试接口"><a href="#WEBUSB-HID-CMSIS-DAP兼容式调试接口" class="headerlink" title="WEBUSB HID-CMSIS-DAP兼容式调试接口"></a>WEBUSB HID-CMSIS-DAP兼容式调试接口</h3><p>WEBUSB HID-CMSIS-DAP是用于网页上进行调试的接口。</p>
+<h2 id="DAPLink官方介绍"><a href="#DAPLink官方介绍" class="headerlink" title="DAPLink官方介绍"></a>DAPLink官方介绍</h2><p><a href="https://armmbed.github.io/DAPLink/" target="_blank" rel="noopener"><img src="http://pdc1n1b19.bkt.clouddn.com/DAPLink.png" alt="DAPLink"></a></p>
+<p>Arm Mbed DAPLink是一个开源软件项目，它能够在Arm Cortex架构上的CPU运行编程和调试应用程序。DAPLink是作为应用MCU的SWD或JTAG接口的辅助型MCU，通常称之为接口固件。这种配置几乎在所有的开发板上都可以看到，DAPLink枚举为一个USB复合设备，为开发者的计算机和CPU调试访问端口之间建立了一个桥梁。DAPLink能让开发者具有：</p>
+<ul>
+<li>MSC-拖拽式编程FLASH闪存</li>
+<li>CDC-日志打印、追踪和终端仿真的虚拟串口</li>
+<li>HID-CMSIS-DAP兼容式调试接口</li>
+<li>WEBUSB HID-CMSIS-DAP兼容式调试接口</li>
+</ul>
+<p>更多的功能正在规划兵渐渐展现出来。DAPLink项目不断地在Arm、它的合作伙伴、众多的硬件供应商和世界各地的开源社区的大力开发之下，取代了CMSIS-DAP接口固件项目，你可以尽情使用和贡献。Enjoy!</p>
+<p>更多可用的细节信息可查看DAPLink用户指南<a href="https://github.com/ARMmbed/DAPLink/blob/master/docs/USERS-GUIDE.md" target="_blank" rel="noopener">DAPLink用户指南</a></p>
+<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p>DAPLink接口固件已经运行在许多基于ARM微控制器的硬件接口电路（HICs），它们可用作独立的（调试器）板子或作为开发工具的一部分。一些已知的IO兼容品牌的电路如下：</p>
+<ul>
+<li><a href="http://www.nxp.com/products/software-and-tools/run-time-software/kinetis-software-and-tools/ides-for-kinetis-mcus/opensda-serial-and-debug-adapter:OPENSDA" target="_blank" rel="noopener">NXP OpenSDA based on K20, K22 and KL26</a></li>
+<li><a href="https://www.nxp.com/support/developer-resources/hardware-development-tools/lpcxpresso-boards:LPCXPRESSO-BOARDS" target="_blank" rel="noopener">NXP LPC-Link2 based on LPC11U35 or LPC4322</a></li>
+<li><a href="https://www.segger.com/products/debug-probes/j-link/models/j-link-ob/" target="_blank" rel="noopener">Segger J-Link OB based on Atmel SAM3U</a></li>
+<li>Maxim Epsilon based on MAX32550 - coming soon</li>
+</ul>
+<h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>DAPLink官方的Github仓库创建了许多板级构建（板 = HIC + 目标组合）。季度版本将包含新的特性和修复BUG，一旦根据报告、验证并修复BUG，就会发布独立的修复BUG后的版本无论是季度版本还是修复Bug版本，都会导致生成号递增。许多开发工具包和产品与DaPink接口固件一起运行，或者能够运行DaPink固件。当前发布版本和更新DaPink界面固件的指令是在<a href="https://armmbed.github.io/DAPLink/" target="_blank" rel="noopener">DaPink发布站点</a>上托管的。发行说明和以前发布版本可以在GITHUB发行版中找到</p>
+<h1 id="DAPLink开发环境搭建"><a href="#DAPLink开发环境搭建" class="headerlink" title="DAPLink开发环境搭建"></a>DAPLink开发环境搭建</h1><h2 id="Windows工具安装"><a href="#Windows工具安装" class="headerlink" title="Windows工具安装"></a>Windows工具安装</h2><p>本章介绍在Windows下的DAPLink开发环境搭建。安装的工具列表如下，如果有些工具已经安装好可以跳过（<em>注意：软件安装包尽量选择最新版，选择适合自己电脑的32/64位安装包</em>）</p>
+<ul>
+<li><strong>Python2</strong>，版本2.7.9以上，并添加环境变量 :point_right:<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">下载地址</a></li>
+<li><strong>Git</strong>，并添加环境变量 :point_right:<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">下载地址</a></li>
+<li><strong>Keil MDK-ARM</strong> :point_right:<a href="https://www.keil.com/download/product/" target="_blank" rel="noopener">下载地址</a><br><em>注意：软件安装时尽量使用默认路径</em></li>
+</ul>
+<h2 id="获取源码-amp-生成MDK工程"><a href="#获取源码-amp-生成MDK工程" class="headerlink" title="获取源码&amp;生成MDK工程"></a>获取源码&amp;生成MDK工程</h2><p><em>将需要的的工具安装完成后，点击鼠标右键，选择<strong>Git Bash Here</strong>打开Git命令行界面，按以下步骤输入命令进行操作</em><br><!-- ![Git Bash](/DAPLink-Brochure/Images/DAPLink3.png) --></p>
+<ol>
+<li><p>下载DAPlink源码到本地</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/mbedmicro/DAPLink</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到DAPLink目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd DAPLink</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装虚拟环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install virtualenv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入拟环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virtualenv venv</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动虚拟环境下的脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ venv/Scripts/activate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装requirements.txt表中的工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成MDK工程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ progen generate -t uvision</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>关闭Git命令行界面，在DAPlink目录下有个projectfiles文件夹，里面就是生成的MDK工程，可使用MDK-ARM工具打开</em></p>
+<h2 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h2><ol>
+<li><p>打开<em>DAPLink\projectfiles\uvision</em>目录下的工程，如<em>lpc11u35_lpc812xpresso_if</em>工程，如弹出<strong>Using an MDK Version 4 Project</strong>窗口，选择<strong>Migrate to Device Pack</strong>  </p>
+<!-- ![Using an MDK Version 4 Project](/DAPLink-Brochure/Images/DAPLink1.png) -->
+</li>
+<li><p>此时会打开<strong>Pack Install</strong>窗口并自动下载安装相应的固件包，等待安装完成并关闭  </p>
+<!-- ![Pack Install](/DAPLink-Brochure/Images/DAPLink4.png) -->
+</li>
+<li><p>编译工程，在lpc11u35_lpc812xpresso_if\build目录会生成.bin和.hex文件  </p>
+<!-- ![Compile](/DAPLink-Brochure/Images/DAPLink2.png) -->
+</li>
+</ol>
+<h2 id="其他问题-amp-解决方法"><a href="#其他问题-amp-解决方法" class="headerlink" title="其他问题&amp;解决方法"></a>其他问题&amp;解决方法</h2><ul>
+<li><strong>编译源码</strong>的第1步中提示的问题是因为MDK-ARM版本问题引起，可安装对应MDK-ARM的MDK4兼容包解决 :point_right:<a href="http://www2.keil.com/mdk5/legacy" target="_blank" rel="noopener">下载地址</a></li>
+<li><strong>编译源码</strong>的第2步中如果提示找不到LPC11U35型号，可在<strong>Pack Install</strong>窗口搜索<code>LPC1100</code>并安装LPC1100 Series固件包；或者在KEIL官网下载安装LPC1100 Series固件包 :point_right:<a href="http://www.keil.com/dd2/Pack/" target="_blank" rel="noopener">下载地址</a></li>
+<li>工程目录<em>projectfiles\uvision\</em>下的文件，以<code>_if</code>结尾的工程是对应工程的应用程序；<code>_bl</code>结尾的是对应工程的Bootloader应用程序，LPC11U35自带Bootloader程序</li>
+</ul>
+<h1 id="DAPlink硬件"><a href="#DAPlink硬件" class="headerlink" title="DAPlink硬件"></a>DAPlink硬件</h1><h2 id="官方DAPLink硬件"><a href="#官方DAPLink硬件" class="headerlink" title="官方DAPLink硬件"></a>官方DAPLink硬件</h2><p>官方DAPLink硬件是开源的，开源地址 :point_right: <a href="https://github.com/ARMmbed/mbed-HDK" target="_blank" rel="noopener">Github</a></p>
+<p>目前成熟的DAPLink硬件方案有三个，分别是位于mbed-HDK\Production Design Projects\ARM-mbed\DAPLink目录下的：</p>
+<ul>
+<li>DIPDAP</li>
+<li>STDAP</li>
+<li>SWDAP</li>
+</ul>
+<h3 id="DIPDAP"><a href="#DIPDAP" class="headerlink" title="DIPDAP"></a>DIPDAP</h3><p><img src="http://uk.rs-online.com/largeimages/R9054100-01.jpg" alt="here" title="DIPDAP-mbed"></p>
+<p>DIPDAP是基于NXP LPC11U35为核心，支持CMSIS-DAP接口、拖拽式下载、虚拟串口等功能，DIAPDAP硬件包括以下内容：</p>
+<ul>
+<li>Eagle原理图和板子文件<em>（注：Eagle是PCB Layout软件）</em></li>
+<li>PDF版原理图和板子副本文件</li>
+<li>Gerber生产文件</li>
+<li>BOM（材料清单）</li>
+<li>eBOM（一份网上购物清单，方便购买！）</li>
+</ul>
+<p>通过DIPDAP提供的硬件材料，用户可以轻松的制作一个，如果嫌麻烦可以在网上购买成品， :point_right: <a href="http://uk.rs-online.com/web/p/processor-microcontroller-development-kits/9054100/" target="_blank" rel="noopener">购买地址</a></p>
+<h3 id="STDAP"><a href="#STDAP" class="headerlink" title="STDAP"></a>STDAP</h3><p>STDAP是基于ST STM32F103CBT6为核心，支持CMSIS-DAP接口、拖拽式下载、虚拟串口等功能，DIAPDAP硬件包括以下内容：</p>
+<ul>
+<li>Eagle原理图和板子文件<em>（注：Eagle是PCB Layout软件）</em></li>
+<li>PDF版原理图和板子副本文件</li>
+<li>Gerber生产文件</li>
+<li>BOM（材料清单）</li>
+<li>eBOM（一份网上购物清单，方便购买！）</li>
+</ul>
+<p><strong><em>需要注意的是，目前官方的DAPLink固件中并没有支持STDAP的固件</em></strong></p>
+<h3 id="SWDAP"><a href="#SWDAP" class="headerlink" title="SWDAP"></a>SWDAP</h3><p><img src="http://uk.rs-online.com/largeimages/R9054104-01.jpg" alt="here" title="SWDAP-mbed"></p>
+<p>DIPDAP是基于NXP LPC11U35为核心，支持CMSIS-DAP接口、拖拽式下载等功能，DIAPDAP硬件包括以下内容：</p>
+<ul>
+<li>Eagle原理图和板子文件<em>（注：Eagle是PCB Layout软件）</em></li>
+<li>PDF版原理图和板子副本文件</li>
+<li>Gerber生产文件</li>
+<li>BOM（材料清单）</li>
+<li>eBOM（一份网上购物清单，方便购买！）</li>
+</ul>
+<p>通过DIPDAP提供的硬件材料，用户可以轻松的制作一个，如果嫌麻烦可以在网上购买成品， :point_right: <a href="http://uk.rs-online.com/web/p/processor-microcontroller-development-kits/9054104/" target="_blank" rel="noopener">购买地址</a></p>
+<h2 id="技新DAPLink硬件"><a href="#技新DAPLink硬件" class="headerlink" title="技新DAPLink硬件"></a>技新DAPLink硬件</h2><p><img src="http://pdc1n1b19.bkt.clouddn.com/DAPLink-JX01.jpg" alt="技新DAPLink"></p>
+<p>技新DAPLink参考官方DIPDAP硬件设计，以NXP LPC11U35为核心，支持CMSIS-DAP接口、拖拽式下载、虚拟串口等功能。技新DAPLink设计采用<a href="https://lceda.cn/" target="_blank" rel="noopener"><strong>LCEDA</strong></a>，元器件在<a href="https://www.szlcsc.com/" target="_blank" rel="noopener"><strong>立创商城</strong></a>平台采购，PCB在<a href="https://www.sz-jlc.com/home/index.html#" target="_blank" rel="noopener"><strong>嘉立创</strong></a>平台生产。技新DAPLink也是开源的，包括：</p>
+<ul>
+<li>Gerber文件，可直接打样生产</li>
+<li>PCB文件、原理图文件</li>
+<li>BOM（元器件采购清单）</li>
+</ul>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/DAPLink-BOM.png" alt="技新DAPLink-BOM"></p>
+<p>技新DAPLink的设计主要是为了解决以下问题：</p>
+<ul>
+<li>官方DAPLink硬件在国内购买比较麻烦</li>
+<li>官方DAPLink硬件的BOM中的元器件国内购买比较麻烦</li>
+<li>提供一个官方DAPLink设计参考</li>
+<li>提供一个官方DAPLink方案验证</li>
+<li>作为小册的硬件实验使用</li>
+</ul>
+<p><em>技新DAPLink购买地址 :point_right: <a href="https://jixiaoxin.taobao.com/" target="_blank" rel="noopener">技新淘宝</a></em><br><em>技新DAPLink开源地址 :point_right: <a href="https://gitee.com/jixiaoxin/DAPLink-Brochures" target="_blank" rel="noopener">码云</a></em></p>
+<h1 id="DAPLink应用"><a href="#DAPLink应用" class="headerlink" title="DAPLink应用"></a>DAPLink应用</h1><h2 id="DAPLink固件更新"><a href="#DAPLink固件更新" class="headerlink" title="DAPLink固件更新"></a>DAPLink固件更新</h2><p>DAPLink固件由两个部分组成</p>
+<ul>
+<li>以xxx_bl结尾的.bin文件（Bootloader）</li>
+<li>以xxx_if结尾的.bin文件（应用程序）</li>
+</ul>
+<p>NXP的LPC11U35是自带Bootloader，原装的LPC11U35芯片首次上电时就会自动进入Bootloader，虚拟出一个U盘设备，然后将以应用程序拖进去即可完成烧录，之后就会自动运行应用程序</p>
+<h3 id="技新DAPLink固件更新"><a href="#技新DAPLink固件更新" class="headerlink" title="技新DAPLink固件更新"></a>技新DAPLink固件更新</h3><ol>
+<li>按住K1（或短接nRST和GND）插入电脑就会识别出一个<code>CRP DISABLD</code>U盘设备，里面有一个<code>firmware.bin</code>文件，将其删除</li>
+<li>把第二章的编译产生的DAPLink固件<strong><code>lpc11u35_lpc812xpresso_if_crc.bin</code></strong>（固件位于DAPLink\projectfiles\uvision\lpc11u35_lpc812xpresso_if\build目录下）拖（复制）到U盘中</li>
+<li>将DAPLink重新插拔一次（不需要按住K1或短接nRST和GND），就会看到一个<code>DAPLINK</code>U盘设备，固件更新完毕</li>
+</ol>
+<p>固件更新后，<code>DAPLINK</code>内有DETALLS.TXT和MBED.HTM两个文件，MBED.HTM是一个网页，DETALLS.TXT是该DAPLink固件的相关信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># DAPLink Firmware - see https://mbed.com/daplink</span><br><span class="line">Unique ID: 105000001781cdaa00000000000000000000000097969902</span><br><span class="line">HIC ID: 97969902</span><br><span class="line">Auto Reset: 0</span><br><span class="line">Automation allowed: 0</span><br><span class="line">Overflow detection: 0</span><br><span class="line">Daplink Mode: Interface</span><br><span class="line">Interface Version: 0247</span><br><span class="line">Git SHA: 7574bed494828d1da9a170d4f2727bba28362eaf</span><br><span class="line">Local Mods: 0</span><br><span class="line">USB Interfaces: MSD, CDC, HID, WebUSB</span><br><span class="line">Interface CRC: 0x7ba4edb8</span><br><span class="line">Remount count: 0</span><br><span class="line">URL: https://mbed.org/device/?code=105000001781cdaa00000000000000000000000097969902?version=0247?target_id=@T</span><br></pre></td></tr></table></figure></p>
+<p>DAPLink插入电脑后会识别出如下设备（如果有部分设备无法识别请检查系统驱动是否有问题）：</p>
+<ul>
+<li>MSD–USB大容量存储设备（拖拽式下载）</li>
+<li>CDC–mbed Serial Port（虚拟串口）</li>
+<li>HID–符合HID标准的供应商定义设备/USB输入设备（CMSIS-DAP接口）</li>
+<li>WebUSB：CMSIS-DAP或USB_DFU<br><em>注：W7和W8系统的CDC驱动需要手动安装，:point_right: <a href="http://os.mbed.com/media/downloads/drivers/mbedWinSerial_16466.exe" target="_blank" rel="noopener">驱动地址</a></em></li>
+</ul>
+<h3 id="其他DAPLink固件更新"><a href="#其他DAPLink固件更新" class="headerlink" title="其他DAPLink固件更新"></a>其他DAPLink固件更新</h3><p>LPC11U35本身自带Bootloader，所以只需要Bootloader的MMSD接口把固件烧录进去即可，对于本身没有自带Bootloader功能的，需要先往里先烧录Bootloader。DAPLink的固件源码编译生成的工程，对于LPC11U35之外没有Bootloader功能的DAPLink硬件提供了Bootloader固件，如DAPLink\projectfiles\uvision目录下的<code>k20dx_bl</code>工程就是<code>k20dx</code>的Bootloader</p>
+<h2 id="DAPLink在ARM-MDK中的使用"><a href="#DAPLink在ARM-MDK中的使用" class="headerlink" title="DAPLink在ARM-MDK中的使用"></a>DAPLink在ARM-MDK中的使用</h2><p>DAPLink的CMSIS-DAP接口是用于ARM Cortex内核MCU调试仿真的，只要IDE支持CMSIS-DAP协议接口即可使用DAPLink，这里以ARM-MDK为例，其他的IDE也类似使用，调试仿真使用的是DAPLink的CMSIS-DAP接口功能</p>
+<ol>
+<li>DAPLink作为仿真器连接目标设备，如STM32F103C8T6最小系统板</li>
+<li>打开STM32F103C8T6的ARM-MDK例程</li>
+<li>打开Options for Target选项，在Debug栏下的Use选项选择CMSIS-DAP Debugger</li>
+<li>点击Settings，Debug栏设置如下图，点击OK完成配置，之后即可编译下载/调试</li>
+</ol>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/DAPLink-MDK1.png" alt="技新DAPLink"></p>
+<h2 id="DAPLink的MSD命令使用"><a href="#DAPLink的MSD命令使用" class="headerlink" title="DAPLink的MSD命令使用"></a>DAPLink的MSD命令使用</h2><p>DAPLink允许通过MSD接口来给它一些简单的命令。复制一个指定命名的文件通过MSD接口到DAPLink，可以使DAPLink执行一个动作或一个永久有效配置，文件的内容可以被忽略（可以发送一个空文件）</p>
+<p>MSD的命令只有在下面状态下才有效</p>
+<ul>
+<li>插入DAPLink，再按住K1，然后把相应的.act或.cfg文件复制到MSD接口</li>
+<li>在打automation-allowed模式下，把相应的.act或.cfg文件复制到MSD接口</li>
+</ul>
+<p>MSD命令有两种</p>
+<ul>
+<li>.act文件，触发DAPLink一个Action（动作）</li>
+<li>.cfg文件，配置DAPLink一个Configuration（设置）</li>
+</ul>
+<h3 id="Action命令"><a href="#Action命令" class="headerlink" title="Action命令"></a>Action命令</h3><p><code>start_bl.act</code> 该文件将强制进入Bootloader，相当于拔下DAPLink，按住K1再插上。如果DAPlink已经处于Bootloader，则该命令无效</p>
+<p><code>start_if.act</code> 该文件将强制DAPLink重新进入DAPLink接口模式。它相当于拔下USB电缆，并将其插入。如果已经处于DAPLink接口模式，则此命令无效</p>
+<p><code>assert.act</code> 该文件可以用来测试DAPLink的assert实用程序。当您将该文件复制到DAPLink MSD驱动器时，DAPLink将生成对util_assert()方法的调用。assert调用导致DAPLink MSD驱动器重新加载一个附加文件ASSERT.TXT，出现在驱动器的根部。这个文件详细说明了断言失败发生的地方(源文件，行号)</p>
+<p><code>refresh.act</code> 该文件强制重新加载DAPLink MSD驱动器</p>
+<p><code>erase.act</code> 该文件触发对目标FLASH的擦除</p>
+<h3 id="Configuration命令"><a href="#Configuration命令" class="headerlink" title="Configuration命令"></a>Configuration命令</h3><p><code>auto_rst.cfg</code> 该文件用于配置自动复位模式，默认情况下自动复位是禁止的</p>
+<p><code>hard_rst.cfg</code> 该文件用于关闭自动复位模式，默认情况下自动复位是禁止的</p>
+<p><code>auto_on.cfg</code>  该文件用于打开automation-allowed模式，再该模式下可以出发DAPLink的MSD命令，而不需要按住K1案件。此外，Bootloader更新只允许再该模式下运行</p>
+<p><code>auto_off.cfg</code> 该文件用于关闭automation-allowed模式，automation-allowed模式默认是关闭的</p>
+<p><code>ovfl_on.cfg</code> 该文件用于打开串口溢出报告。再串口通讯过程中，如果主机PC没有以足够快的速度从DAPLink读取数据，并且发生溢出，则文本&lt;DAPLink: overflow &gt;将出现在串行数据中。串行溢出报告默认关闭</p>
+<p><code>ovfl_off.cfg</code> 该文件用于关闭串口溢出报告</p>
+<h3 id="MSD命令使用"><a href="#MSD命令使用" class="headerlink" title="MSD命令使用"></a>MSD命令使用</h3><ol>
+<li><p>使能automation-allowed模式。新建文本文档并重命名为<code>auto_on.cfg</code>，插入DAPLink并按按K1，然后把auto_on.cfg文件拷贝进DAPLink的MSD接口（虚拟U盘），这时DAPLink的MSD会重启，在根目录的DETAILS.TXT文件中<code>Automation allowed: 1; Remount count: 1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># DAPLink Firmware - see https://mbed.com/daplink</span><br><span class="line">Unique ID: 105000001781cdaa00000000000000000000000097969902</span><br><span class="line">HIC ID: 97969902</span><br><span class="line">Auto Reset: 0</span><br><span class="line">Automation allowed: 1</span><br><span class="line">Overflow detection: 0</span><br><span class="line">Daplink Mode: Interface</span><br><span class="line">Interface Version: 0247</span><br><span class="line">Git SHA: 7574bed494828d1da9a170d4f2727bba28362eaf</span><br><span class="line">Local Mods: 0</span><br><span class="line">USB Interfaces: MSD, CDC, HID, WebUSB</span><br><span class="line">Interface CRC: 0x7ba4edb8</span><br><span class="line">Remount count: 1</span><br><span class="line">URL: https://mbed.org/device/?code=105000001781cdaa00000000000000000000000097969902?version=0247?target_id=@T</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>触发一个Action。新建文本文档并重命名为<code>refresh.act</code>，将该文档拷贝进DAPLink的MSD接口（虚拟U盘），这时DAPLink的MSD会重启，在根目录的DETAILS.TXT文件中<code>Automation allowed: 1; Remount count: 2</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># DAPLink Firmware - see https://mbed.com/daplink</span><br><span class="line">Unique ID: 105000001781cdaa00000000000000000000000097969902</span><br><span class="line">HIC ID: 97969902</span><br><span class="line">Auto Reset: 0</span><br><span class="line">Automation allowed: 1</span><br><span class="line">Overflow detection: 0</span><br><span class="line">Daplink Mode: Interface</span><br><span class="line">Interface Version: 0247</span><br><span class="line">Git SHA: 7574bed494828d1da9a170d4f2727bba28362eaf</span><br><span class="line">Local Mods: 0</span><br><span class="line">USB Interfaces: MSD, CDC, HID, WebUSB</span><br><span class="line">Interface CRC: 0x7ba4edb8</span><br><span class="line">Remount count: 2</span><br><span class="line">URL: https://mbed.org/device/?code=105000001781cdaa00000000000000000000000097969902?version=0247?target_id=@T</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置一个Configuration。新建文本文档并重命名为<code>refresh.act</code>，将该文档拷贝进DAPLink的MSD接口（虚拟U盘），这时DAPLink的MSD会重启，在根目录的DETAILS.TXT文件中<code>Automation allowed: 1; Overflow detection: 1; Remount count: 3</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># DAPLink Firmware - see https://mbed.com/daplink</span><br><span class="line">Unique ID: 105000001781cdaa00000000000000000000000097969902</span><br><span class="line">HIC ID: 97969902</span><br><span class="line">Auto Reset: 0</span><br><span class="line">Automation allowed: 1</span><br><span class="line">Overflow detection: 1</span><br><span class="line">Daplink Mode: Interface</span><br><span class="line">Interface Version: 0247</span><br><span class="line">Git SHA: 7574bed494828d1da9a170d4f2727bba28362eaf</span><br><span class="line">Local Mods: 0</span><br><span class="line">USB Interfaces: MSD, CDC, HID, WebUSB</span><br><span class="line">Interface CRC: 0x7ba4edb8</span><br><span class="line">Remount count: 3</span><br><span class="line">URL: https://mbed.org/device/?code=105000001781cdaa00000000000000000000000097969902?version=0247?target_id=@T</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>注：其他MSD命令使用也如上配置</em></p>
+<h2 id="DAPLink其他功能介绍"><a href="#DAPLink其他功能介绍" class="headerlink" title="DAPLink其他功能介绍"></a>DAPLink其他功能介绍</h2><h3 id="CDC虚拟串口"><a href="#CDC虚拟串口" class="headerlink" title="CDC虚拟串口"></a>CDC虚拟串口</h3><p>DAPLink带有虚拟串口功能，可用于与目标设备进行串口通讯，使用方法与其他UDB转TTL的模块一样，支持的比特率有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">9600</span><br><span class="line">14400</span><br><span class="line">19200</span><br><span class="line">28800</span><br><span class="line">38400</span><br><span class="line">56000</span><br><span class="line">57600</span><br><span class="line">115200</span><br></pre></td></tr></table></figure></p>
+<p><em>注：大多数DAPLink还支持这里列出来之外的串口通讯波特率</em></p>
+<h3 id="MSC拖拽式下载功能"><a href="#MSC拖拽式下载功能" class="headerlink" title="MSC拖拽式下载功能"></a>MSC拖拽式下载功能</h3><p>DAPLink带有拖拽式下载功能，但是该功能通常只针对独立的目标设备，如固件<code>lpc11u35_lpc812xpresso_if_crc.bin</code>的拖拽式下载是针对lpc812xpresso目标的，如果想支持其他的目标就需要对DAPLink固件进行修改移植， :point_right: <a href="https://github.com/ARMmbed/DAPLink/blob/master/docs/PORT_BOARD.md" target="_blank" rel="noopener">参考文档</a></p>
+<h3 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h3><p>DAPLink还提供了非常多的功能和应用，如自动化测试、添加一个新板支持、添加一个新设备、移植到新的硬件电路等，其中的操作都有独立的文档讲解，本章介绍的固件更新和DAPLink的MSD命令使用也只是其中一部分功能，具体可参考  :point_right: <a href="https://github.com/ARMmbed/DAPLink/tree/master/docs" target="_blank" rel="noopener">DAPLink官方文档</a></p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/08/12/DAPLink设计与应用/">DAPLink设计与应用</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
+  <p><span>发布时间:</span>2018年08月12日 - 13:08</p>
+  <p><span>最后更新:</span>2018年08月12日 - 13:08</p>
+  <p><span>原始链接:</span><a href="/2018/08/12/DAPLink设计与应用/" title="DAPLink设计与应用">http://yoursite.com/2018/08/12/DAPLink设计与应用/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/08/12/DAPLink设计与应用/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+    });
+    });  
+</script>
+
+
+      
+	</div>
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thank You For Your Approval !</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="LGG001 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="LGG001 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DAPLink/" rel="tag"># DAPLink</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/22/Text2/" rel="next" title="Text2">
+                <i class="fa fa-chevron-left"></i> Text2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zODI2Ni8xNDc5NA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LGG001</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LGG001" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1058901869@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://lgg001.github.io/" target="_blank" title="blog">
+                      
+                        <i class="fa fa-fw fa-edit"></i>blog</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jixin.pro/" title="技新网" target="_blank">技新网</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://juejin.im/timeline/" title="掘金网" target="_blank">掘金网</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.jianshu.com/" title="简书" target="_blank">简书</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DAPLink介绍"><span class="nav-number">1.</span> <span class="nav-text">DAPLink介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DAPLink功能介绍"><span class="nav-number">1.1.</span> <span class="nav-text">DAPLink功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MSC拖拽式下载"><span class="nav-number">1.1.1.</span> <span class="nav-text">MSC拖拽式下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CDC-日志打印、追踪和终端仿真的虚拟串口"><span class="nav-number">1.1.2.</span> <span class="nav-text">CDC-日志打印、追踪和终端仿真的虚拟串口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HID-CMSIS-DAP兼容式调试接口"><span class="nav-number">1.1.3.</span> <span class="nav-text">HID-CMSIS-DAP兼容式调试接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WEBUSB-HID-CMSIS-DAP兼容式调试接口"><span class="nav-number">1.1.4.</span> <span class="nav-text">WEBUSB HID-CMSIS-DAP兼容式调试接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAPLink官方介绍"><span class="nav-number">1.2.</span> <span class="nav-text">DAPLink官方介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性"><span class="nav-number">1.2.1.</span> <span class="nav-text">兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本"><span class="nav-number">1.2.2.</span> <span class="nav-text">版本</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DAPLink开发环境搭建"><span class="nav-number">2.</span> <span class="nav-text">DAPLink开发环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows工具安装"><span class="nav-number">2.1.</span> <span class="nav-text">Windows工具安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取源码-amp-生成MDK工程"><span class="nav-number">2.2.</span> <span class="nav-text">获取源码&amp;生成MDK工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译源码"><span class="nav-number">2.3.</span> <span class="nav-text">编译源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题-amp-解决方法"><span class="nav-number">2.4.</span> <span class="nav-text">其他问题&amp;解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DAPlink硬件"><span class="nav-number">3.</span> <span class="nav-text">DAPlink硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#官方DAPLink硬件"><span class="nav-number">3.1.</span> <span class="nav-text">官方DAPLink硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DIPDAP"><span class="nav-number">3.1.1.</span> <span class="nav-text">DIPDAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STDAP"><span class="nav-number">3.1.2.</span> <span class="nav-text">STDAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SWDAP"><span class="nav-number">3.1.3.</span> <span class="nav-text">SWDAP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技新DAPLink硬件"><span class="nav-number">3.2.</span> <span class="nav-text">技新DAPLink硬件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DAPLink应用"><span class="nav-number">4.</span> <span class="nav-text">DAPLink应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DAPLink固件更新"><span class="nav-number">4.1.</span> <span class="nav-text">DAPLink固件更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#技新DAPLink固件更新"><span class="nav-number">4.1.1.</span> <span class="nav-text">技新DAPLink固件更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他DAPLink固件更新"><span class="nav-number">4.1.2.</span> <span class="nav-text">其他DAPLink固件更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAPLink在ARM-MDK中的使用"><span class="nav-number">4.2.</span> <span class="nav-text">DAPLink在ARM-MDK中的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAPLink的MSD命令使用"><span class="nav-number">4.3.</span> <span class="nav-text">DAPLink的MSD命令使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Action命令"><span class="nav-number">4.3.1.</span> <span class="nav-text">Action命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration命令"><span class="nav-number">4.3.2.</span> <span class="nav-text">Configuration命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MSD命令使用"><span class="nav-number">4.3.3.</span> <span class="nav-text">MSD命令使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAPLink其他功能介绍"><span class="nav-number">4.4.</span> <span class="nav-text">DAPLink其他功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CDC虚拟串口"><span class="nav-number">4.4.1.</span> <span class="nav-text">CDC虚拟串口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MSC拖拽式下载功能"><span class="nav-number">4.4.2.</span> <span class="nav-text">MSC拖拽式下载功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他功能"><span class="nav-number">4.4.3.</span> <span class="nav-text">其他功能</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LGG001</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
