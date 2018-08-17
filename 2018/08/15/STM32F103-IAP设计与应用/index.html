@@ -117,19 +117,19 @@
 
 
 
-<meta name="description" content="STM32F10x IAP 设计与应用大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通">
+<meta name="description" content="大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通信端口对产品中的固件程序进行更新升级。">
 <meta name="keywords" content="STM32-IAP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32F103 IAP设计与应用（官方）">
 <meta property="og:url" content="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用/index.html">
 <meta property="og:site_name" content="My Hexo">
-<meta property="og:description" content="STM32F10x IAP 设计与应用大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通">
+<meta property="og:description" content="大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通信端口对产品中的固件程序进行更新升级。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg">
-<meta property="og:updated_time" content="2018-08-17T11:05:59.363Z">
+<meta property="og:updated_time" content="2018-08-17T11:08:27.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32F103 IAP设计与应用（官方）">
-<meta name="twitter:description" content="STM32F10x IAP 设计与应用大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通">
+<meta name="twitter:description" content="大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通信端口对产品中的固件程序进行更新升级。">
 <meta name="twitter:image" content="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg">
 
 
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,009 字
+                  2,002 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg" rel="gallery_cjkxw1szr0004e4t2vle9kez3"
+                 href="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg" rel="gallery_cjkxw4rnw0004rwt21awx18iw"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg" itemprop="contentUrl"/>
               </a>
@@ -484,7 +484,7 @@
       
 
       
-        <h1 id="STM32F10x-IAP-设计与应用"><a href="#STM32F10x-IAP-设计与应用" class="headerlink" title="STM32F10x IAP 设计与应用"></a>STM32F10x IAP 设计与应用</h1><p>大部分MCU系统会具备下面三种编程方式：  </p>
+        <p>大部分MCU系统会具备下面三种编程方式：  </p>
 <ul>
 <li>IAP（In Application Programming）在应用编程</li>
 <li>ISP（In System Programing）在系统编程</li>
@@ -865,7 +865,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STM32F10x-IAP-设计与应用"><span class="nav-number">1.</span> <span class="nav-text">STM32F10x IAP 设计与应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STM32程序运行过程分析"><span class="nav-number">1.1.</span> <span class="nav-text">STM32程序运行过程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32正常启动流程"><span class="nav-number">1.1.1.</span> <span class="nav-text">STM32正常启动流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32加入IAP启动流程"><span class="nav-number">1.1.2.</span> <span class="nav-text">STM32加入IAP启动流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IAP例程介绍"><span class="nav-number">1.2.</span> <span class="nav-text">IAP例程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IAP相关文件介绍"><span class="nav-number">1.2.1.</span> <span class="nav-text">IAP相关文件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IAP例程使用概要"><span class="nav-number">1.2.2.</span> <span class="nav-text">IAP例程使用概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载APP例程文件"><span class="nav-number">1.2.3.</span> <span class="nav-text">下载APP例程文件</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#STM32程序运行过程分析"><span class="nav-number">1.</span> <span class="nav-text">STM32程序运行过程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32正常启动流程"><span class="nav-number">1.1.</span> <span class="nav-text">STM32正常启动流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32加入IAP启动流程"><span class="nav-number">1.2.</span> <span class="nav-text">STM32加入IAP启动流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IAP例程介绍"><span class="nav-number">2.</span> <span class="nav-text">IAP例程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IAP相关文件介绍"><span class="nav-number">2.1.</span> <span class="nav-text">IAP相关文件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IAP例程使用概要"><span class="nav-number">2.2.</span> <span class="nav-text">IAP例程使用概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载APP例程文件"><span class="nav-number">2.3.</span> <span class="nav-text">下载APP例程文件</span></a></li></ol></li></ol></div>
             
 
           </div>
