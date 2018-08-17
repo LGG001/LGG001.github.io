@@ -117,19 +117,19 @@
 
 
 
-<meta name="description" content="内容待续">
+<meta name="description" content="STM32F10x IAP 设计与应用大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通">
 <meta name="keywords" content="STM32-IAP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32F103 IAP设计与应用（官方）">
-<meta property="og:url" content="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用（官方）/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用/index.html">
 <meta property="og:site_name" content="My Hexo">
-<meta property="og:description" content="内容待续">
+<meta property="og:description" content="STM32F10x IAP 设计与应用大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg">
-<meta property="og:updated_time" content="2018-08-15T15:46:37.421Z">
+<meta property="og:updated_time" content="2018-08-17T11:05:59.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32F103 IAP设计与应用（官方）">
-<meta name="twitter:description" content="内容待续">
+<meta name="twitter:description" content="STM32F10x IAP 设计与应用大部分MCU系统会具备下面三种编程方式：    IAP（In Application Programming）在应用编程 ISP（In System Programing）在系统编程 ICP（In Circuit Programing）在电路编程  IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通">
 <meta name="twitter:image" content="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg">
 
 
@@ -160,7 +160,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用（官方）/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用/"/>
 
 
 
@@ -348,7 +348,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用（官方）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LGG001">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4 字
+                  2,009 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg" rel="gallery_cjkvb6wr70000y4t2cb4rpcsa"
+                 href="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg" rel="gallery_cjkxw1szr0004e4t2vle9kez3"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pdgd2i3gi.bkt.clouddn.com/ST_Cap.jpg" itemprop="contentUrl"/>
               </a>
@@ -484,7 +484,79 @@
       
 
       
-        <h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><p>待续</p>
+        <h1 id="STM32F10x-IAP-设计与应用"><a href="#STM32F10x-IAP-设计与应用" class="headerlink" title="STM32F10x IAP 设计与应用"></a>STM32F10x IAP 设计与应用</h1><p>大部分MCU系统会具备下面三种编程方式：  </p>
+<ul>
+<li>IAP（In Application Programming）在应用编程</li>
+<li>ISP（In System Programing）在系统编程</li>
+<li>ICP（In Circuit Programing）在电路编程</li>
+</ul>
+<p>IAP是用户自己的程序在运行过程中对User Flash的部分区域进行重新烧写，产品发布后可以方便地通过预留的通信端口对产品中的固件程序进行更新升级。实现IAP有两个很重要的前提：</p>
+<ul>
+<li>单片机程序能对自身内部User Flash进行擦写</li>
+<li>单片机要有能够与外部进行通讯，如使用USART、IIC、SPI等</li>
+</ul>
+<p>在实现IAP功能时，通常要设计两个程序：IAP程序、APP（应用）程序。IAP程序的功能就是作为Bootloader的角色，通过某种通讯协议（如USART）来接收APP程序并将其烧录到指定的User Flash中（<em>注：IAP与APP程序在同一个FLASH中的不同地址上</em>），然后跳转到APP中执行程序。ST官方提供STM32F10x的IAP相关资料，这里针对官方的STM32F10x的IAP资料进行应用，内容分为以下部分：  </p>
+<ul>
+<li>STM32程序运行过程分析</li>
+<li>STM32F10x IAP例程介绍</li>
+<li>STM32F10x IAP例程测试</li>
+</ul>
+<h2 id="STM32程序运行过程分析"><a href="#STM32程序运行过程分析" class="headerlink" title="STM32程序运行过程分析"></a>STM32程序运行过程分析</h2><p>想要设计STM32的IAP程序，必须先了解STM32的运行过程，下面以STM32F103的MCU为例介绍它的正常启动运行流程与加入IAP后的程序运行流程。</p>
+<h3 id="STM32正常启动流程"><a href="#STM32正常启动流程" class="headerlink" title="STM32正常启动流程"></a>STM32正常启动流程</h3><p><img src="http://pdc1n1b19.bkt.clouddn.com/STM32F10x%20IAP.jpg" alt="STM32正常启动流程图"></p>
+<ol>
+<li>STM32上电后会从0x08000004处出去复位中断向量的地址，并跳转执行复位中断服务程序，如<strong>①</strong></li>
+<li>复位中断程序执行完后就会跳转到mian函数中，如<strong>②</strong></li>
+<li>main函数一般为死循环，当收到中断请求后STM32会强制把PC指向中断向量表，如<strong>③</strong></li>
+<li>这时会查询中断向量表，根据中断源跳转到相应的中断服务程序中执行，如<strong>④</strong></li>
+<li>执行完中断函数后再重新返回main函数中继续执行，如<strong>⑤</strong></li>
+</ol>
+<h3 id="STM32加入IAP启动流程"><a href="#STM32加入IAP启动流程" class="headerlink" title="STM32加入IAP启动流程"></a>STM32加入IAP启动流程</h3><p><img src="http://pdc1n1b19.bkt.clouddn.com/STM32F10x%20IAP%20%281%29.jpg" alt="STM32正常启动流程图"></p>
+<ol>
+<li>STM32上电后会从0x08000004处出去复位中断向量的地址，并跳转执行复位中断服务程序，如<strong>①</strong></li>
+<li>执行完复位中断服务程序后进入到IAP的main函数中，将新的APP代码烧写到指定的User Flash中，然后跳转到APP中执行程序，如<strong>②</strong></li>
+<li>在APP中跳转到指定新的向量表，取出复位中断向量地址，并跳转执行新的复位中断服务程序，然后跳转至APP的main函数，如<strong>③</strong></li>
+<li>这时FLASH中存在两个向量表，当有中断请求到来时，PC指针仍然会指向地址0x08000004中断向量表，如<strong>④</strong></li>
+<li>查询中断向量表，根据中断来源跳转到新（APP）的中断服务程序中执行，如<strong>⑤</strong></li>
+<li>执行完中断函数后再重新返回main函数中继续执行，如<strong>⑥</strong><br><em>注：灰色部分为APP代码</em></li>
+</ol>
+<h2 id="IAP例程介绍"><a href="#IAP例程介绍" class="headerlink" title="IAP例程介绍"></a>IAP例程介绍</h2><p>ST官方提供STM32F10x IAP资源包和一份应用笔记：</p>
+<ul>
+<li>STM32F10x IAP例程包，下载地址 :point_right: <a href="https://www.st.com/content/ccc/resource/technical/document/application_note/95/15/6f/65/15/06/4e/d3/CD00161640.pdf/files/CD00161640.pdf/jcr:content/translations/en.CD00161640.pdf" target="_blank" rel="noopener">ST官网</a></li>
+<li>STM32F10x IAP应用笔记，下载地址 :point_right: <a href="https://www.st.com/content/st_com/en/products/embedded-software/mcus-embedded-software/stm32-embedded-software/stm32-standard-peripheral-library-expansion/stsw-stm32008.html" target="_blank" rel="noopener">ST官网</a></li>
+</ul>
+<h3 id="IAP相关文件介绍"><a href="#IAP相关文件介绍" class="headerlink" title="IAP相关文件介绍"></a>IAP相关文件介绍</h3><p>把ST官方的STM32F10x IAP例程包下载并解压，在<code>STM32F10x_AN2557_FW_V3.3.0\Project\IAP</code>目录下有EWARM、HiTOP、MDK-ARM、RIDE、TrueSTUDIO的工程目录，以常用的MDK-ARM为例打开工程，根据目标MCU平台选择工程Target，如MCU平台为STM32F103C8T6（中容量产品），则工程Target选择STM3210B-EVAL，然后编译，IAP主要的代码在工程目录的User Groups下  </p>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/Snipaste_2018-08-17_11-09-27.png" alt="MDK-ARM工程目录"></p>
+<p>User Groups下包含的IAP驱动相关的源文件和描述如下：  </p>
+<ul>
+<li>mian.c：初始化串口，然后从common.c文件中执行主菜单</li>
+<li>common.c：内容显示函数和主菜单程序</li>
+<li>ymodem.c和download.c：用于接收超级终端发送过来的数据（采用ymodem协议）并下载到STM32F10x内部RAM中</li>
+<li>upload.c：把内部FLASH中的APP代码通过ymodem协议进行上传</li>
+</ul>
+<p>整个IAP程序的运行框架如下图：</p>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/STM32_IAP.jpg" alt="MDK-ARM工程目录"></p>
+<p>IAP程序运行过程：判断用户按键是否按下（STM3210B-EVAL使用的是PB9，判断PB9是否为低电平），没有按下（PB9为高电平）就直接跳转到用户APP程序执行；如按下，初始化串口1，（连接到超级终端，超级终端）显示IAP菜单，菜单有：1-下载，2-上传，3-跳转（如检测到FLASH被写保护，就会有4-解除写保护）。</p>
+<p>键盘输入1：提示下载APP程序文件，通过超级终端的ymodem协议把APP程序的二进制文件传输下载到指定的User FLASH中，如果出现错误则会在超级终端中显示出来，传输下载完成后会重新返回显示IAP主菜单</p>
+<p>键盘输入2：提示把FLASH中APP程序通过ymodem协议在超级终端上传，如果出现错误则会在超级终端中显示出来</p>
+<p>键盘输入3：跳转到APP程序运行</p>
+<p>键盘输入4：解除FLASH写保护（该操作在系统检测到FLASH处于写保护才会显示到超级终端上）</p>
+<h3 id="IAP例程使用概要"><a href="#IAP例程使用概要" class="headerlink" title="IAP例程使用概要"></a>IAP例程使用概要</h3><p>IAP驱动程序也是需要下载到FLASH里运行的，IAP程序占用FLASH大小约为12KByte，在不同密度的产品占用FLASH的页数不一样（低、中密度为1KByte字节每页，超高、高密度为2KByte字节每页）  </p>
+<ul>
+<li>在低、中密度产品中，IAP程序占用FLASH的页0~页11</li>
+<li>在超高、高密度产品中，IAP程序占用FLASH的页0~页5</li>
+</ul>
+<p>IAP例程还需要一个支持ymodem协议的PC上位机（超级终端），使用STM32的串口连接PC，通过上位机来进行程序的上传和下载，这里使用的上位机软件是：<code>SecureCRT8.3</code>（安装和使用请参考百度）</p>
+<p>打开<code>STM32F10x_AN2557_FW_V3.3.0\Project\IAP</code>目录下的MDK-ARM工程，选择Target为STM3210B-EVAL，编译并下载到测试目标板中（测试目标板MCU型号为STM32F103C8T6），通过串口连接测试目标板与PC，打开SecureCRT8.3建立基于串口通讯的快速连接（波特率：115200，数据位：8位，无奇偶校验，停止位：1位，无流控），然后把PB9引脚接低电平，复位测试目标板，可以看到上位机显示</p>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/Snipaste_2018-08-17_16-46-58.png" alt=""><br><em>注：程序检测到FLASH没有处于写保护状态时，不会显示FLASH擦除选项</em></p>
+<h3 id="下载APP例程文件"><a href="#下载APP例程文件" class="headerlink" title="下载APP例程文件"></a>下载APP例程文件</h3><p>在下载APP例程文件前，需要知道IAP程序中设置的APP程序FLASH地址，该地址位于工程的common.h文件下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define ApplicationAddress    0x8003000</span><br></pre></td></tr></table></figure></p>
+<p>APP程序下载的FLASH起始地址为0x8003000。打开<code>STM32F10x_AN2557_FW_V3.3.0\Project\IAP\binary_template</code>目录下的MDK-ARM工程，选择Target为STM3210B-EVAL，该工程为官方提供的APP例程，打开工程的Options窗口，在Target栏下做如下修改（STM32F103C8T6的FLASH大小为64KB，APP例程的FLASH起始地址设为0x08003000，大小为：64KB-IAP使用的12KB = 52KB = 0xD000）  </p>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/Snipaste_2018-08-17_17-10-00.png" alt=""></p>
+<p>在User栏下，After Build/Rebuild选项下勾选Run #1，然后在对于的右侧填入<code>D:\Keil_v5\ARM\ARMCC\bin\fromelf.exe --bin -o  ./STM3210B-EVAL/@L.bin  ./STM3210B-EVAL/@L.axf</code>，该语句的作用是在工程下的STM3210B-EVAL目录下生成STM3210B-EVAL.bin和STM3210B-EVAL.axf文件（如KEIL安装目录不一样，则需要修改<code>D:\Keil_v5\ARM\ARMCC\bin\fromelf.exe</code>）</p>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/Snipaste_2018-08-17_17-31-17.png" alt="">  </p>
+<p>编译之后就会生成STM3210B-EVAL.bin，该APP例程的效果是4个LED闪烁，LED的IO口定义在stm3210b_eval.h文件下，可根据实际硬件LED连接来修改。</p>
+<p>生成.bin文件后，回到上位机界面，然后键盘输入数字：1，此时上位机提示等待接收APP程序文件，在上位机菜单栏点击Transfer–&gt;Send Ymodem…，选择生成的APP程序文件STM3210B-EVAL.bin，然后点击Add，最后点击OK，发送成功后会显示发送的文件文件名和大小，然后再次返回IAP注菜单</p>
+<p><img src="http://pdc1n1b19.bkt.clouddn.com/Snipaste_2018-08-17_18-08-30.png" alt=""><br><em>注：发送超时会自动返回IAP主菜单</em></p>
+<p>最后键盘输入数字：3，程序跳转到APP运行，可以看到LED闪烁。</p>
 
       
     </div>
@@ -501,12 +573,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/08/15/STM32F103-IAP设计与应用（官方）/">STM32F103 IAP设计与应用（官方）</a></p>
+  <p><span>本文标题:</span><a href="/2018/08/15/STM32F103-IAP设计与应用/">STM32F103 IAP设计与应用（官方）</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2018年08月15日 - 23:08</p>
-  <p><span>最后更新:</span>2018年08月15日 - 23:08</p>
-  <p><span>原始链接:</span><a href="/2018/08/15/STM32F103-IAP设计与应用（官方）/" title="STM32F103 IAP设计与应用（官方）">http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用（官方）/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用（官方）/"  aria-label="复制成功！"></i></span>
+  <p><span>最后更新:</span>2018年08月17日 - 19:08</p>
+  <p><span>原始链接:</span><a href="/2018/08/15/STM32F103-IAP设计与应用/" title="STM32F103 IAP设计与应用（官方）">http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/08/15/STM32F103-IAP设计与应用/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -793,7 +865,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内容"><span class="nav-number">1.</span> <span class="nav-text">内容</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STM32F10x-IAP-设计与应用"><span class="nav-number">1.</span> <span class="nav-text">STM32F10x IAP 设计与应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STM32程序运行过程分析"><span class="nav-number">1.1.</span> <span class="nav-text">STM32程序运行过程分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32正常启动流程"><span class="nav-number">1.1.1.</span> <span class="nav-text">STM32正常启动流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32加入IAP启动流程"><span class="nav-number">1.1.2.</span> <span class="nav-text">STM32加入IAP启动流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IAP例程介绍"><span class="nav-number">1.2.</span> <span class="nav-text">IAP例程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IAP相关文件介绍"><span class="nav-number">1.2.1.</span> <span class="nav-text">IAP相关文件介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IAP例程使用概要"><span class="nav-number">1.2.2.</span> <span class="nav-text">IAP例程使用概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载APP例程文件"><span class="nav-number">1.2.3.</span> <span class="nav-text">下载APP例程文件</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
