@@ -125,7 +125,7 @@
 <meta property="og:description" content="Create Hexo需要环境环境安装是只需一直点Next即可  PC:Windows10 64-bit Git:Download 2.18.0 for Windows Node.js:Windows Installer(.msi)64-bit  安装Hexo安装好Git和Node.js环境后，打开Git Bash，然后输入如下命令安装Hexo1npm install hexo-cli -g 输入">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pd5d21ufk.bkt.clouddn.com/Github+Hexo.jpg">
-<meta property="og:updated_time" content="2018-08-08T15:05:55.177Z">
+<meta property="og:updated_time" content="2018-08-19T12:59:15.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo:搭建个人博客">
 <meta name="twitter:description" content="Create Hexo需要环境环境安装是只需一直点Next即可  PC:Windows10 64-bit Git:Download 2.18.0 for Windows Node.js:Windows Installer(.msi)64-bit  安装Hexo安装好Git和Node.js环境后，打开Git Bash，然后输入如下命令安装Hexo1npm install hexo-cli -g 输入">
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  399 字
+                  1,361 字
                 </span>
               
 
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -448,7 +448,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pd5d21ufk.bkt.clouddn.com/Github+Hexo.jpg" rel="gallery_cjkxww5b60000hgt2sw77edf2"
+                 href="http://pd5d21ufk.bkt.clouddn.com/Github+Hexo.jpg" rel="gallery_cjl0uz5tk0002x8t2x7z26qcs"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pd5d21ufk.bkt.clouddn.com/Github+Hexo.jpg" itemprop="contentUrl"/>
               </a>
@@ -479,6 +479,38 @@
 <p>可以看到一下信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure></p>
 <p>现在打开浏览器访问<code>http://localhost:4000/</code>即可看到，在Git Bash按Crl+c就会关闭网站。</p>
 <p><em>note:如果出现防火墙提示，放行就可以了</em></p>
+<h1 id="部署网站到Github"><a href="#部署网站到Github" class="headerlink" title="部署网站到Github"></a>部署网站到Github</h1><h2 id="Github仓库创建"><a href="#Github仓库创建" class="headerlink" title="Github仓库创建"></a>Github仓库创建</h2><ol>
+<li>新建一个仓库，命名方式：userName+’github.io’</li>
+<li>点击Create Repository后，选择Setting进入设置</li>
+<li>在Github Pages下点击Choose a theme选择一个主题</li>
+<li>此时返回仓库再点击Setting既可以查看到github分配的域名</li>
+</ol>
+<h2 id="将本地的博客发布到github上"><a href="#将本地的博客发布到github上" class="headerlink" title="将本地的博客发布到github上"></a>将本地的博客发布到github上</h2><p>回到Git Bash，修改博客根目录的<code>_config.yml</code>文件，修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/LGG001/LGG001.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>然后安装部署插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git —save</span><br></pre></td></tr></table></figure></p>
+<p>最后部署到github上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<h2 id="补充：生成SSH-Key"><a href="#补充：生成SSH-Key" class="headerlink" title="补充：生成SSH Key"></a>补充：生成SSH Key</h2><p>在Git Bash中输入命令来生产SSH密钥<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;1058901869@qq.com.com&quot;</span><br></pre></td></tr></table></figure></p>
+<p>接着会要求输入密语字符串，直接回车跳过即可。然后会让输入2次口令，这里也直接输入两次回车跳过（使用3次回车就会生产一份公钥<code>id_rsa.pub</code>和一份密钥<code>id_rsa</code>，这两份密钥位于根目录下的.ssh目录下）</p>
+<p>公钥需要在Github上的<code>Settings--&gt;SSH and GPG keys</code>上配置，把生成好的公钥<code>id_rsa.pub</code>复制到key输入框中，然后为key起一个title来区分每个key。生成后Github会发一封邮件提醒</p>
+<p>接下来回到博客根目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd g:blogs</span><br></pre></td></tr></table></figure></p>
+<p>修改_config.yml文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim _config.yml</span><br></pre></td></tr></table></figure></p>
+<p>修改<code>deploy</code>部分，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:LGG001/LGG001.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>最后重新输入如下命令来重新发布到Github上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<p>输入网址<code>https://lgg001.github.io/</code>即可访问博客了</p>
+<h1 id="发表文章"><a href="#发表文章" class="headerlink" title="发表文章"></a>发表文章</h1><h2 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h2><p>在博客的目录文件夹下进入Git Bash，然后输入hexo new “博文名字”，如hexo new “Hexo:搭建个人博客”</p>
+<p>在blogs\source_post目录下就会再到”博文名字”.md的文件，该文件的内容是使用MarkDown格式的，使用MarkDown编辑器编辑。个人推荐：MarkDownPad2</p>
+<h2 id="添加分类"><a href="#添加分类" class="headerlink" title="添加分类"></a>添加分类</h2><p>在blogs\scaffolds目录下，修改post.md文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br></pre></td></tr></table></figure></p>
+<p>观察成的”Hexo:搭建个人博客”文章内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &apos;Hexo:搭建个人博客&apos; #文章页面显示的名称</span><br><span class="line">categories: #文章分类目录</span><br><span class="line">date: 2018-07-20 23:23:06 #文章生成时间</span><br><span class="line">tags: #文章标签</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>在文章下面就可以写自己的内容了。</p>
+<p>如果想给文章添加图片的效果，在文章里面的头上添加photos选项即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">layout: photo</span><br><span class="line">title: &apos;Hexo:搭建个人博客&apos; #文章页面显示的名称</span><br><span class="line">categories: #文章分类目录</span><br><span class="line">date: 2018-07-20 23:23:06 #文章生成时间</span><br><span class="line">tags: #文章标签</span><br><span class="line">photos: </span><br><span class="line">- http://bruce.u.qiniudn.com/2013/11/27/reading/photos-0.jpg</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用描述、摘要"><a href="#使用描述、摘要" class="headerlink" title="使用描述、摘要"></a>使用描述、摘要</h2><p>描述和摘要的使用如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">title: hexo你的博客</span><br><span class="line">date: 2013-11-22 17:11:54</span><br><span class="line">categories: default</span><br><span class="line">tags: [hexo]</span><br><span class="line">description: 你对本页的描述</span><br><span class="line"></span><br><span class="line">以上是摘要</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">以下是余下全文</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用图片"><a href="#使用图片" class="headerlink" title="使用图片"></a>使用图片</h2><p>在Git Bash输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure></p>
+<p>重新创建一个博客名字，然后发现Hexo\source_posts下多了一个与博客名字相同的空文件夹,然后就可以把我们博客中要用到的图片存放在这个文件夹下，需要时直接引用即可.</p>
+<h1 id="安装主题（Next）"><a href="#安装主题（Next）" class="headerlink" title="安装主题（Next）"></a>安装主题（Next）</h1><h2 id="安装Next主题"><a href="#安装Next主题" class="headerlink" title="安装Next主题"></a>安装Next主题</h2><p>关于Next的详细内容可以参考<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next</a>官方文档</p>
+<p>安装Next主题只需要一条命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后，打开<strong>博客</strong>的配置文件_config.yml文件，修改主题为next<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure></p>
+<p>然后输入<code>hexo s --debug</code>在本地查看预览效果</p>
+<p>打开themes\next目录，编辑<strong>主题</strong>的配置文件_config.yml</p>
+<p>重新发布主题到Github上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -752,7 +784,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-Hexo"><span class="nav-number">1.</span> <span class="nav-text">Create Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需要环境"><span class="nav-number">1.1.</span> <span class="nav-text">需要环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hexo"><span class="nav-number">1.2.</span> <span class="nav-text">安装Hexo</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-Hexo"><span class="nav-number">1.</span> <span class="nav-text">Create Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需要环境"><span class="nav-number">1.1.</span> <span class="nav-text">需要环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hexo"><span class="nav-number">1.2.</span> <span class="nav-text">安装Hexo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署网站到Github"><span class="nav-number">2.</span> <span class="nav-text">部署网站到Github</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Github仓库创建"><span class="nav-number">2.1.</span> <span class="nav-text">Github仓库创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将本地的博客发布到github上"><span class="nav-number">2.2.</span> <span class="nav-text">将本地的博客发布到github上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充：生成SSH-Key"><span class="nav-number">2.3.</span> <span class="nav-text">补充：生成SSH Key</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发表文章"><span class="nav-number">3.</span> <span class="nav-text">发表文章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新建文章"><span class="nav-number">3.1.</span> <span class="nav-text">新建文章</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加分类"><span class="nav-number">3.2.</span> <span class="nav-text">添加分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用描述、摘要"><span class="nav-number">3.3.</span> <span class="nav-text">使用描述、摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用图片"><span class="nav-number">3.4.</span> <span class="nav-text">使用图片</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装主题（Next）"><span class="nav-number">4.</span> <span class="nav-text">安装主题（Next）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Next主题"><span class="nav-number">4.1.</span> <span class="nav-text">安装Next主题</span></a></li></ol></li></ol></div>
             
 
           </div>
