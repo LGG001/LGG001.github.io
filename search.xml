@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[nRF52832-程序下载]]></title>
+    <url>%2F2018%2F08%2F29%2FnRF52832-%E7%A8%8B%E5%BA%8F%E4%B8%8B%E8%BD%BD%2F</url>
+    <content type="text"><![CDATA[nRF52832程序下载 基本外设例程下载SDK版本：15.1.0（nRF5_SDK_15.1.0_a8c0c4d）硬件：nRF52832开发板（外设配置与官方一致） 基本外设例程位于目录：examples\peripheral\，以该目录下的blinky例程为例，打开blinky\pca10040\s132\arm5_no_packs的MDK工程注：pca10040是官方的nRF52832开发板，s132是针对nRF52832的SoftDevice，IDE环境是ARM-MDK5对应arm5_no_packs中的工程 nRF52832的程序下载流程分如下三步： 擦除FLASH 下载协议栈 下载应用程序 具体实现如下： 选择目标工程为flash_s132_nrf52_6.1.0_softdevice，该工程是协议栈工程，在下载应用工程前需要先下载对应的协议栈 打开工程的Options窗口，在Debug栏下选择对应的下载器协议，然后点击Setting 切换到Flash Download，勾选Reset and Run，添加Programming Algorithm，RAM for Algorithm下的大小改为0x2000，点击OK完成配置 点击菜单栏Flash–&gt;Erase擦除FLASH，然后点击Flash–&gt;Download下载协议栈 在菜单栏切换目标工程为nrf52832_xxaa，该工程是应用程序工程 打开工程的Options窗口，在Debug栏下选择对应的下载器协议，然后点击Setting 切换到Flash Download，勾选Reset and Run，添加Programming Algorithm，RAM for Algorithm下的大小改为0x2000，点击OK完成配置 点击Build Target编译应用程序，然后点击Flash–&gt;Download下载应用程序，下载完成后重启一次，可以看到程序效果：LED1~LED4逐次亮–&gt;灭]]></content>
+      <categories>
+        <category>Bluetooth</category>
+      </categories>
+      <tags>
+        <tag>nRF52832</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[nRF52832-开发环境]]></title>
     <url>%2F2018%2F08%2F29%2FnRF52832-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[开发环境搭建开发环境基于Windows10-64位平台 开发工具下载使用的软件和工具下载地址：nRF52832资源下载 软件开发包（SDK）下载：点击下载 ARM-MDK集成开发环境下载：点击下载 nRF5x的MDK支持包下载：点击下载 ARM.CMSIS.5.4.0.pack下载：点击下载 nRFgo Studio-Win64下载（nRF5x程序下载工具W10-64位）：点击下载 开发工具安装SDK是以压缩包形式打包的，里面包含各个外设的例程、协议栈、蓝牙通讯的Demo等等，下载后解压就可以直接使用 ARM-MDK开发环境安装： 下载并安装ARM-MDK，安装过程一路点击Next即可，建议保持默认路径 安装nRF5x的MDK支持包，双击安装，会自动识别ARM-MDK的安装路径 安装ARM.CMSIS.5.4.0.pack，双击安装，会自动识别ARM-MDK的安装路径 nRFgo Studio安装，该安装过程比较简单，一路保持默认，安装类型选择（Typical）,点击Next即可]]></content>
