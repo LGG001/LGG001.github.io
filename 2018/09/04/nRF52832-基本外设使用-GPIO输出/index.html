@@ -117,19 +117,19 @@
 
 
 
-<meta name="description" content="开发环境搭建开发环境基于Windows10-64位平台 开发工具下载使用的软件和工具下载地址：nRF52832资源下载  软件开发包（SDK）下载：点击下载 ARM-MDK集成开发环境下载：点击下载 nRF5x的MDK支持包下载：点击下载 ARM.CMSIS.5.4.0.pack下载：点击下载 nRFgo Studio-Win64下载（nRF5x程序下载工具W10-64位）：点击下载  开发工具安">
+<meta name="description" content="nRF52832-GPIO输出   环境介绍PC环境：WindowsIDE环境：ARM-MDK5SDK环境：nRF5 SDK v15.1.0 使用官方的blinky例程，该位于nRF5_SDK_15.1.0_a8c0c4d\examples\peripheral\blinky\pca10040\s132\arm5_no_packs目录下。注：pca10040代表nRF52832例程，s132代表基">
 <meta name="keywords" content="nRF52832">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nRF52832-开发环境">
-<meta property="og:url" content="http://yoursite.com/2018/08/29/nRF52832-开发环境/index.html">
+<meta property="og:title" content="nRF52832-基本外设使用:GPIO输出">
+<meta property="og:url" content="http://yoursite.com/2018/09/04/nRF52832-基本外设使用-GPIO输出/index.html">
 <meta property="og:site_name" content="My Hexo">
-<meta property="og:description" content="开发环境搭建开发环境基于Windows10-64位平台 开发工具下载使用的软件和工具下载地址：nRF52832资源下载  软件开发包（SDK）下载：点击下载 ARM-MDK集成开发环境下载：点击下载 nRF5x的MDK支持包下载：点击下载 ARM.CMSIS.5.4.0.pack下载：点击下载 nRFgo Studio-Win64下载（nRF5x程序下载工具W10-64位）：点击下载  开发工具安">
+<meta property="og:description" content="nRF52832-GPIO输出   环境介绍PC环境：WindowsIDE环境：ARM-MDK5SDK环境：nRF5 SDK v15.1.0 使用官方的blinky例程，该位于nRF5_SDK_15.1.0_a8c0c4d\examples\peripheral\blinky\pca10040\s132\arm5_no_packs目录下。注：pca10040代表nRF52832例程，s132代表基">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdgd2i3gi.bkt.clouddn.com/NRF_LOGO.jpg">
-<meta property="og:updated_time" content="2018-08-30T17:25:33.372Z">
+<meta property="og:updated_time" content="2018-09-04T14:42:53.197Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nRF52832-开发环境">
-<meta name="twitter:description" content="开发环境搭建开发环境基于Windows10-64位平台 开发工具下载使用的软件和工具下载地址：nRF52832资源下载  软件开发包（SDK）下载：点击下载 ARM-MDK集成开发环境下载：点击下载 nRF5x的MDK支持包下载：点击下载 ARM.CMSIS.5.4.0.pack下载：点击下载 nRFgo Studio-Win64下载（nRF5x程序下载工具W10-64位）：点击下载  开发工具安">
+<meta name="twitter:title" content="nRF52832-基本外设使用:GPIO输出">
+<meta name="twitter:description" content="nRF52832-GPIO输出   环境介绍PC环境：WindowsIDE环境：ARM-MDK5SDK环境：nRF5 SDK v15.1.0 使用官方的blinky例程，该位于nRF5_SDK_15.1.0_a8c0c4d\examples\peripheral\blinky\pca10040\s132\arm5_no_packs目录下。注：pca10040代表nRF52832例程，s132代表基">
 <meta name="twitter:image" content="http://pdgd2i3gi.bkt.clouddn.com/NRF_LOGO.jpg">
 
 
@@ -160,13 +160,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/29/nRF52832-开发环境/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/04/nRF52832-基本外设使用-GPIO输出/"/>
 
 
 
 
 
-  <title>nRF52832-开发环境 | My Hexo</title>
+  <title>nRF52832-基本外设使用:GPIO输出 | My Hexo</title>
   
 
 
@@ -348,7 +348,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/nRF52832-开发环境/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/nRF52832-基本外设使用-GPIO输出/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LGG001">
@@ -365,7 +365,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nRF52832-开发环境</h1>
+          <h1 class="post-title" itemprop="name headline">nRF52832-基本外设使用:GPIO输出</h1>
         
 
         <div class="post-meta">
@@ -377,8 +377,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T22:32:29+08:00">
-                2018-08-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T22:18:56+08:00">
+                2018-09-04
               </time>
             
 
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  273 字
+                  109 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pdgd2i3gi.bkt.clouddn.com/NRF_LOGO.jpg" rel="gallery_cjlntun9u0008vct2whdoqevv"
+                 href="http://pdgd2i3gi.bkt.clouddn.com/NRF_LOGO.jpg" rel="gallery_cjlntun9h0000vct2y57mm57c"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pdgd2i3gi.bkt.clouddn.com/NRF_LOGO.jpg" itemprop="contentUrl"/>
               </a>
@@ -484,24 +484,11 @@
       
 
       
-        <h1 id="开发环境搭建"><a href="#开发环境搭建" class="headerlink" title="开发环境搭建"></a>开发环境搭建</h1><p><em>开发环境基于Windows10-64位平台</em></p>
-<h2 id="开发工具下载"><a href="#开发工具下载" class="headerlink" title="开发工具下载"></a>开发工具下载</h2><p>使用的软件和工具下载地址：<a href="https://www.nordicsemi.com/eng/Products/Bluetooth-low-energy/nRF52832" target="_blank" rel="noopener">nRF52832资源下载</a></p>
-<ul>
-<li>软件开发包（SDK）下载：<a href="https://www.nordicsemi.com/eng/nordic/download_resource/59012/84/81810672/116085" target="_blank" rel="noopener">点击下载</a></li>
-<li>ARM-MDK集成开发环境下载：<a href="http://www.keil.com/fid/qv02uawrommj1wry6xw1aqdjf9lgcqd1tb0pd1/files/eval/mdk525.exe" target="_blank" rel="noopener">点击下载</a></li>
-<li>nRF5x的MDK支持包下载：<a href="https://www.nordicsemi.com/eng/nordic/download_resource/48740/31/82481821/87790" target="_blank" rel="noopener">点击下载</a></li>
-<li>ARM.CMSIS.5.4.0.pack下载：<a href="https://www.nordicsemi.com/eng/nordic/download_resource/48740/31/82481821/87790" target="_blank" rel="noopener">点击下载</a></li>
-<li>nRFgo Studio-Win64下载（nRF5x程序下载工具W10-64位）：<a href="https://www.nordicsemi.com/eng/nordic/download_resource/48826/69/56326041/2447" target="_blank" rel="noopener">点击下载</a></li>
-</ul>
-<h2 id="开发工具安装"><a href="#开发工具安装" class="headerlink" title="开发工具安装"></a>开发工具安装</h2><p>SDK是以压缩包形式打包的，里面包含各个外设的例程、协议栈、蓝牙通讯的Demo等等，下载后解压就可以直接使用</p>
-<p>ARM-MDK开发环境安装：</p>
-<ol>
-<li>下载并安装ARM-MDK，安装过程一路点击Next即可，建议保持默认路径</li>
-<li>安装nRF5x的MDK支持包，双击安装，会自动识别ARM-MDK的安装路径</li>
-<li>安装ARM.CMSIS.5.4.0.pack，双击安装，会自动识别ARM-MDK的安装路径</li>
-</ol>
-<p>nRFgo Studio安装，该安装过程比较简单，一路保持默认，安装类型选择（Typical）,点击Next即可</p>
-
+        <h1 id="nRF52832-GPIO输出"><a href="#nRF52832-GPIO输出" class="headerlink" title="nRF52832-GPIO输出"></a>nRF52832-GPIO输出</h1><!--- 2018-9-4 --->  
+<h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><p>PC环境：Windows<br>IDE环境：ARM-MDK5<br>SDK环境：nRF5 SDK v15.1.0</p>
+<p>使用官方的blinky例程，该位于<code>nRF5_SDK_15.1.0_a8c0c4d\examples\peripheral\blinky\pca10040\s132\arm5_no_packs</code>目录下。<br><em>注：pca10040代表nRF52832例程，s132代表基于协议栈的工程，ARM-MDK5选择arm5_no_packs</em><br><em>注：基于协议栈的工程和不基于协议栈的工程的RAM和FLASH配置不一致</em></p>
+<h2 id="GPIO输出配置"><a href="#GPIO输出配置" class="headerlink" title="GPIO输出配置"></a>GPIO输出配置</h2><p>打开工程，</p>
+<h2 id="代码烧录"><a href="#代码烧录" class="headerlink" title="代码烧录"></a>代码烧录</h2>
       
     </div>
     
@@ -517,12 +504,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/08/29/nRF52832-开发环境/">nRF52832-开发环境</a></p>
+  <p><span>本文标题:</span><a href="/2018/09/04/nRF52832-基本外设使用-GPIO输出/">nRF52832-基本外设使用:GPIO输出</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
-  <p><span>发布时间:</span>2018年08月29日 - 22:08</p>
-  <p><span>最后更新:</span>2018年08月31日 - 01:08</p>
-  <p><span>原始链接:</span><a href="/2018/08/29/nRF52832-开发环境/" title="nRF52832-开发环境">http://yoursite.com/2018/08/29/nRF52832-开发环境/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/08/29/nRF52832-开发环境/"  aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2018年09月04日 - 22:09</p>
+  <p><span>最后更新:</span>2018年09月04日 - 22:09</p>
+  <p><span>原始链接:</span><a href="/2018/09/04/nRF52832-基本外设使用-GPIO输出/" title="nRF52832-基本外设使用:GPIO输出">http://yoursite.com/2018/09/04/nRF52832-基本外设使用-GPIO输出/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/09/04/nRF52832-基本外设使用-GPIO输出/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -607,8 +594,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/15/STM32F103-IAP设计与应用/" rel="next" title="STM32F103 IAP设计与应用（官方）">
-                <i class="fa fa-chevron-left"></i> STM32F103 IAP设计与应用（官方）
+              <a href="/2018/08/29/nRF52832-程序下载/" rel="next" title="nRF52832-程序下载">
+                <i class="fa fa-chevron-left"></i> nRF52832-程序下载
               </a>
             
           </div>
@@ -616,10 +603,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/29/nRF52832-程序下载/" rel="prev" title="nRF52832-程序下载">
-                nRF52832-程序下载 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -813,7 +796,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开发环境搭建"><span class="nav-number">1.</span> <span class="nav-text">开发环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发工具下载"><span class="nav-number">1.1.</span> <span class="nav-text">开发工具下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发工具安装"><span class="nav-number">1.2.</span> <span class="nav-text">开发工具安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nRF52832-GPIO输出"><span class="nav-number">1.</span> <span class="nav-text">nRF52832-GPIO输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境介绍"><span class="nav-number">1.1.</span> <span class="nav-text">环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GPIO输出配置"><span class="nav-number">1.2.</span> <span class="nav-text">GPIO输出配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码烧录"><span class="nav-number">1.3.</span> <span class="nav-text">代码烧录</span></a></li></ol></li></ol></div>
             
 
           </div>

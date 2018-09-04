@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[nRF52832-基本外设使用:GPIO输出]]></title>
+    <url>%2F2018%2F09%2F04%2FnRF52832-%E5%9F%BA%E6%9C%AC%E5%A4%96%E8%AE%BE%E4%BD%BF%E7%94%A8-GPIO%E8%BE%93%E5%87%BA%2F</url>
+    <content type="text"><![CDATA[nRF52832-GPIO输出 环境介绍PC环境：WindowsIDE环境：ARM-MDK5SDK环境：nRF5 SDK v15.1.0 使用官方的blinky例程，该位于nRF5_SDK_15.1.0_a8c0c4d\examples\peripheral\blinky\pca10040\s132\arm5_no_packs目录下。注：pca10040代表nRF52832例程，s132代表基于协议栈的工程，ARM-MDK5选择arm5_no_packs注：基于协议栈的工程和不基于协议栈的工程的RAM和FLASH配置不一致 GPIO输出配置打开工程， 代码烧录]]></content>
+      <categories>
+        <category>Bluetooth</category>
+      </categories>
+      <tags>
+        <tag>nRF52832</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[nRF52832-程序下载]]></title>
     <url>%2F2018%2F08%2F29%2FnRF52832-%E7%A8%8B%E5%BA%8F%E4%B8%8B%E8%BD%BD%2F</url>
     <content type="text"><![CDATA[nRF52832程序下载 基本外设例程下载SDK版本：15.1.0（nRF5_SDK_15.1.0_a8c0c4d）硬件：nRF52832开发板（外设配置与官方一致） 基本外设例程位于目录：examples\peripheral\，以该目录下的blinky例程为例，打开blinky\pca10040\s132\arm5_no_packs的MDK工程注：pca10040是官方的nRF52832开发板，s132是针对nRF52832的SoftDevice，IDE环境是ARM-MDK5对应arm5_no_packs中的工程 nRF52832的程序下载流程分如下三步： 擦除FLASH 下载协议栈 下载应用程序 具体实现如下： 选择目标工程为flash_s132_nrf52_6.1.0_softdevice，该工程是协议栈工程，在下载应用工程前需要先下载对应的协议栈 打开工程的Options窗口，在Debug栏下选择对应的下载器协议，然后点击Setting 切换到Flash Download，勾选Reset and Run，添加Programming Algorithm，RAM for Algorithm下的大小改为0x2000，点击OK完成配置 点击菜单栏Flash–&gt;Erase擦除FLASH，然后点击Flash–&gt;Download下载协议栈 在菜单栏切换目标工程为nrf52832_xxaa，该工程是应用程序工程 打开工程的Options窗口，在Debug栏下选择对应的下载器协议，然后点击Setting 切换到Flash Download，勾选Reset and Run，添加Programming Algorithm，RAM for Algorithm下的大小改为0x2000，点击OK完成配置 点击Build Target编译应用程序，然后点击Flash–&gt;Download下载应用程序，下载完成后重启一次，可以看到程序效果：LED1~LED4逐次亮–&gt;灭]]></content>
