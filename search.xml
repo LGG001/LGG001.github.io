@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[nRF52832-基本外设使用:GPIO输出]]></title>
     <url>%2F2018%2F09%2F04%2FnRF52832-%E5%9F%BA%E6%9C%AC%E5%A4%96%E8%AE%BE%E4%BD%BF%E7%94%A8-GPIO%E8%BE%93%E5%87%BA%2F</url>
-    <content type="text"><![CDATA[nRF52832-GPIO输出 环境介绍PC环境：WindowsIDE环境：ARM-MDK5SDK环境：nRF5 SDK v15.1.0 使用官方的blinky例程，该位于nRF5_SDK_15.1.0_a8c0c4d\examples\peripheral\blinky\pca10040\s132\arm5_no_packs目录下。注：pca10040代表nRF52832例程，s132代表基于协议栈的工程，ARM-MDK5选择arm5_no_packs注：基于协议栈的工程和不基于协议栈的工程的RAM和FLASH配置不一致 GPIO输出配置打开工程， 代码烧录]]></content>
+    <content type="text"><![CDATA[nRF52832-GPIO输出 环境介绍PC环境：WindowsIDE环境：ARM-MDK5SDK环境：nRF5 SDK v15.1.0 使用官方的blinky例程，该位于nRF5_SDK_15.1.0_a8c0c4d\examples\peripheral\blinky\pca10040\s132\arm5_no_packs目录下。注：pca10040代表nRF52832例程，s132代表基于协议栈的工程，ARM-MDK5选择arm5_no_packs注：基于协议栈的工程和不基于协议栈的工程的RAM和FLASH配置不一致 GPIO输出配置打开工程并打开main.c文件，可以看到mian函数内容如下：123456789101112131415int main(void)&#123; /* Configure board. */ bsp_board_init(BSP_INIT_LEDS); /* Toggle LEDs. */ while (true) &#123; for (int i = 0; i &lt; LEDS_NUMBER; i++) &#123; bsp_board_led_invert(i); nrf_delay_ms(500); &#125; &#125;&#125; 该例程是基于pca10040（nRF52832）开发板的LED例程，实现LED1~LED4依次闪烁的功能，下面根据LED的GPIO配置来配置P25和P26引脚输出高低电平，在main函数上面添加自定义函数，如下：1234567891011121314/** * @º¯ÊýÃû Custom_Init * @¹¦ ÄÜ ÓÃ»§×Ô¶¨ÒåGPIO¿Ú³õÊ¼»¯ * @²Î Êý ÎÞ * @·µ»ØÖµ ÎÞ */void Custom_Init(void)&#123; nrf_gpio_cfg_output(25); //³õÊ¼»¯P25Òý½Å£¬ÅäÖÃÎªÊä³öÄ£Ê½ nrf_gpio_cfg_output(26); //³õÊ¼»¯P26Òý½Å£¬ÅäÖÃÎªÊä³öÄ£Ê½ nrf_gpio_pin_write(25, 0); //P25Òý½ÅÊä³öµÍµçÆ½ nrf_gpio_pin_write(26, 0); //P26Òý½ÅÊä³öµÍµçÆ½&#125; 代码烧录]]></content>
       <categories>
         <category>Bluetooth</category>
       </categories>
