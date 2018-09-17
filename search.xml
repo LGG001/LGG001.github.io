@@ -5,10 +5,10 @@
     <url>%2F2018%2F09%2F17%2FPython%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
     <content type="text"><![CDATA[Python开发入门-开发环境搭建 人生苦短，我用Python。Python是一门非常容易入门的语言，同时也是一门高效的语言，在开始学习之前，需要搭建Python的开发环境。本文介绍Python3.6 + Python2.7的环境安装，同时也介绍相关的Python工具安装。Python主要有两个版本：Python3和Python2，这两个版本是不兼容的，Python2会在2020年停止维护，但是目前很多Python相关的库只支持Python2，而且有很多脚本工具也是使用Python2环境，所以在搭建Python的开发环境使用Python3和Python2兼容的方式安装 环境介绍PC环境：Windows10 64bitPython版本：Python3.6 + Python2.7IDE环境：PyCharm其他（可选）：Sublime Txt3 工具下载下面给出各工具的下载地址，根据不同的环境选择相对于的安装包进行安装： Python3.6 + Python2.7：https://www.python.org/downloads/ PyCharm：http://www.jetbrains.com/pycharm/download/#section=windows Sublime Txt3：https://www.sublimetext.com/3 工具安装Python3.6 + Python2.7安装PyCharm安装Sublime Txt3安装]]></content>
       <categories>
-        <category>Bluetooth</category>
+        <category>Python</category>
       </categories>
       <tags>
-        <tag>Python</tag>
+        <tag>Python开发入门</tag>
       </tags>
   </entry>
   <entry>
