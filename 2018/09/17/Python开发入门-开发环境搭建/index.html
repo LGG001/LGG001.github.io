@@ -126,7 +126,7 @@
 <meta property="og:description" content="Python开发入门-开发环境搭建   人生苦短，我用Python。Python是一门非常容易入门的语言，同时也是一门高效的语言，在开始学习之前，需要搭建Python的开发环境。本文介绍Python3.6 + Python2.7的环境安装，同时也介绍相关的Python工具安装。Python主要有两个版本：Python3和Python2，这两个版本是不兼容的，Python2会在2020年停止维护，但">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png">
-<meta property="og:updated_time" content="2018-09-17T15:01:33.149Z">
+<meta property="og:updated_time" content="2018-09-18T15:41:41.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python开发入门-开发环境搭建">
 <meta name="twitter:description" content="Python开发入门-开发环境搭建   人生苦短，我用Python。Python是一门非常容易入门的语言，同时也是一门高效的语言，在开始学习之前，需要搭建Python的开发环境。本文介绍Python3.6 + Python2.7的环境安装，同时也介绍相关的Python工具安装。Python主要有两个版本：Python3和Python2，这两个版本是不兼容的，Python2会在2020年停止维护，但">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  268 字
+                  664 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" rel="gallery_cjm6f3wtu0001fct2ikiddb4s"
+                 href="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" rel="gallery_cjm7w036d0001swt2swj78j77"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" itemprop="contentUrl"/>
               </a>
@@ -493,7 +493,21 @@
 <li>PyCharm：<a href="http://www.jetbrains.com/pycharm/download/#section=windows" target="_blank" rel="noopener">http://www.jetbrains.com/pycharm/download/#section=windows</a></li>
 <li>Sublime Txt3：<a href="https://www.sublimetext.com/3" target="_blank" rel="noopener">https://www.sublimetext.com/3</a></li>
 </ul>
-<h2 id="工具安装"><a href="#工具安装" class="headerlink" title="工具安装"></a>工具安装</h2><h3 id="Python3-6-Python2-7安装"><a href="#Python3-6-Python2-7安装" class="headerlink" title="Python3.6 + Python2.7安装"></a>Python3.6 + Python2.7安装</h3><h3 id="PyCharm安装"><a href="#PyCharm安装" class="headerlink" title="PyCharm安装"></a>PyCharm安装</h3><h3 id="Sublime-Txt3安装"><a href="#Sublime-Txt3安装" class="headerlink" title="Sublime Txt3安装"></a>Sublime Txt3安装</h3>
+<h2 id="工具安装"><a href="#工具安装" class="headerlink" title="工具安装"></a>工具安装</h2><h3 id="Python3-6-Python2-7安装"><a href="#Python3-6-Python2-7安装" class="headerlink" title="Python3.6 + Python2.7安装"></a>Python3.6 + Python2.7安装</h3><p>下载Python3.6（目前Python3.6版本比较稳定）的对应安装包，双击安装（安装目录设为C:\Python36）</p>
+<p>下载Python2.7的对应安装包，双击安装（安装目录设为C:\Python27）</p>
+<p>安装完成后，需要添加环境变量，通过修改环境变量达到Python3和Python2切换使用。点击<strong>我的电脑–&gt;右键属性–&gt;高级系统设置–&gt;环境变量</strong></p>
+<p>在系统变量中新建一个环境变量，变量名：PY_HOME；值：C:\Python36（设置Python3为有效）</p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-18_23-22-24.png" alt=""></p>
+<p>选择系统变量的Path，在他的值中添加<code>%PY_HOME%\;%PY_HOME%\Scripts\;</code></p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-18_23-26-22.png" alt=""></p>
+<p>点击确定完成设置，目前设置Python3为有效（如果要设置Python2有效，则把环境变量PY_HOME的值改为Python27即可），打开CMD命令行工具，输入python，则会进入python环境并打印Python3的版本号等信息</p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-18_23-32-05.png" alt=""></p>
+<p>输入<code>exit()</code>退出python环境，输入pip -V，则会打印pip相关信息，python的环境到此安装完毕</p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-18_23-34-29.png" alt=""></p>
+<h3 id="PyCharm安装"><a href="#PyCharm安装" class="headerlink" title="PyCharm安装"></a>PyCharm安装</h3><p>进入PyCharm官方，会有两个版本提供下载：专业版（收费）；社区版（免费开源），选择社区版下载安装即可，安装过程一路点击Next即可安装完成</p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-18_23-36-24.png" alt=""></p>
+<h3 id="Sublime-Txt3安装"><a href="#Sublime-Txt3安装" class="headerlink" title="Sublime Txt3安装"></a>Sublime Txt3安装</h3><p>Sublime Txt3是我个人非常喜欢的一款代码编辑工具，功能非常强大（几乎满足程序员的所有要求），下载安装也是很简单，到官网上下载，然后双击安装，一路Next即可。需要注意的是Sublime Txt3是收费的软件，但是网上有很多破解的教程，不过个人建议支持正版</p>
+
       
     </div>
     
@@ -512,7 +526,7 @@
   <p><span>本文标题:</span><a href="/2018/09/17/Python开发入门-开发环境搭建/">Python开发入门-开发环境搭建</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2018年09月17日 - 22:09</p>
-  <p><span>最后更新:</span>2018年09月17日 - 23:09</p>
+  <p><span>最后更新:</span>2018年09月18日 - 23:09</p>
   <p><span>原始链接:</span><a href="/2018/09/17/Python开发入门-开发环境搭建/" title="Python开发入门-开发环境搭建">http://yoursite.com/2018/09/17/Python开发入门-开发环境搭建/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/09/17/Python开发入门-开发环境搭建/"  aria-label="复制成功！"></i></span>
   </p>
