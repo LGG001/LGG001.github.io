@@ -117,19 +117,19 @@
 
 
 
-<meta name="description" content="Python应用-爬取京东书籍信息">
+<meta name="description" content="Python应用-爬取京东书籍信息  说到Python的应用，听到比较多的市爬虫，爬虫也是Python入门最好的练手项目。本文主要讲解xpath的用法，并使用xpath来分析和抓取爬取京东书籍的相关信息。关于书籍有一个基本的概念：国际标准书号（简称ISBN），每一本书出版都带有一个唯一的ISBN，本文也是通过ISBN来找到对应数据的信息 环境介绍PC环境：WindowsPython版本：Pytho">
 <meta name="keywords" content="Python应用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python应用-爬取京东书籍信息">
 <meta property="og:url" content="http://yoursite.com/2018/09/25/Python应用-爬取京东书籍信息/index.html">
 <meta property="og:site_name" content="My Hexo">
-<meta property="og:description" content="Python应用-爬取京东书籍信息">
+<meta property="og:description" content="Python应用-爬取京东书籍信息  说到Python的应用，听到比较多的市爬虫，爬虫也是Python入门最好的练手项目。本文主要讲解xpath的用法，并使用xpath来分析和抓取爬取京东书籍的相关信息。关于书籍有一个基本的概念：国际标准书号（简称ISBN），每一本书出版都带有一个唯一的ISBN，本文也是通过ISBN来找到对应数据的信息 环境介绍PC环境：WindowsPython版本：Pytho">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png">
-<meta property="og:updated_time" content="2018-09-25T13:37:52.352Z">
+<meta property="og:updated_time" content="2018-09-25T14:42:01.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python应用-爬取京东书籍信息">
-<meta name="twitter:description" content="Python应用-爬取京东书籍信息">
+<meta name="twitter:description" content="Python应用-爬取京东书籍信息  说到Python的应用，听到比较多的市爬虫，爬虫也是Python入门最好的练手项目。本文主要讲解xpath的用法，并使用xpath来分析和抓取爬取京东书籍的相关信息。关于书籍有一个基本的概念：国际标准书号（简称ISBN），每一本书出版都带有一个唯一的ISBN，本文也是通过ISBN来找到对应数据的信息 环境介绍PC环境：WindowsPython版本：Pytho">
 <meta name="twitter:image" content="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png">
 
 
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  11 字
+                  607 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" rel="gallery_cjmhrn7pc0000swt2yz7p2x7r"
+                 href="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" rel="gallery_cjmhtxucj000x30t2jcf23oo0"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" itemprop="contentUrl"/>
               </a>
@@ -485,6 +485,17 @@
 
       
         <h1 id="Python应用-爬取京东书籍信息"><a href="#Python应用-爬取京东书籍信息" class="headerlink" title="Python应用-爬取京东书籍信息"></a>Python应用-爬取京东书籍信息</h1><!--- 2018-9-25 ---> 
+<p>说到Python的应用，听到比较多的市爬虫，爬虫也是Python入门最好的练手项目。本文主要讲解xpath的用法，并使用xpath来分析和抓取爬取京东书籍的相关信息。关于书籍有一个基本的概念：国际标准书号（简称ISBN），每一本书出版都带有一个唯一的ISBN，本文也是通过ISBN来找到对应数据的信息</p>
+<h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><p>PC环境：Windows<br>Python版本：Python3.6<br>IDE环境：PyCharm<br>使用第三方库：lxml、requests</p>
+<h2 id="使用PyCharm建立Python工程"><a href="#使用PyCharm建立Python工程" class="headerlink" title="使用PyCharm建立Python工程"></a>使用PyCharm建立Python工程</h2><p>在桌面新建文件夹：python_spiderJD，双击打开PyCharm，点击Create New Project新建Python工程，选择工程目录文件夹为刚新建的python_spiderJD，使用新的虚拟环境，选择Python解释器为Python3.6，如下图</p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-25_22-06-34.png" alt=""></p>
+<p>工程建立完成后，在工程目录下新建文件：spiderJD.py</p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-25_22-07-30.png" alt=""></p>
+<h2 id="使用PyCharm安装相关第三方库"><a href="#使用PyCharm安装相关第三方库" class="headerlink" title="使用PyCharm安装相关第三方库"></a>使用PyCharm安装相关第三方库</h2><p>在PyCharm中安装lxml和requests库。点击菜单栏File–&gt;Settings选择Project:python_spiderJD下的Project Interpreter，然后点击右边的小加号，在弹出的窗口中搜索需要安装的库，然后点击安装</p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/python1.gif" alt=""></p>
+<p>安装好lxml和requests库后，可以看到该环境下多出了一下库<strong>（注：如提示安装失败，可能是由于pip的版本问题导致，可以将pip的版本降级为pip9以下版本或修改相关脚本文件）</strong></p>
+<p><img src="http://pf9cmqo3z.bkt.clouddn.com/Snipaste_2018-09-25_22-21-24.png" alt=""></p>
+<h2 id="代码实现爬取京东指定ISBN号书籍信息"><a href="#代码实现爬取京东指定ISBN号书籍信息" class="headerlink" title="代码实现爬取京东指定ISBN号书籍信息"></a>代码实现爬取京东指定ISBN号书籍信息</h2><p>代码如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> html</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在京东商城通过ISBN来查找对应书籍信息</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">spider</span><span class="params">(isbn)</span>:</span></span><br><span class="line">    <span class="comment"># 获取URL</span></span><br><span class="line">    url = <span class="string">'https://search.jd.com/Search?keyword=&#123;0&#125;'</span>.format(isbn)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取HTML文档，并将编码改为'utf-8'</span></span><br><span class="line">    resp = requests.get(url)</span><br><span class="line">    print(resp.encoding)</span><br><span class="line">    resp.encoding = <span class="string">'utf-8'</span></span><br><span class="line">    html_doc = resp.text</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取xpath对象</span></span><br><span class="line">    selector = html.fromstring(html_doc)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 找到列表的集合</span></span><br><span class="line">    ul_list = selector.xpath(<span class="string">'//div[@id = "J_goodsList"]/ul/li'</span>)</span><br><span class="line">    print(len(ul_list))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解析对应的内容、标题、价格、连接并打印</span></span><br><span class="line">    <span class="keyword">for</span> li <span class="keyword">in</span> ul_list:</span><br><span class="line">        <span class="comment"># 标题</span></span><br><span class="line">        title = li.xpath(<span class="string">'div/div[@class = "p-name"]/a/@title'</span>)</span><br><span class="line">        print(title[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 购买连接</span></span><br><span class="line">        link = li.xpath(<span class="string">'div/div[@class = "p-name"]/a/@href'</span>)</span><br><span class="line">        print(link[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 价格</span></span><br><span class="line">        price = li.xpath(<span class="string">'div/div[@class="p-price"]/strong/i/text()'</span>)</span><br><span class="line">        print(price[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 店铺</span></span><br><span class="line">        store = li.xpath(<span class="string">'div//a[@class="curr-shop"]/@title'</span>)</span><br><span class="line">        print(store)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    isbn = input(<span class="string">'请输入ISBN'</span>)</span><br><span class="line">    spider(isbn)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -504,7 +515,7 @@
   <p><span>本文标题:</span><a href="/2018/09/25/Python应用-爬取京东书籍信息/">Python应用-爬取京东书籍信息</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2018年09月25日 - 21:09</p>
-  <p><span>最后更新:</span>2018年09月25日 - 21:09</p>
+  <p><span>最后更新:</span>2018年09月25日 - 22:09</p>
   <p><span>原始链接:</span><a href="/2018/09/25/Python应用-爬取京东书籍信息/" title="Python应用-爬取京东书籍信息">http://yoursite.com/2018/09/25/Python应用-爬取京东书籍信息/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/09/25/Python应用-爬取京东书籍信息/"  aria-label="复制成功！"></i></span>
   </p>
@@ -793,7 +804,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python应用-爬取京东书籍信息"><span class="nav-number">1.</span> <span class="nav-text">Python应用-爬取京东书籍信息</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python应用-爬取京东书籍信息"><span class="nav-number">1.</span> <span class="nav-text">Python应用-爬取京东书籍信息</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境介绍"><span class="nav-number">1.1.</span> <span class="nav-text">环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用PyCharm建立Python工程"><span class="nav-number">1.2.</span> <span class="nav-text">使用PyCharm建立Python工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用PyCharm安装相关第三方库"><span class="nav-number">1.3.</span> <span class="nav-text">使用PyCharm安装相关第三方库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现爬取京东指定ISBN号书籍信息"><span class="nav-number">1.4.</span> <span class="nav-text">代码实现爬取京东指定ISBN号书籍信息</span></a></li></ol></li></ol></div>
             
 
           </div>
