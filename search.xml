@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python应用-爬取京东书籍信息]]></title>
+    <url>%2F2018%2F09%2F25%2FPython%E5%BA%94%E7%94%A8-%E7%88%AC%E5%8F%96%E4%BA%AC%E4%B8%9C%E4%B9%A6%E7%B1%8D%E4%BF%A1%E6%81%AF%2F</url>
+    <content type="text"><![CDATA[Python应用-爬取京东书籍信息]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python应用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python开发入门-开发环境搭建]]></title>
     <url>%2F2018%2F09%2F17%2FPython%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%2F</url>
     <content type="text"><![CDATA[Python开发入门-开发环境搭建 人生苦短，我用Python。Python是一门非常容易入门的语言，同时也是一门高效的语言，在开始学习之前，需要搭建Python的开发环境。本文介绍Python3.6 + Python2.7的环境安装，同时也介绍相关的Python工具安装。Python主要有两个版本：Python3和Python2，这两个版本是不兼容的，Python2会在2020年停止维护，但是目前很多Python相关的库只支持Python2，而且有很多脚本工具也是使用Python2环境，所以在搭建Python的开发环境使用Python3和Python2兼容的方式安装 环境介绍PC环境：Windows10 64bitPython版本：Python3.6 + Python2.7IDE环境：PyCharm其他（可选）：Sublime Txt3 工具下载下面给出各工具的下载地址，根据不同的环境选择相对于的安装包进行安装： Python3.6 + Python2.7：https://www.python.org/downloads/ PyCharm：http://www.jetbrains.com/pycharm/download/#section=windows Sublime Txt3：https://www.sublimetext.com/3 工具安装Python3.6 + Python2.7安装下载Python3.6（目前Python3.6版本比较稳定）的对应安装包，双击安装（安装目录设为C:\Python36） 下载Python2.7的对应安装包，双击安装（安装目录设为C:\Python27） 安装完成后，需要添加环境变量，通过修改环境变量达到Python3和Python2切换使用。点击我的电脑–&gt;右键属性–&gt;高级系统设置–&gt;环境变量 在系统变量中新建一个环境变量，变量名：PY_HOME；值：C:\Python36（设置Python3为有效） 选择系统变量的Path，在他的值中添加%PY_HOME%\;%PY_HOME%\Scripts\; 点击确定完成设置，目前设置Python3为有效（如果要设置Python2有效，则把环境变量PY_HOME的值改为Python27即可），打开CMD命令行工具，输入python，则会进入python环境并打印Python3的版本号等信息 输入exit()退出python环境，输入pip -V，则会打印pip相关信息，python的环境到此安装完毕 PyCharm安装进入PyCharm官方，会有两个版本提供下载：专业版（收费）；社区版（免费开源），选择社区版下载安装即可，安装过程一路点击Next即可安装完成 Sublime Txt3安装Sublime Txt3是我个人非常喜欢的一款代码编辑工具，功能非常强大（几乎满足程序员的所有要求），下载安装也是很简单，到官网上下载，然后双击安装，一路Next即可。需要注意的是Sublime Txt3是收费的软件，但是网上有很多破解的教程，不过个人建议支持正版]]></content>
