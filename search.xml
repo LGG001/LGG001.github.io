@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python应用-Excel图表制作]]></title>
+    <url>%2F2018%2F09%2F29%2FPython%E5%BA%94%E7%94%A8-Excel%E5%9B%BE%E8%A1%A8%E5%88%B6%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[Python应用-Excel图表制作 在实际应用过程中会经常使用excel工具来处理一些数据，或者让里面的数据可视化（图标形式），如果是一个两个那么手动就能处理，如果成千上万的那么手动处理的方式就显得很吃力了。针对excel的处理可通过Python来实现，本文介绍如何使用Python来操作excel文件 环境介绍PC环境：WindowsPython版本：Python3.6IDE环境：PyCharm使用第三方库：openpyxl源码下载：http://pf9cmqo3z.bkt.clouddn.com/python_spiderJD.zip 使用PyCharm建立Python工程]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python应用</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python开发入门-安装第三方库]]></title>
     <url>%2F2018%2F09%2F28%2FPython%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8-%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%2F</url>
     <content type="text"><![CDATA[Python开发入门-安装第三方库 环境介绍PC环境：Windows10 64bitPython版本：Python3.6或Python2.7IDE环境：PyCharm pip安装大部分的库可以打开命令行，使用命令:1pip install xxx 如：安装flask库 下载压缩包安装在https://pypi.org/中找到要安装的库，把对应的压缩包下载下来。 解压下载的安装包，解压后通常会看见一个setup的文件，然后打开命令行，进入该文件夹，使用命令：1python setup.py install 下载.whl文件安装下载地址： https://www.lfd.uci.edu/~gohlke/pythonlibs/# 在下载地址把想要安装的库对应的.whl文件下载下来(如pykinsol库：pykinsol-0.1.2-cp36-cp36m-win_amd64，注意的是cp36对应python3.6版本，amd64对应Windows-64bit)，然后打开命令行，进入该文件所在的文件夹，使用命令：1pip install pykinsol-0.1.2-cp36-cp36m-win_amd64.whl]]></content>
