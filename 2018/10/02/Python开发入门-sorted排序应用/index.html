@@ -117,19 +117,19 @@
 
 
 
-<meta name="description" content="Python开发入门-sorted排序应用Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、set、甚">
+<meta name="description" content="Python开发入门-sorted排序应用   Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、se">
 <meta name="keywords" content="Python开发入门">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python开发入门-sorted排序应用">
 <meta property="og:url" content="http://yoursite.com/2018/10/02/Python开发入门-sorted排序应用/index.html">
 <meta property="og:site_name" content="My Hexo">
-<meta property="og:description" content="Python开发入门-sorted排序应用Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、set、甚">
+<meta property="og:description" content="Python开发入门-sorted排序应用   Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、se">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png">
-<meta property="og:updated_time" content="2018-10-02T16:08:32.103Z">
+<meta property="og:updated_time" content="2018-10-02T16:13:05.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python开发入门-sorted排序应用">
-<meta name="twitter:description" content="Python开发入门-sorted排序应用Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、set、甚">
+<meta name="twitter:description" content="Python开发入门-sorted排序应用   Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、se">
 <meta name="twitter:image" content="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png">
 
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" rel="gallery_cjmrx3zfl0006jot24me8xb0d"
+                 href="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" rel="gallery_cjmrxi34i000cast2h2t4pw4u"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pdgd2i3gi.bkt.clouddn.com/python-logo.png" itemprop="contentUrl"/>
               </a>
@@ -484,7 +484,8 @@
       
 
       
-        <h1 id="Python开发入门-sorted排序应用"><a href="#Python开发入门-sorted排序应用" class="headerlink" title="Python开发入门-sorted排序应用"></a>Python开发入门-sorted排序应用</h1><p>Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能</p>
+        <h1 id="Python开发入门-sorted排序应用"><a href="#Python开发入门-sorted排序应用" class="headerlink" title="Python开发入门-sorted排序应用"></a>Python开发入门-sorted排序应用</h1><!--- 2018-10-3 --->  
+<p>Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能</p>
 <h2 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h2><p>PC环境：Windows10 64bit<br>Python版本：Python3.6（IDLE）</p>
 <h2 id="sorted介绍"><a href="#sorted介绍" class="headerlink" title="sorted介绍"></a>sorted介绍</h2><p>sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、set、甚至是字符串），它的功能非常强大。在python的IDLE环境中输入help(sorted)，可以看到一下描述<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>help(sorted)</span><br><span class="line">Help on built-<span class="keyword">in</span> function sorted <span class="keyword">in</span> module builtins:</span><br><span class="line"></span><br><span class="line">sorted(iterable, /, *, key=<span class="keyword">None</span>, reverse=<span class="keyword">False</span>)</span><br><span class="line">    Return a new list containing all items <span class="keyword">from</span> the iterable <span class="keyword">in</span> ascending order.</span><br><span class="line">    </span><br><span class="line">    A custom key function can be supplied to customize the sort order, <span class="keyword">and</span> the</span><br><span class="line">    reverse flag can be set to request the result <span class="keyword">in</span> descending order.</span><br></pre></td></tr></table></figure></p>
 <h3 id="升降排序"><a href="#升降排序" class="headerlink" title="升降排序"></a>升降排序</h3><p>一般情况下sorted函数将列表按升序进行排序，并返回一个新列表对象，原列表保持不变<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>nums = [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(nums)</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure></p>
@@ -608,6 +609,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/10/03/OSC802虚拟示波器测评/" rel="prev" title="OSC802虚拟示波器测评">
+                OSC802虚拟示波器测评 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -694,7 +699,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -705,7 +710,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -716,7 +721,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

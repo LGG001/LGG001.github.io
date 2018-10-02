@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[OSC802虚拟示波器测评]]></title>
+    <url>%2F2018%2F10%2F03%2FOSC802%E8%99%9A%E6%8B%9F%E7%A4%BA%E6%B3%A2%E5%99%A8%E6%B5%8B%E8%AF%84%2F</url>
+    <content type="text"><![CDATA[OSC802虚拟示波器测评 环境介绍PC环境：Windows10 64-bit硬件：OSC802 + P2200（200MHz）探头软件：上位机 + 驱动（Win10自带WinUSB驱动，插入自动安装） 上位机下载：下载地址]]></content>
+      <categories>
+        <category>测评</category>
+      </categories>
+      <tags>
+        <tag>OSC802虚拟示波器测评</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python开发入门-sorted排序应用]]></title>
     <url>%2F2018%2F10%2F02%2FPython%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8-sorted%E6%8E%92%E5%BA%8F%E5%BA%94%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[Python开发入门-sorted排序应用Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、set、甚至是字符串），它的功能非常强大。在python的IDLE环境中输入help(sorted)，可以看到一下描述12345678&gt;&gt;&gt; help(sorted)Help on built-in function sorted in module builtins:sorted(iterable, /, *, key=None, reverse=False) Return a new list containing all items from the iterable in ascending order. A custom key function can be supplied to customize the sort order, and the reverse flag can be set to request the result in descending order. 升降排序一般情况下sorted函数将列表按升序进行排序，并返回一个新列表对象，原列表保持不变123&gt;&gt;&gt; nums = [3,4,5,2,1]&gt;&gt;&gt; sorted(nums)[1, 2, 3, 4, 5] 如果要按照降序排列，只需指定参数 reverse=True 即可 123&gt;&gt;&gt; nums = [3,4,5,2,1]&gt;&gt;&gt; sorted(nums, reverse=True)[5, 4, 3, 2, 1] 指定参数key排序按照某个规则排序，则需指定参数 key，key 是一个函数对象，例如字符串构成的列表，我想按照字符串的长度来排序 123&gt;&gt;&gt; chars = ['Andrew', 'This', 'a', 'from', 'is', 'string', 'test']&gt;&gt;&gt; sorted(chars, key=len)['a', 'is', 'from', 'test', 'This', 'Andrew', 'string']]]></content>
+    <content type="text"><![CDATA[Python开发入门-sorted排序应用 Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、set、甚至是字符串），它的功能非常强大。在python的IDLE环境中输入help(sorted)，可以看到一下描述12345678&gt;&gt;&gt; help(sorted)Help on built-in function sorted in module builtins:sorted(iterable, /, *, key=None, reverse=False) Return a new list containing all items from the iterable in ascending order. A custom key function can be supplied to customize the sort order, and the reverse flag can be set to request the result in descending order. 升降排序一般情况下sorted函数将列表按升序进行排序，并返回一个新列表对象，原列表保持不变123&gt;&gt;&gt; nums = [3,4,5,2,1]&gt;&gt;&gt; sorted(nums)[1, 2, 3, 4, 5] 如果要按照降序排列，只需指定参数 reverse=True 即可 123&gt;&gt;&gt; nums = [3,4,5,2,1]&gt;&gt;&gt; sorted(nums, reverse=True)[5, 4, 3, 2, 1] 指定参数key排序按照某个规则排序，则需指定参数 key，key 是一个函数对象，例如字符串构成的列表，我想按照字符串的长度来排序 123&gt;&gt;&gt; chars = ['Andrew', 'This', 'a', 'from', 'is', 'string', 'test']&gt;&gt;&gt; sorted(chars, key=len)['a', 'is', 'from', 'test', 'This', 'Andrew', 'string']]]></content>
       <categories>
         <category>Python</category>
       </categories>
