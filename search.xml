@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C语言算法-排序]]></title>
+    <url>%2F2018%2F10%2F14%2FC%E8%AF%AD%E8%A8%80%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[C语言算法-排序]]></content>
+      <categories>
+        <category>C</category>
+      </categories>
+      <tags>
+        <tag>C语言算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[OSC802虚拟示波器测评]]></title>
     <url>%2F2018%2F10%2F03%2FOSC802%E8%99%9A%E6%8B%9F%E7%A4%BA%E6%B3%A2%E5%99%A8%E6%B5%8B%E8%AF%84%2F</url>
     <content type="text"><![CDATA[OSC802虚拟示波器测评 环境介绍PC环境：Windows10 64-bit硬件：OSC802 + P2200（200MHz）探头软件：上位机 + 驱动（Win10自带WinUSB驱动，插入自动安装） 上位机下载：下载地址]]></content>
