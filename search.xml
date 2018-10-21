@@ -34,6 +34,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[osc802-evaluation]]></title>
+    <url>%2F2018%2F10%2F03%2Fosc802-evaluation%2F</url>
+    <content type="text"><![CDATA[OSC802虚拟示波器简介虚拟示波器优缺点 优点： 体积小，方便使用以及携带，可给每个研发人员独立配备一台 价格便宜，适合示波器入门使用 使用简单方便，操作门槛低 缺点： 功能不及经典示波器（但检测常见信号如PWM,IIC等足够） 检测精度、带宽等会稍逊经典示波器（体积与性能不能兼得） OSC802虚拟示波器参数OSC802虚拟示波器概要： OSC802虚拟示波器硬件参数： OSC802虚拟示波器功能描述： OSC802虚拟示波器线路图： 环境配置环境介绍PC环境：Windows10 64-bit硬件：OSC802 + P2200（200MHz）探头软件：上位机 + 驱动（Win10自带WinUSB驱动，插入自动安装） 根据PC环境下载相应的资料： 驱动：百度云地址-https://pan.baidu.com/s/1Ko73TxTDd-X7QChnK8DQ1Q，版本-V1.0.0.2 用户手册：百度云地址-https://pan.baidu.com/s/1HkkSBkhe0nOw3ZajX-mfKA，版本-v2.0.0.0 上位机：版本-v2.0.0.0 Windows XP-https://pan.baidu.com/s/1PU6Swqoj4DUk7s4JQ-bl8Q Windows 7-https://pan.baidu.com/s/1ne_kYYMDwh-C7z5W75HM-g Windows 8-https://pan.baidu.com/s/15ZOeJS5Etfj_Gg9DfzMXEQ Windows 10-https://pan.baidu.com/s/1IKXUonht_Vy6UC-vmwD0KA 环境搭建本机环境为Windows10 64-bit，所以不需要安装OSC802虚拟示波器驱动，只需要安装对应环境的上位机即可，下面介绍OSC802上位机安装。 下载对应的上位机软件，解压后双击安装，一路点击NEXT即可安装完成 上机测试硬件链接 使用连接线通过USB连接OSC802与PC—[A] 将示波器探头接入OSC802的CHA，探头检测端接OSC802信号（1kHz，1.5V）输出-B—[B] 将衰减比配置为1X（条件红色部分，打到1X端）—[C]注：由于检测的是OSC802内部输出的信号，所以不需要接地；当检测其他外部信号时需要接地，并确保外部地的电位与PC端地电位一致 信号检测 打开OSC802上位机软件（安装完成后在桌面会生成一个Shortcut to OSC802.exe快捷方式） 打开通道A（关闭通道B），选择捕获模式为Normal，点击右下角的Start Dervice开始检测 调节通道A电压刻度为：1V；调节时间刻度为1ms 设置通道A为上升沿触发，调节触发点 左下角会有通道A检测的信号相关信息 信号分析捕捉到信号后，点击右下角的Stop Dervice暂停检测，通过左下角的数据来分析信号 信号峰值电压 = P_P = 1.543V 信号频率 = Frequency/1ms(0.001) = 995Hz 占空比 ≈ +Wideth / (+Wideth + -Wideth) ≈ %50 建议 上位机软件不能随意缩放，只有一个最大化和最小化状态 在最小化视图中，点击FFT图标后，FFT图标会被遮挡住]]></content>
+      <categories>
+        <category>测评</category>
+      </categories>
+      <tags>
+        <tag>OSC802虚拟示波器测评</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python开发入门-sorted排序应用]]></title>
     <url>%2F2018%2F10%2F02%2FPython%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8-sorted%E6%8E%92%E5%BA%8F%E5%BA%94%E7%94%A8%2F</url>
     <content type="text"><![CDATA[Python开发入门-sorted排序应用 Python对数据进行排序有许多种方法，本文主要讨论Python的sorted函数（该函数为Python的内建函数），介绍sorted的功能 环境介绍PC环境：Windows10 64bitPython版本：Python3.6（IDLE） sorted介绍sorted用于对集合进行排序（这里说的集合是对可迭代对象的一个统称，他们可以是列表、字典、set、甚至是字符串），它的功能非常强大。在python的IDLE环境中输入help(sorted)，可以看到一下描述12345678&gt;&gt;&gt; help(sorted)Help on built-in function sorted in module builtins:sorted(iterable, /, *, key=None, reverse=False) Return a new list containing all items from the iterable in ascending order. A custom key function can be supplied to customize the sort order, and the reverse flag can be set to request the result in descending order. 升降排序一般情况下sorted函数将列表按升序进行排序，并返回一个新列表对象，原列表保持不变123&gt;&gt;&gt; nums = [3,4,5,2,1]&gt;&gt;&gt; sorted(nums)[1, 2, 3, 4, 5] 如果要按照降序排列，只需指定参数 reverse=True 即可 123&gt;&gt;&gt; nums = [3,4,5,2,1]&gt;&gt;&gt; sorted(nums, reverse=True)[5, 4, 3, 2, 1] 指定参数key排序按照某个规则排序，则需指定参数 key，key 是一个函数对象，例如字符串构成的列表，我想按照字符串的长度来排序 123&gt;&gt;&gt; chars = ['Andrew', 'This', 'a', 'from', 'is', 'string', 'test']&gt;&gt;&gt; sorted(chars, key=len)['a', 'is', 'from', 'test', 'This', 'Andrew', 'string']]]></content>
