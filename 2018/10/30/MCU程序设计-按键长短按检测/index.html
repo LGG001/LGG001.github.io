@@ -126,7 +126,7 @@
 <meta property="og:description" content="环境介绍软件环境介绍PC环境：Windows10 64-bitIDE环境：MDK-ARM 5.24.2.0工程名称：STM32_KeyTest工程下载地址：github 硬件环境介绍MCU平台：STM32F103C8T6工程名称：STM32 Display Board V1.0工程下载地址：github 应用环境介绍按键检测是属于一个基础的单片机IO口应用，在消费级产品中如：洗衣机、抽油烟机、MP">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg">
-<meta property="og:updated_time" content="2018-10-30T13:14:58.313Z">
+<meta property="og:updated_time" content="2018-10-30T15:18:58.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MCU程序设计-按键长短按检测">
 <meta name="twitter:description" content="环境介绍软件环境介绍PC环境：Windows10 64-bitIDE环境：MDK-ARM 5.24.2.0工程名称：STM32_KeyTest工程下载地址：github 硬件环境介绍MCU平台：STM32F103C8T6工程名称：STM32 Display Board V1.0工程下载地址：github 应用环境介绍按键检测是属于一个基础的单片机IO口应用，在消费级产品中如：洗衣机、抽油烟机、MP">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  302 字
+                  717 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg" rel="gallery_cjnvr8zsk0001y0t26mkiz3qb"
+                 href="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg" rel="gallery_cjnvvoapa0008kwt2fk7ot8v1"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg" itemprop="contentUrl"/>
               </a>
@@ -487,7 +487,26 @@
         <h1 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h1><h2 id="软件环境介绍"><a href="#软件环境介绍" class="headerlink" title="软件环境介绍"></a>软件环境介绍</h2><p>PC环境：Windows10 64-bit<br>IDE环境：MDK-ARM 5.24.2.0<br>工程名称：STM32_KeyTest<br>工程下载地址：<a href="https://github.com/LGG001/MyApplication_Program" target="_blank" rel="noopener">github</a></p>
 <h2 id="硬件环境介绍"><a href="#硬件环境介绍" class="headerlink" title="硬件环境介绍"></a>硬件环境介绍</h2><p>MCU平台：STM32F103C8T6<br>工程名称：STM32 Display Board V1.0<br>工程下载地址：<a href="https://github.com/LGG001/LCEDA_Hardware" target="_blank" rel="noopener">github</a></p>
 <h2 id="应用环境介绍"><a href="#应用环境介绍" class="headerlink" title="应用环境介绍"></a>应用环境介绍</h2><p>按键检测是属于一个基础的单片机IO口应用，在消费级产品中如：洗衣机、抽油烟机、MP3…等等，几乎任何一个产品都会带有按键，因此在研发人员开发中就会遇到检测按键功能设计，本文从硬件原理到软件实现介绍如何检测按键的长短按，并触发相应的事件，可以轻松移植到任何MCU平台上。硬件平台使用的是以STM32F103C8T6位核心的一块STM32 Display Board V1.0开发板，开源在github上，可通过上面相应链接进行下载。软件工程也开源在github上可通过上面相应链接进行下载</p>
-<h1 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h1><h2 id="硬件过程分析"><a href="#硬件过程分析" class="headerlink" title="硬件过程分析"></a>硬件过程分析</h2><h2 id="状态与时间分析"><a href="#状态与时间分析" class="headerlink" title="状态与时间分析"></a>状态与时间分析</h2><h1 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h1><h2 id="数据结构定义"><a href="#数据结构定义" class="headerlink" title="数据结构定义"></a>数据结构定义</h2><h2 id="按键扫描过程程序设计"><a href="#按键扫描过程程序设计" class="headerlink" title="按键扫描过程程序设计"></a>按键扫描过程程序设计</h2><h2 id="键值处理过程程序设计"><a href="#键值处理过程程序设计" class="headerlink" title="键值处理过程程序设计"></a>键值处理过程程序设计</h2><h1 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h1>
+<h1 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h1><h2 id="硬件过程分析"><a href="#硬件过程分析" class="headerlink" title="硬件过程分析"></a>硬件过程分析</h2><p>按键电路一般是：一端接上拉电阻（IO口带上拉电阻配置可直接配置），一点接GND，当按键没有按下时位高电平，按下位低电平。按键在实际工作中会存在许多的干扰，如在按下的一瞬间会有抖动、误触发等。因为按键本身的特性原因，在按下的时候会有一个抖动电平，这个抖动会触发多个高低电平，因此会使按键无法正常直接检测。使用示波器观察按键按下时的抖动现象如下：<br><img src="http://pdc1n1b19.bkt.clouddn.com/ARM-arm.jpg" alt=""></p>
+<h2 id="状态与时间分析"><a href="#状态与时间分析" class="headerlink" title="状态与时间分析"></a>状态与时间分析</h2><p><img src="http://phd9o0dsm.bkt.clouddn.com/Snipaste_2018-10-30_22-41-09.png" alt=""></p>
+<p>本文章讨论按键长短按，根据按键的长短按过程，根据上图可以分为如下几个状态：</p>
+<ul>
+<li>A：IDLE-空闲状态，没有按键按下或按键释放后的状态</li>
+<li>B：Debounce-消抖状态，按键按下瞬间的抖动状态</li>
+<li>C：Pressed-按键按下状态，位低电平</li>
+<li>D：Long_Pressed-按键长按状态，按键按下超过一定的时间</li>
+<li>E：Release-按键释放状态，按键松开的状态</li>
+</ul>
+<p>按键的触发过程是一个从左向右的单向过程，在这每个过程都对应着一个时间段，不过在检测长短按过程中只需重点要关注B：消抖时间、D：长按时间、E：释放时间</p>
+<p>其他状态时间A：空闲状态时间、C：按键按下的时间可以有B、D、E的时间以及状态确定</p>
+<p>在按键过程分析中，主要分析下图的三个过程：</p>
+<ul>
+<li>按键消抖过程（或误触发）</li>
+<li>按键短按过程</li>
+<li>按键长按过程  </li>
+</ul>
+<p><img src="http://phd9o0dsm.bkt.clouddn.com/Snipaste_2018-10-30_23-13-02.png" alt=""></p>
+<h1 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h1><h2 id="数据结构定义"><a href="#数据结构定义" class="headerlink" title="数据结构定义"></a>数据结构定义</h2><h2 id="按键扫描过程程序设计"><a href="#按键扫描过程程序设计" class="headerlink" title="按键扫描过程程序设计"></a>按键扫描过程程序设计</h2><h2 id="键值处理过程程序设计"><a href="#键值处理过程程序设计" class="headerlink" title="键值处理过程程序设计"></a>键值处理过程程序设计</h2><h1 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h1>
       
     </div>
     
@@ -506,7 +525,7 @@
   <p><span>本文标题:</span><a href="/2018/10/30/MCU程序设计-按键长短按检测/">MCU程序设计-按键长短按检测</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2018年10月30日 - 20:10</p>
-  <p><span>最后更新:</span>2018年10月30日 - 21:10</p>
+  <p><span>最后更新:</span>2018年10月30日 - 23:10</p>
   <p><span>原始链接:</span><a href="/2018/10/30/MCU程序设计-按键长短按检测/" title="MCU程序设计-按键长短按检测">http://yoursite.com/2018/10/30/MCU程序设计-按键长短按检测/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2018/10/30/MCU程序设计-按键长短按检测/"  aria-label="复制成功！"></i></span>
   </p>
