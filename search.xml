@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MCU程序设计-按键长短按检测]]></title>
+    <url>%2F2018%2F10%2F30%2FMCU%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E6%8C%89%E9%94%AE%E9%95%BF%E7%9F%AD%E6%8C%89%E6%A3%80%E6%B5%8B%2F</url>
+    <content type="text"><![CDATA[环境介绍软件环境介绍PC环境：Windows10 64-bitIDE环境：MDK-ARM 5.24.2.0工程名称：STM32_KeyTest工程下载地址：github 硬件环境介绍MCU平台：STM32F103C8T6工程名称：STM32 Display Board V1.0工程下载地址：github 应用环境介绍按键检测是属于一个基础的单片机IO口应用，在消费级产品中如：洗衣机、抽油烟机、MP3…等等，几乎任何一个产品都会带有按键，因此在研发人员开发中就会遇到检测按键功能设计，本文从硬件原理到软件实现介绍如何检测按键的长短按，并触发相应的事件，可以轻松移植到任何MCU平台上。硬件平台使用的是以STM32F103C8T6位核心的一块STM32 Display Board V1.0开发板，开源在github上，可通过上面相应链接进行下载。软件工程也开源在github上可通过上面相应链接进行下载 原理介绍硬件过程分析状态与时间分析程序设计数据结构定义按键扫描过程程序设计键值处理过程程序设计实现效果]]></content>
+      <categories>
+        <category>ARM</category>
+      </categories>
+      <tags>
+        <tag>MCU程序设计</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[sublime-C/C++环境配置]]></title>
     <url>%2F2018%2F10%2F15%2Fsublime-C%26C%2B%2B%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%2F</url>
     <content type="text"><![CDATA[sublime-C/C++环境配置sublime text3的代码编辑功能非常强大好用，不仅界面好看，还有丰富的插件可供选择。本人常用sublime text3进行代码编辑和查看，经常会接触C/C++算法，希望能在其上面进行编译从而看到结果，方便学习 环境PC环境：Windows10 64bitIDE：sublime text3其他：MinGw MinGw安装要在sublime text3运行C/C++，首先需要安装gcc环境，这里安装MinGw，关于其左右可以自行百度，下载和安装参考下方链接： 下载地址安装教程 注：如上链接下载不了，可点击此下载地址链接进行下载 下载完成后配置环境变量： 配置完成后，打开命令行输入g++ -v，如下即为配置成功 sublime text3配置打开sublime，点击Tools→Build System→New Build System，将里面的代码都删除，粘贴以下代码：123456789101112131415161718&#123;&quot;cmd&quot;: [&quot;g++&quot;,&quot;-Wall&quot;, &quot;$&#123;file&#125;&quot;, &quot;-o&quot;, &quot;$&#123;file_path&#125;/$&#123;file_base_name&#125;&quot;],&quot;file_regex&quot;: &quot;^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$&quot;,&quot;working_dir&quot;: &quot;$&#123;file_path&#125;&quot;,&quot;selector&quot;: &quot;source.c, source.c++&quot;,&quot;encoding&quot;:&quot;cp936&quot;,&quot;variants&quot;:[&#123;&quot;name&quot;: &quot;Run&quot;,&quot;cmd&quot;: [&quot;cmd&quot;, &quot;/c&quot;, &quot;g++&quot;, &quot;-Wall&quot;,&quot;$&#123;file&#125;&quot;, &quot;-o&quot;, &quot;$&#123;file_path&#125;/$&#123;file_base_name&#125;&quot;, &quot;&amp;&amp;&quot;, &quot;cmd&quot;, &quot;/c&quot;, &quot;$&#123;file_path&#125;/$&#123;file_base_name&#125;&quot;]&#125;,&#123;&quot;name&quot;: &quot;RunInCommand&quot;,&quot;cmd&quot;: [&quot;cmd&quot;, &quot;/c&quot;, &quot;g++&quot;, &quot;-Wall&quot;,&quot;$&#123;file&#125;&quot;, &quot;-o&quot;, &quot;$&#123;file_path&#125;/$&#123;file_base_name&#125;&quot;, &quot;&amp;&amp;&quot;, &quot;start&quot;, &quot;cmd&quot;, &quot;/c&quot;, &quot;$&#123;file_path&#125;/$&#123;file_base_name&#125; &amp; echo.&amp;pause&quot;]&#125;]&#125; 最后Ctrl+S保存文件在默认路径，命名为c，至此配置完成 新建一个test.c文件，往里输入内容123456789#include &lt;stdio.h&gt;int main()&#123; int a = 5; int b = 10; printf(&quot;a = %d, b = %d\n&quot;, a,b);&#125; 文件内容书写完毕后先保存，然后点击Tools–&gt;Build With…，选择c-RunInCommand，在命令行运行C代码并再执行输出，效果如下 为了更方便执行，这里配置一个快捷键F9来代替（Tools–&gt;Build With…–&gt;c-RunInCommand）运行操作；点击Perferences→Key Bindings - User，将里面的代码都删除，粘贴以下代码： 123[&#123;&quot;keys&quot;: [&quot;f9&quot;], &quot;command&quot;: &quot;build&quot;, &quot;args&quot;: &#123;&quot;variant&quot;: &quot;RunInCommand&quot;&#125;&#125;] 输入完毕后Ctrl+S直接保存，后面运行是直接按F9即可 注：如果运行的代码错误会显示错误，并且不会打开命令行]]></content>
