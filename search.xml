@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[KEIL-MDK安装]]></title>
     <url>%2F2019%2F02%2F17%2FKEIL-MDK%E5%AE%89%E8%A3%85%2F</url>
-    <content type="text"><![CDATA[软件介绍基本介绍KEIL-MDK是一款针对Cortex-M内核MCU开发的IDE，功能强大，使用简易，能帮助开发者快速开发产品。目前KEIL分为两类，一类为开发C51的KEIL-C51,另一类就是KEIL-MDK。KEIL-MDK主要有两个大版本，一个是MDK4；一个是MDK5；本文介绍KEIL-MDK5的下载安装 应用领域Cortex-M内核MCU有许多公司都有生产出售，比较熟悉的有ST(意法半导体)和NXP（恩智浦半导体），而大多数开发者开发是采用的IDE工具就是KEIL-ARM（也有其他的如IAR-ARM,GCC等等） 软件下载官方地址百度网盘软件安装软件破解软件配置]]></content>
+    <content type="text"><![CDATA[软件介绍基本介绍KEIL-MDK是一款针对Cortex-M内核MCU开发的IDE，功能强大，使用简易，能帮助开发者快速开发产品。目前KEIL分为两类，一类为开发C51的KEIL-C51,另一类就是KEIL-MDK。KEIL-MDK主要有两个大版本，一个是MDK4；一个是MDK5；两个版本的主要区别是：MDK4是自带软件包，MDK5需要手动添加/安装，当然还有其它的一些区别，详情可以到KEIL官方查看。本文介绍KEIL-MDK5（兼容MDK4）的下载安装（一些使用MDK4版本建立的工程使用MDK5打开是会出现编译错误，解决方法就是安装对于版本的MDK4兼容版） 应用领域Cortex-M内核MCU有许多公司都有生产出售，比较熟悉的有ST(意法半导体)和NXP（恩智浦半导体），而大多数开发者开发是采用的IDE工具就是KEIL-ARM（也有其他的如IAR-ARM,GCC等等） 软件下载目前MDK5的最新版本是5.26（据官网消息，5.27版本快要出来），下载是要注意是否有对应版本的MDK4兼容包，这里使用的是MDK5.25和对应版本的MDK4安装 官方地址MDK5下载地址：https://www.keil.com/demo/eval/arm.htmMDK4兼容包下载地址： 软件支持包下载地址：http://www.keil.com/dd2/Pack/ 百度网盘链接：https://pan.baidu.com/s/1XJcRmb1H-HgfUtNiKJ_zIA提取码：b06e 软件安装首先安装MDK5.25，双击软件进行安装，一路点击Next即可，如需要填写信息部分可以随便填写，如都填写”abc” 软件破解软件配置]]></content>
       <categories>
         <category>软件安装类</category>
       </categories>
