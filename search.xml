@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[嵌入式硬件通讯接口-IIC]]></title>
     <url>%2F2019%2F02%2F19%2F%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6%E9%80%9A%E8%AE%AF%E6%8E%A5%E5%8F%A3-IIC%2F</url>
-    <content type="text"><![CDATA[协议简介]]></content>
+    <content type="text"><![CDATA[IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的目的是为了通信的稳定性与可操作性，因此现在IIC系统也包含有SMBus的一些规范，有些时候设计会同时支持IIC和SMBus，因为只需要通过命令或输出引脚的很小改动就能兼容两者 IIC协议应用IIC适用于外围设备简单和制造成本比速度重要的场合，常见的IIC应用有： 通过小型ROM配置表描述可连接设备，以支持“即插即用”操作，如 双内联内存模块(DIMMs)上的串行状态检测(SPD) EEPROMs 通过VGA、DVI和HDMI连接器为监视器提供扩展显示识别数据(EDID) 通过SMBus对PC系统进行系统管理 SMBus引脚在传统PCI和PCI Express连接器中都有配置 访问实时时钟和NVRAM芯片来保存用户设置 访问低速的ADCs与DACs 改变显示器中的对比度、色相和色彩平衡设置（通过显示数据通道） 改变智能扬声器的音量 控制小的（如功能性手机）OLED或LCD显示器 读取硬件监视器和诊断传感器，如风扇的速度 开/关系统各部件的电源 微控制器（MCU）中的IIC特点是只需要两个通用的IO口就能实现对多个设备进行控制，能有效的节省资源，相对的缺点就是速度较慢 IIC协议的版本]]></content>
       <categories>
         <category>软件安装类</category>
       </categories>
