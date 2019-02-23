@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-0.jpg">
-<meta property="og:updated_time" content="2019-02-23T10:18:41.203Z">
+<meta property="og:updated_time" content="2019-02-23T13:38:24.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,052 字
+                  3,149 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  11 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-0.jpg" rel="gallery_cjshc5jb6001ghgtkvvj40591"
+                 href="http://02.xiaolinjun.top/0a7-0.jpg" rel="gallery_cjshj5iza002g08tkmc0s02ny"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -522,7 +522,7 @@
 <p>IIC设计一般采用7位地址空间，少数或采用10位地址。一般IIC总线速度为100kbit/s标准模式和400kbit/s快速模式，也有10bit/s的低速模式，但也允许任意始终频率。最新的IIC版本可以拥有更多节点并运行在更快的速度上（400kbit/s快速模式，1Mbit/s超快速模式和3.4Mbit/s高速模式），这些速度模式在嵌入式系统上面的应用比PC上更加广泛  </p>
 <p>需要注意的是，这里所说的速度多少bit/s是在主机与从机发送之间没有始终延展（后面会讲述该特性）与其他硬件开销的情况下。协议的开销包括一个从机地址和可能在从设备的一个寄存器地址，还有每一个字节的应答/不应答位，总的来说通讯的实际有效数据位是比真实传输的数据是少的  </p>
 <p>IIC总线的节点数量有地址空间与总线上的电容（不超过400pf）决定的，这也约束了通讯距离在几米之内。同时为了有相对较高的阻抗和较低的噪声要求有一个相同的对地点平，这再次约束实际应用只能在同一块板子/PC上  </p>
-<h2 id="IIC协议的主从概念"><a href="#IIC协议的主从概念" class="headerlink" title="IIC协议的主从概念"></a>IIC协议的主从概念</h2><p>上述说是的IIC协议是一种带有时钟（SCL）和带有7位寻址的数据（SDA）总线，该总线在节点中充当两个角色：主机和从机：  </p>
+<h2 id="IIC协议的概念"><a href="#IIC协议的概念" class="headerlink" title="IIC协议的概念"></a>IIC协议的概念</h2><p>上述说是的IIC协议是一种带有时钟（SCL）和带有7位寻址的数据（SDA）总线，该总线在节点中充当两个角色：主机和从机：  </p>
 <ul>
 <li>主机节点-产生始终并发起与从节点的通信  </li>
 <li>从机节点-接收始终并响应主机发出的寻址  </li>
@@ -547,7 +547,23 @@
 <li>组合格式-主机向一个或多个从机发出至少两个读/写操作  </li>
 </ul>
 <p>再一次组合传输中，每次读/写都是以STSRT（起始）信号和从地址开始，第一个之后的STSRT（起始）信号也叫重复起始条件，在之前没有STOP（停止）信号，这就是从机判断下一次消息是同一次传输的一部分的方法<br><em>从机只响应其产品文档中指定的特定消息</em></p>
-<p>理论上IIC系统支持任意的信息结构</p>
+<p>理论上IIC系统支持任意的信息结构，SMBus受限在其中9种信息结构，比如对一个从机进行读字N和写入字N。PMBus扩展了SMBus的Group协议，允许在一个组合消息中发送多个SMBus传输，STOP（停止）信号表示这些组生效（选中）。比如，一个PMBus操作三个供电设备（使用三个不同的IIC从机地址），当它们接收到STOP（停止）信号就会生效   </p>
+<p>大多数从机采取请求-响应的控制模式，在写命令后面的一个或多个字节字节待变命令或四肢，这些字节决定后续写入的字节如何处理或从机响应后如何继续读取，大多数SMBus操作都是单字节命令  </p>
+<h2 id="IIC协议的物理层"><a href="#IIC协议的物理层" class="headerlink" title="IIC协议的物理层"></a>IIC协议的物理层</h2><p>物理层可以理解为实际的硬件设计。SCL线与SDA线都采用开漏设计，因此它们需要上拉电阻。当输出逻辑0时把线拉到GND；当输出逻辑1时状态是浮空的，因为由上拉电阻存在会变为高。线不会主动变为高（只能被上拉电阻拉高），这种连接方式允许多个节点接入到总线上而不会因为信号引起短路。高速系统（和其他一些系统）可以使用电流源来取代SCL或SCL和SDA的上拉电阻来适应更高的总线电容和更快的上升时间  </p>
+<p><strong>从上述可以得出一个结论：多个节点可以同时驱动线路。如果任意一个节点把线拉低，那么该线就会处于低状态，当有节点试图把线拉高就会检测出此线处于低状态，从而得出有其他节点正在使用总线。这种情况发生在SCL线上时，被称为始终延展，作为从机流控制机制；当发生在SDA线上时，被称为仲裁，作为一次通信只能有一个发送方  </strong>  </p>
+<p>总线在空闲的时候，SCL和SDA都为高。开始一个传输时，在SCL为高状态时，把SDA拉低。如果下一步通过释放SDA把SDA变为高状态来停止传输，这是不合理的（尽管这样的“无效消息”通常是无害的），因此下一步时将SCL拉低  </p>
+<p>除了START（起始）信号和STOP（停止）信号，SDA线只在SCL线为低状态时发生改变，传输一个数据位时，先保持SDA线稳定在所需的状态然后拉高。当SCL处于低状态时，发送方（通常指主机）将SDA设置为所需的状态然后释放SCL，（一个小延迟后让值传播）让SCL变为高状态，主机等待SCL线自动变为高。SCL的上升时间有一定的延迟（取决上拉电阻的RC时间常数和总线的寄生电容），或者进入了从机的始终延展。一旦SCL变为高，主机将等待一个最小时间（主机是SCL的发送方），标准IIC速度为4μs，来确保该数据为被发送出去/被从机接收到，然后再次拉低SCL，这就是传输一个数据位的过程  </p>
+<p>在一个方向上每8个数据位之后，一个应答位由另一个方向发送，发送方和接收方因为这个应答为而交换角色，原本的接收方会发送一个信号”0”作为应答，如果发送的是“1”：  </p>
+<ul>
+<li>（如果是主机发送给从机）从机无法接收数据。没有这样的从机、命令无法解析或不能接收更多的数据  </li>
+<li>（如果是从机发送给主机）主机希望传输在这个数据之后停止  </li>
+</ul>
+<p>在SDA线状态在应答位期间发生改变（SCL线不变），SCL总是由主机控制。在应答位之后，SCL拉低，主机接下来可能会做下面三件事之一：  </p>
+<ul>
+<li>开始传输另一字节数据：发送方设置SDA状态，然后把SCL状态变为高（释放SCL）  </li>
+<li>发送一个STOP（停止）信号：设置SDA为低，把SCL状态变为高，然后让SDA为高，释放IIC总线  </li>
+<li>发送一个重复STSRT（起始）信号，设置SDA为高，把SCL状态变为高，拉低SDA。这是重新开始一个IIC总线消息而不是释放总线  </li>
+</ul>
 
       
     </div>
@@ -567,7 +583,7 @@
   <p><span>本文标题:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/">嵌入式硬件通讯接口-IIC</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年02月19日 - 23:02</p>
-  <p><span>最后更新:</span>2019年02月23日 - 18:02</p>
+  <p><span>最后更新:</span>2019年02月23日 - 21:02</p>
   <p><span>原始链接:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/" title="嵌入式硬件通讯接口-IIC">http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/"  aria-label="复制成功！"></i></span>
   </p>
@@ -856,7 +872,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的主从概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的主从概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li></ol></li></ol></div>
             
 
           </div>
