@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-0.jpg">
-<meta property="og:updated_time" content="2019-02-23T15:13:57.457Z">
+<meta property="og:updated_time" content="2019-02-23T15:20:24.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,552 字
+                  3,557 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-0.jpg" rel="gallery_cjshmkblb0020yctklupt7k1o"
+                 href="http://02.xiaolinjun.top/0a7-0.jpg" rel="gallery_cjshmsmtc002hzstk4hni4q39"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -520,7 +520,7 @@
 <h1 id="IIC协议设计"><a href="#IIC协议设计" class="headerlink" title="IIC协议设计"></a>IIC协议设计</h1><p><img src="http://02.xiaolinjun.top/0a7-1.png" alt=""></p>
 <p>IIC应用只需要两跟双向的集电极开路或漏极开路线：串行数据线（SDA）和串行时钟线（SCL）与上拉电阻。虽然系统允许采用各种工作电压，不过一般IIC应用在+5V与+3.3V的系统  </p>
 <p>IIC设计一般采用7位地址空间，少数或采用10位地址。一般IIC总线速度为100kbit/s标准模式和400kbit/s快速模式，也有10bit/s的低速模式，但也允许任意始终频率。最新的IIC版本可以拥有更多节点并运行在更快的速度上（400kbit/s快速模式，1Mbit/s超快速模式和3.4Mbit/s高速模式），这些速度模式在嵌入式系统上面的应用比PC上更加广泛  </p>
-<p>需要注意的是，这里所说的速度多少bit/s是在主机与从机发送之间没有始终延展（后面会讲述该特性）与其他硬件开销的情况下。协议的开销包括一个从机地址和可能在从设备的一个寄存器地址，还有每一个字节的应答/不应答位，总的来说通讯的实际有效数据位是比真实传输的数据是少的  </p>
+<p>需要注意的是，这里所说的速度多少bit/s是在主机与从机发送之间没有时钟延展（后面会讲述该特性）与其他硬件开销的情况下。协议的开销包括一个从机地址和可能在从设备的一个寄存器地址，还有每一个字节的应答/不应答位，总的来说通讯的实际有效数据位是比真实传输的数据是少的  </p>
 <p>IIC总线的节点数量有地址空间与总线上的电容（不超过400pf）决定的，这也约束了通讯距离在几米之内。同时为了有相对较高的阻抗和较低的噪声要求有一个相同的对地点平，这再次约束实际应用只能在同一块板子/PC上  </p>
 <h2 id="IIC协议的概念"><a href="#IIC协议的概念" class="headerlink" title="IIC协议的概念"></a>IIC协议的概念</h2><p>上述说是的IIC协议是一种带有时钟（SCL）和带有7位寻址的数据（SDA）总线，该总线在节点中充当两个角色：主机和从机：  </p>
 <ul>
@@ -564,11 +564,11 @@
 <li>发送一个STOP（停止）信号：设置SDA为低，把SCL状态变为高，然后让SDA为高，释放IIC总线  </li>
 <li>发送一个重复STSRT（起始）信号，设置SDA为高，把SCL状态变为高，拉低SDA。这是重新开始一个IIC总线消息而不是释放总线  </li>
 </ul>
-<h2 id="SCL始终延展特性"><a href="#SCL始终延展特性" class="headerlink" title="SCL始终延展特性"></a>SCL始终延展特性</h2><p>时钟延展是IIC协议一个很重要的特点。一个编址的从机设备在接收（或发送）一个字节后可以保持SCL线为低状态，表示它还没有准备好处理更多的数据，正在与它进行通讯的主机可能无法完成当前位的传输，也必须等到SCL实际变为高为止。如果从机发起时钟延展，SCL线必须保持低状态（因为硬件上SCL是开漏输出），同样的，主机必须观察等待SCL线变为高状态  </p>
+<h2 id="SCL时钟延展特性"><a href="#SCL时钟延展特性" class="headerlink" title="SCL时钟延展特性"></a>SCL时钟延展特性</h2><p>时钟延展是IIC协议一个很重要的特点。一个编址的从机设备在接收（或发送）一个字节后可以保持SCL线为低状态，表示它还没有准备好处理更多的数据，正在与它进行通讯的主机可能无法完成当前位的传输，也必须等到SCL实际变为高为止。如果从机发起时钟延展，SCL线必须保持低状态（因为硬件上SCL是开漏输出），同样的，主机必须观察等待SCL线变为高状态  </p>
 <p>尽管理论上在通信过程的任何一位置都可以使用时钟延展，但是时钟延展通常使用在应答位前/后。例如，如果从机是一个MCU设备，它的IIC接口可以在每个字节后延展时钟，直到软件决定是否发出一个应答/不应答  </p>
 <p>时钟延展是唯一一次从机驱动SCL线（正常通信中由主机控制SCL）。很多从机不需要时钟延展，因此严格上可以认为SCL是一个没有电路驱动的输入。一些主机，如专门定制的ASICs很多都不支持时钟延展，通常这些设备叫做”两线式接口（two-wire interface）”而不是IIC  </p>
 <p>为了保证最小的总线吞吐量，SMBus对时钟可以延展的时间进行了限制，主机和从机在此条件下不能短时间内阻塞对总线的访问，这不是一个完整的IIC系统</p>
-
+<h2 id="SDA仲裁特性"><a href="#SDA仲裁特性" class="headerlink" title="SDA仲裁特性"></a>SDA仲裁特性</h2>
       
     </div>
     
@@ -876,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL始终延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL始终延展特性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL时钟延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL时钟延展特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁特性"><span class="nav-number">2.5.</span> <span class="nav-text">SDA仲裁特性</span></a></li></ol></li></ol></div>
             
 
           </div>
