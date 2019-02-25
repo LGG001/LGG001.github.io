@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-2.png">
-<meta property="og:updated_time" content="2019-02-25T13:51:31.392Z">
+<meta property="og:updated_time" content="2019-02-25T15:19:52.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,774 字
+                  5,445 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  17 分钟
+                  19 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjskei2x0002k3ctke1tj8ldx"
+                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjskhnl96002m88tkhfc5bdkl"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-2.png" itemprop="contentUrl"/>
               </a>
@@ -581,7 +581,23 @@
 <li>SMBus也支持一个“地址响应协议”，设备会返回一个16-Byte的通用设备ID（UUID），多个设备可能响应，UUID最低的将赢得仲裁  </li>
 </ul>
 <h2 id="PMBus的仲裁"><a href="#PMBus的仲裁" class="headerlink" title="PMBus的仲裁"></a>PMBus的仲裁</h2><p>PMBus的V1.3版本在其“zone read”协议中扩展了SMBus的警报响应协议，从机可能内分类到”zones”,在zone的所有从机都可能被寻址响应，它们的响应带有屏蔽（忽略不需要的信息），反过来说（因此需要的信息作为0位发送，这将赢得仲裁），或重新整理（因此最重要的信息将首先发送），仲裁确保优先级最高的响应是首先返回给主机的响应。PMBus默认IIC的zone读和写地址分别是0x28和0x37</p>
-<h2 id="不同模式下的速度"><a href="#不同模式下的速度" class="headerlink" title="不同模式下的速度"></a>不同模式下的速度</h2>
+<h2 id="不同模式下的速度"><a href="#不同模式下的速度" class="headerlink" title="不同模式下的速度"></a>不同模式下的速度</h2><p>IIC的通信的运行模式可能会是下面多种之一。100kbit/s标准模式（Standard Mode）是所有设备都兼容的，也一直被使用，但是在同一总线上同时具有不同功能的设备可能会导致问题，如下：  </p>
+<ul>
+<li>快速模式（Fast Mode）是大部分设备兼容的，并简单地收缩了几个时间参数来达到400kbit/s的速度。快速模式广泛被从机设备支持，因此，只要总线电容和上拉强度允许，主机就能使用它  </li>
+<li>快速模式+（Fast Mode Plus）能达到1Mbit/s，使用更强大的（20ma）驱动和上拉来实现加快上升和下降沿时间，如果减少通讯是的下拉强度能实现与标准模式和快速模式兼容  </li>
+<li>高速模式（High Speed Mode）3.4Mbit/s在同一总线上与正常IIC设备兼容，但是要求在高速传输时主机有一个主动上拉的时钟线，第一个数据位以正常的开漏上升时钟沿传输，该时钟可能被延展，剩余的7个数据位和应答位，主机在适当驱动时钟线为高，从机不能对其延展。所有高速传输之前都有一个使用标准/高速传输单字节的“master code”，这个coed有三个用途：  <ul>
+<li>告诉高速从机设备更改为高速时间设置规则</li>
+<li>它确保快速/正常速度设备不会尝试参与传输（因为与他们的地址不匹配）</li>
+<li>因为它标识了主代码(有8个主代码，每个主代码必须使用一个不同的主代码)，所以它确保仲裁在传输的高速部分之前完成，因此高速部分不需要考虑这种能力  </li>
+</ul>
+</li>
+<li>超快速模式（Ultra-Fast Mode）本质上时一个只写的IIC子设备，它与其他模式不适合兼容，除了容易添加到现有的IIC硬件设计。只允许有一个主机，并且在任何时候都主动驱动时钟线和信号线以达到5Mbit/s的传输速率，时钟延展、仲裁、读传输、和应答都被忽略。它的主要作用于动态LED显示，其中传输错误只会导致一个无关紧要的短暂视觉故障，与其他IIC总线模式相似之处在于：   </li>
+<li>起始和停止条件用于划分传输  </li>
+<li>IIC地址允许多从机设备挂在，但与SPI总线不同的是没有从机选择信号  </li>
+<li>每个字节发送的第九个时钟脉冲用于表示应答位</li>
+</ul>
+<p><img src="http://02.xiaolinjun.top/0a7-3.png" alt=""></p>
+
       
     </div>
     
@@ -600,7 +616,7 @@
   <p><span>本文标题:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/">嵌入式硬件通讯接口-IIC</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年02月19日 - 23:02</p>
-  <p><span>最后更新:</span>2019年02月25日 - 21:02</p>
+  <p><span>最后更新:</span>2019年02月25日 - 23:02</p>
   <p><span>原始链接:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/" title="嵌入式硬件通讯接口-IIC">http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/"  aria-label="复制成功！"></i></span>
   </p>
