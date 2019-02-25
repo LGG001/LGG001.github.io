@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-2.png">
-<meta property="og:updated_time" content="2019-02-24T15:51:31.568Z">
+<meta property="og:updated_time" content="2019-02-25T13:33:05.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,284 字
+                  4,625 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  15 分钟
+                  16 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjsj3dep4002a5stklxzpafgr"
+                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjskdugv2002b9ktkyfc8zu2f"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-2.png" itemprop="contentUrl"/>
               </a>
@@ -574,7 +574,13 @@
 <p>仲裁一般很少发生，但是对一些特定的多主机支持是必须的，就像时钟延展一样，不是所有设备都支持仲裁。如果支持，通常会贴上支持“多主机”通信的标签  </p>
 <p>一个主机可能会因为接收到的消息而失去仲裁，并且必须及时将其角色从主机变为从机，以确认其自己的地址</p>
 <p>在极其罕见的情况下，两个主机同时发送相同的消息，双方都认为通信时成功的，但是总计只能识别到一个信息。因此，当一个从机可以被多个主机访问时，从机识别的每一条命令要么是幂等（都一样的意思）的，要么必须保证永远都不会是两个主机同一时间发出（比如，一个命令是由一个主机发出的就不是幂等，当某种互斥机制确保在任何给定的时间只能由一个主机发出的命令也不是幂等）  </p>
-
+<h2 id="SMBus的仲裁"><a href="#SMBus的仲裁" class="headerlink" title="SMBus的仲裁"></a>SMBus的仲裁</h2><p>虽然IIC只在两个主机之间进行仲裁，在多个从机响应主机和获取主机消息时，SMBus的仲裁使用在三种情况下：  </p>
+<ul>
+<li>虽然在概念上是单主机总线，但是支持“主机通知协议”的从机设备可以充当执行通知的主机设备，它捕获总线并写3个字节到默认的“SMBus Host”地址（0x08），一个字节是地址，两个字节是数据。当两个从机试图同一时间通知主机时，其中一个将失去仲裁并需要重试  </li>
+<li>另一种从机通知系统使用独立的SMBALERT#信号来请求关注。在这种情况下，主机从默认的”SMBus Alert Response Address”(0x0c)读取1字节，这是广播地址的一种，所有发出警报的从机都响应1字节包含自己地址的数据。当从机生工发送自己的地址时（赢得仲裁），它会停止抢断。在这种与上面那中情况下，仲裁都要确保一个从机的信息被接收到，其他从机会知道他们必须重试  </li>
+<li>SMBus也支持一个“地址响应协议”，设备会返回一个16-Byte的通用设备ID（UUID），多个设备可能响应，UUID最低的将赢得仲裁  </li>
+</ul>
+<h2 id="PMBus的仲裁"><a href="#PMBus的仲裁" class="headerlink" title="PMBus的仲裁"></a>PMBus的仲裁</h2>
       
     </div>
     
@@ -593,7 +599,7 @@
   <p><span>本文标题:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/">嵌入式硬件通讯接口-IIC</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年02月19日 - 23:02</p>
-  <p><span>最后更新:</span>2019年02月24日 - 23:02</p>
+  <p><span>最后更新:</span>2019年02月25日 - 21:02</p>
   <p><span>原始链接:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/" title="嵌入式硬件通讯接口-IIC">http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/"  aria-label="复制成功！"></i></span>
   </p>
@@ -882,7 +888,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL时钟延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL时钟延展特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁特性"><span class="nav-number">2.5.</span> <span class="nav-text">SDA仲裁特性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL时钟延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL时钟延展特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁特性"><span class="nav-number">2.5.</span> <span class="nav-text">SDA仲裁特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMBus的仲裁"><span class="nav-number">2.6.</span> <span class="nav-text">SMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMBus的仲裁"><span class="nav-number">2.7.</span> <span class="nav-text">PMBus的仲裁</span></a></li></ol></li></ol></div>
             
 
           </div>
