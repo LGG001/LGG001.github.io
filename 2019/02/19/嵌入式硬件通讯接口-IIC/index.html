@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-2.png">
-<meta property="og:updated_time" content="2019-02-25T13:33:05.193Z">
+<meta property="og:updated_time" content="2019-02-25T13:51:31.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,625 字
+                  4,774 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  16 分钟
+                  17 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjskdugv2002b9ktkyfc8zu2f"
+                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjskei2x0002k3ctke1tj8ldx"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-2.png" itemprop="contentUrl"/>
               </a>
@@ -580,7 +580,8 @@
 <li>另一种从机通知系统使用独立的SMBALERT#信号来请求关注。在这种情况下，主机从默认的”SMBus Alert Response Address”(0x0c)读取1字节，这是广播地址的一种，所有发出警报的从机都响应1字节包含自己地址的数据。当从机生工发送自己的地址时（赢得仲裁），它会停止抢断。在这种与上面那中情况下，仲裁都要确保一个从机的信息被接收到，其他从机会知道他们必须重试  </li>
 <li>SMBus也支持一个“地址响应协议”，设备会返回一个16-Byte的通用设备ID（UUID），多个设备可能响应，UUID最低的将赢得仲裁  </li>
 </ul>
-<h2 id="PMBus的仲裁"><a href="#PMBus的仲裁" class="headerlink" title="PMBus的仲裁"></a>PMBus的仲裁</h2>
+<h2 id="PMBus的仲裁"><a href="#PMBus的仲裁" class="headerlink" title="PMBus的仲裁"></a>PMBus的仲裁</h2><p>PMBus的V1.3版本在其“zone read”协议中扩展了SMBus的警报响应协议，从机可能内分类到”zones”,在zone的所有从机都可能被寻址响应，它们的响应带有屏蔽（忽略不需要的信息），反过来说（因此需要的信息作为0位发送，这将赢得仲裁），或重新整理（因此最重要的信息将首先发送），仲裁确保优先级最高的响应是首先返回给主机的响应。PMBus默认IIC的zone读和写地址分别是0x28和0x37</p>
+<h2 id="不同模式下的速度"><a href="#不同模式下的速度" class="headerlink" title="不同模式下的速度"></a>不同模式下的速度</h2>
       
     </div>
     
@@ -888,7 +889,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL时钟延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL时钟延展特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁特性"><span class="nav-number">2.5.</span> <span class="nav-text">SDA仲裁特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMBus的仲裁"><span class="nav-number">2.6.</span> <span class="nav-text">SMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMBus的仲裁"><span class="nav-number">2.7.</span> <span class="nav-text">PMBus的仲裁</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议设计"><span class="nav-number">2.</span> <span class="nav-text">IIC协议设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL时钟延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL时钟延展特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁特性"><span class="nav-number">2.5.</span> <span class="nav-text">SDA仲裁特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMBus的仲裁"><span class="nav-number">2.6.</span> <span class="nav-text">SMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMBus的仲裁"><span class="nav-number">2.7.</span> <span class="nav-text">PMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同模式下的速度"><span class="nav-number">2.8.</span> <span class="nav-text">不同模式下的速度</span></a></li></ol></li></ol></div>
             
 
           </div>
