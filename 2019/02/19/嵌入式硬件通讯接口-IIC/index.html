@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-2.png">
-<meta property="og:updated_time" content="2019-02-27T15:11:22.799Z">
+<meta property="og:updated_time" content="2019-02-27T15:40:28.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,568 字
+                  5,909 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  19 分钟
+                  21 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjsnc8ng1002mcktk522eubjl"
+                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjsnd9wb7002qlstkjjnfx3wn"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-2.png" itemprop="contentUrl"/>
               </a>
@@ -598,8 +598,12 @@
 <li>每个字节发送的第九个时钟脉冲用于表示应答位</li>
 </ul>
 <p><img src="http://02.xiaolinjun.top/0a7-3.png" alt="">  </p>
-<h1 id="IIC协议时序"><a href="#IIC协议时序" class="headerlink" title="IIC协议时序"></a>IIC协议时序</h1><h2 id="起始信号-amp-停止信号"><a href="#起始信号-amp-停止信号" class="headerlink" title="起始信号&amp;停止信号"></a>起始信号&amp;停止信号</h2><p>IIC的数据传输开始与一个起始START位，结束于一个停止STOP位。起始位时序：在SCL处于高状态时，SDA被拉低（SDA由高变为低），即在SCL处于高状态时，SDA产生一个下降沿；停止位时序：在SCL处于高状态时，SDA在低状态变为高状态（SDA由低变为高），即在SCL处于高状态时，SDA产生一个上升沿  </p>
+<h1 id="IIC协议时序"><a href="#IIC协议时序" class="headerlink" title="IIC协议时序"></a>IIC协议时序</h1><p>IIC的传输在串行数据线（SDA）和串行时钟线（SCL）上完成，IIC在通信过程有两个角色：主机和从机；主机是控制SCL线的一方。IIC通信的数据是高位线发送  </p>
+<h2 id="起始信号-amp-停止信号"><a href="#起始信号-amp-停止信号" class="headerlink" title="起始信号&amp;停止信号"></a>起始信号&amp;停止信号</h2><p>IIC的数据传输开始与一个起始START位，结束于一个停止STOP位。起始位时序：在SCL处于高状态时，SDA被拉低（SDA由高变为低），即在SCL处于高状态时，SDA产生一个下降沿；停止位时序：在SCL处于高状态时，SDA在低状态变为高状态（SDA由低变为高），即在SCL处于高状态时，SDA产生一个上升沿  </p>
 <p><img src="http://02.xiaolinjun.top/0a7-5.png" alt="">  </p>
+<h2 id="数据传输-amp-应答"><a href="#数据传输-amp-应答" class="headerlink" title="数据传输&amp;应答"></a>数据传输&amp;应答</h2><p>IIC的数据是由高为线发送，数据在传输过程是以bit为单位，在SCL产生的时序脉冲下通过SDA线传输，发送方（可能是主机或从机）每传输1Byte数据需要接收一个应答位，应发位由接收方发出，接收方在接收完1Byte数据，在第九个脉冲产生控制SDA产生应答，用于告诉发送方接下来通信事宜，接收方在第九个脉冲拉低SDA表示应答发送方，拉高SDA表示不应答。在SCL处于低状态时，发送方把1bit数据放到SDA线，然后在SCL上升沿后的高状态中发送出去  </p>
+<p>数据阶段，SCL处于低状态时，允许SDA改变状态，这时发送方把数据放到SDA上；SCL处于高状态时，SDA不允许改变状态，接收方从SDA上读取数据。从SCL角度理解，当SCL产生下降沿时，通知发送方传输数据到SDA上，当SCL产生上升沿时，通知接收方读取SDA上的数据    </p>
+<p><img src="http://02.xiaolinjun.top/0a7-6.png" alt=""></p>
 
       
     </div>
@@ -908,7 +912,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议特性"><span class="nav-number">2.</span> <span class="nav-text">IIC协议特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">IIC消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL时钟延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL时钟延展特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁特性"><span class="nav-number">2.5.</span> <span class="nav-text">SDA仲裁特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMBus的仲裁"><span class="nav-number">2.6.</span> <span class="nav-text">SMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMBus的仲裁"><span class="nav-number">2.7.</span> <span class="nav-text">PMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同模式下的速度"><span class="nav-number">2.8.</span> <span class="nav-text">不同模式下的速度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议时序"><span class="nav-number">3.</span> <span class="nav-text">IIC协议时序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#起始信号-amp-停止信号"><span class="nav-number">3.1.</span> <span class="nav-text">起始信号&amp;停止信号</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的版本"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议特性"><span class="nav-number">2.</span> <span class="nav-text">IIC协议特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的概念"><span class="nav-number">2.1.</span> <span class="nav-text">IIC协议的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC消息协议"><span class="nav-number">2.2.</span> <span class="nav-text">IIC消息协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议的物理层"><span class="nav-number">2.3.</span> <span class="nav-text">IIC协议的物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SCL时钟延展特性"><span class="nav-number">2.4.</span> <span class="nav-text">SCL时钟延展特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁特性"><span class="nav-number">2.5.</span> <span class="nav-text">SDA仲裁特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMBus的仲裁"><span class="nav-number">2.6.</span> <span class="nav-text">SMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMBus的仲裁"><span class="nav-number">2.7.</span> <span class="nav-text">PMBus的仲裁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同模式下的速度"><span class="nav-number">2.8.</span> <span class="nav-text">不同模式下的速度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议时序"><span class="nav-number">3.</span> <span class="nav-text">IIC协议时序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#起始信号-amp-停止信号"><span class="nav-number">3.1.</span> <span class="nav-text">起始信号&amp;停止信号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据传输-amp-应答"><span class="nav-number">3.2.</span> <span class="nav-text">数据传输&amp;应答</span></a></li></ol></li></ol></div>
             
 
           </div>
