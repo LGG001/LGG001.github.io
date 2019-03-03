@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-2.png">
-<meta property="og:updated_time" content="2019-03-03T14:59:15.604Z">
+<meta property="og:updated_time" content="2019-03-03T15:07:35.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 SMBus（System Management Bus）,系统管理总线。由Intel于1995年定义，是IIC的子集，规范更加严格。SMBus设计的">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,908 字
+                  5,869 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjst1kld4002ixctkkk5m2ued"
+                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjst1wzup002lbctk245yhzi6"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-2.png" itemprop="contentUrl"/>
               </a>
@@ -582,7 +582,7 @@
 <li>SMBus也支持一个“地址响应协议”，设备会返回一个16-Byte的通用设备ID（UUID），多个设备可能响应，UUID最低的将赢得仲裁  </li>
 </ul>
 <h2 id="PMBus的仲裁"><a href="#PMBus的仲裁" class="headerlink" title="PMBus的仲裁"></a>PMBus的仲裁</h2><p>PMBus的V1.3版本在其“zone read”协议中扩展了SMBus的警报响应协议，从机可能内分类到”zones”,在zone的所有从机都可能被寻址响应，它们的响应带有屏蔽（忽略不需要的信息），反过来说（因此需要的信息作为0位发送，这将赢得仲裁），或重新整理（因此最重要的信息将首先发送），仲裁确保优先级最高的响应是首先返回给主机的响应。PMBus默认IIC的zone读和写地址分别是0x28和0x37</p>
-<h2 id="不同模式下的速度"><a href="#不同模式下的速度" class="headerlink" title="不同模式下的速度"></a>不同模式下的速度</h2><p>IIC的通信的运行模式可能会是下面多种之一。100kbit/s标准模式（Standard Mode）是所有设备都兼容的，也一直被使用，但是在同一总线上同时具有不同功能的设备可能会导致问题，如下：  </p>
+<h2 id="不同模式下的速度"><a href="#不同模式下的速度" class="headerlink" title="不同模式下的速度"></a>不同模式下的速度</h2><p>IIC的通信的运行模式可能会是下面几种之一。100kbit/s标准模式（Standard Mode）是所有设备都兼容的，也一直被使用，但是在同一总线上同时具有不同功能的设备可能会导致问题，如下：  </p>
 <ul>
 <li>快速模式（Fast Mode）是大部分设备兼容的，并简单地收缩了几个时间参数来达到400kbit/s的速度。快速模式广泛被从机设备支持，因此，只要总线电容和上拉强度允许，主机就能使用它  </li>
 <li>快速模式+（Fast Mode Plus）能达到1Mbit/s，使用更强大的（20ma）驱动和上拉来实现加快上升和下降沿时间，如果减少通讯是的下拉强度能实现与标准模式和快速模式兼容  </li>
@@ -598,11 +598,11 @@
 <li>每个字节发送的第九个时钟脉冲用于表示应答位</li>
 </ul>
 <p><img src="http://02.xiaolinjun.top/0a7-3.png" alt="">  </p>
-<h1 id="IIC协议时序"><a href="#IIC协议时序" class="headerlink" title="IIC协议时序"></a>IIC协议时序</h1><p>IIC的传输在串行数据线（SDA）和串行时钟线（SCL）上完成，IIC在通信过程有两个角色：主机和从机；主机是控制SCL线的一方。IIC通信的数据是高位线发送  </p>
+<h1 id="IIC协议时序"><a href="#IIC协议时序" class="headerlink" title="IIC协议时序"></a>IIC协议时序</h1><p>IIC的传输在串行数据线（SDA）和串行时钟线（SCL）上完成，IIC在通信过程有两个角色：主机和从机；主机是控制SCL线的一方。IIC通信的数据是高位先发送  </p>
 <h2 id="起始信号-amp-停止信号"><a href="#起始信号-amp-停止信号" class="headerlink" title="起始信号&amp;停止信号"></a>起始信号&amp;停止信号</h2><p>IIC的数据传输开始与一个起始START位，结束于一个停止STOP位。起始位时序：在SCL处于高状态时，SDA被拉低（SDA由高变为低），即在SCL处于高状态时，SDA产生一个下降沿；停止位时序：在SCL处于高状态时，SDA在低状态变为高状态（SDA由低变为高），即在SCL处于高状态时，SDA产生一个上升沿  </p>
 <p><img src="http://02.xiaolinjun.top/0a7-5.png" alt="">  </p>
-<h2 id="数据传输-amp-应答"><a href="#数据传输-amp-应答" class="headerlink" title="数据传输&amp;应答"></a>数据传输&amp;应答</h2><p>IIC的数据是先发送高位，数据在传输过程是以bit为单位，在SCL产生的时序脉冲下通过SDA线传输，发送方（可能是主机或从机）每传输1Byte数据需要接收一个应答位，应发位由接收方发出，接收方在接收完1Byte数据，在第九个脉冲产生控制SDA产生应答，用于告诉发送方接下来通信事宜，接收方在第九个脉冲拉低SDA表示应答发送方，拉高SDA表示不应答。在SCL处于低状态时，发送方把1bit数据放到SDA线，然后在SCL上升沿后的高状态中发送出去  </p>
-<p>数据阶段，SCL处于低状态时，允许SDA改变状态，这时发送方把数据放到SDA上；SCL处于高状态时，SDA不允许改变状态，接收方从SDA上读取数据。从SCL角度理解，当SCL产生下降沿时，通知发送方传输数据到SDA上，当SCL产生上升沿时，通知接收方读取SDA上的数据    </p>
+<h2 id="数据传输-amp-应答"><a href="#数据传输-amp-应答" class="headerlink" title="数据传输&amp;应答"></a>数据传输&amp;应答</h2><p>IIC的数据是先发送高位，数据在传输过程是以bit为单位，在SCL产生的时序脉冲下通过SDA线传输，发送方（可能是主机或从机）每传输1Byte数据需要接收一个应答位，应答位由接收方发出，接收方在接收完1Byte数据，在第九个脉冲产生控制SDA产生应答，用于告诉发送方接下来通信事宜，接收方在第九个脉冲拉低SDA表示应答发送方，拉高SDA表示不应答 </p>
+<p>数据阶段，SCL处于低状态时，允许SDA改变状态，这时发送方把数据放到SDA上；SCL处于高状态时，SDA不允许改变状态，接收方从SDA上读取数据。从SCL角度理解，当SCL产生下降沿时，发送方传输数据到SDA上，当SCL产生上升沿时，接收方读取SDA上的数据    </p>
 <p><img src="http://02.xiaolinjun.top/0a7-6.png" alt=""></p>
 
       
@@ -623,7 +623,7 @@
   <p><span>本文标题:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/">嵌入式硬件通讯接口-IIC</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年02月19日 - 23:02</p>
-  <p><span>最后更新:</span>2019年03月03日 - 22:03</p>
+  <p><span>最后更新:</span>2019年03月03日 - 23:03</p>
   <p><span>原始链接:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/" title="嵌入式硬件通讯接口-IIC">http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/"  aria-label="复制成功！"></i></span>
   </p>
