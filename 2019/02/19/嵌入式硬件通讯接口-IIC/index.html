@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源   IIC协议特点IIC应用只需要两根双向的集电极开路或漏极开路线：串行数据线（SDA）和串行时钟线（SCL）与上拉电阻。虽然系统允许采用各种工作电">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-2.png">
-<meta property="og:updated_time" content="2019-03-04T14:59:08.397Z">
+<meta property="og:updated_time" content="2019-03-05T14:01:25.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源   IIC协议特点IIC应用只需要两根双向的集电极开路或漏极开路线：串行数据线（SDA）和串行时钟线（SCL）与上拉电阻。虽然系统允许采用各种工作电">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,342 字
+                  4,348 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjsuh0l6e002bpgtk96j4o4mj"
+                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjsvudnme0029cwtkndgo8fib"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-2.png" itemprop="contentUrl"/>
               </a>
@@ -565,15 +565,17 @@
 <p>数据阶段，SCL处于低状态时，允许SDA改变状态，这时发送方把数据放到SDA上；SCL处于高状态时，SDA不允许改变状态，接收方从SDA上读取数据。从SCL角度理解，当SCL产生下降沿时，发送方传输数据到SDA上，当SCL产生上升沿时，接收方读取SDA上的数据    </p>
 <p><img src="http://02.xiaolinjun.top/0a7-6.png" alt=""></p>
 <h2 id="时钟延展时序"><a href="#时钟延展时序" class="headerlink" title="时钟延展时序"></a>时钟延展时序</h2><p>时钟延展是IIC协议一个很重要的特点。一个编址的从机设备在接收（或发送）一个字节后可以保持SCL线为低状态，表示它还没有准备好处理更多的数据，正在与它进行通讯的主机可能无法完成当前位的传输，也必须等到SCL实际变为高为止。如果从机发起时钟延展，SCL线必须保持低状态（因为硬件上SCL是开漏输出），同样的，主机必须观察等待SCL线变为高状态  </p>
+<p><img src="http://02.xiaolinjun.top/0a7-7.png" alt="">  </p>
 <p>尽管理论上在通信过程的任何一位置都可以使用时钟延展，但是时钟延展通常使用在应答位前/后。例如，如果从机是一个MCU设备，它的IIC接口可以在每个字节后延展时钟，直到软件决定是否发出一个应答/不应答  </p>
 <p>时钟延展是唯一一次从机驱动SCL线（正常通信中由主机控制SCL）。很多从机不需要时钟延展，因此严格上可以认为SCL是一个没有电路驱动的输入。一些主机，如专门定制的ASICs很多都不支持时钟延展，通常这些设备叫做”两线式接口（two-wire interface）”而不是IIC  </p>
-<h2 id="SDA总裁时序"><a href="#SDA总裁时序" class="headerlink" title="SDA总裁时序"></a>SDA总裁时序</h2><p>每个主机监控着总线的START（起始）和STOP（停止）位，当其他主机使得总线忙时不启动通讯。无论如何，两个主机有可能同时启动传输，在这种情况下产生仲裁。当一个主机寻址多个从机时，从机发送模式也能产生仲裁，但是这种情况不常见。与在发出重试之前使用随机回退延迟的协议(如以太网)不同，IIC有一个确定性的仲裁政策，每个发送方都检测SDA线电平并与预期的电平作比较，如果他们不匹配，则发送方失去仲裁并推出协议交互  </p>
+<h2 id="SDA仲裁时序"><a href="#SDA仲裁时序" class="headerlink" title="SDA仲裁时序"></a>SDA仲裁时序</h2><p>每个主机监控着总线的START（起始）和STOP（停止）位，当其他主机使得总线忙时不启动通讯。无论如何，两个主机有可能同时启动传输，在这种情况下产生仲裁。当一个主机寻址多个从机时，从机发送模式也能产生仲裁，但是这种情况不常见。与在发出重试之前使用随机回退延迟的协议(如以太网)不同，IIC有一个确定性的仲裁政策，每个发送方都检测SDA线电平并与预期的电平作比较，如果他们不匹配，则发送方失去仲裁并推出协议交互  </p>
+<p><img src="http://02.xiaolinjun.top/0a7-8.png" alt=""> </p>
 <p>如果一个发送方设置SDA状态位1（高），另一个发送方将SDA设置为0（低），此时SDA线为地状态。第一个发送方检测到总线的SDA电平与预期的不一样，可以得出另一个节点正在发送，第一个注意到这种情况的节点是仲裁失败的节点：它将停止驱动SDA，如果它是主机，它也停止驱动SCL并等待STOP（停止）信号，然后它可能尝试重新发送整个消息。在此期间，其他节点没有注意到SDA实际的电平与预期的不一样，因此可以继续传输。因为到目前为止，信号完全符合它的预期，没有其他发送方干扰它的信息  </p>
 <p>如果两个主机发送一个消息到不同的从机，发送较低从机地址的一方总是在地址阶段“赢得”仲裁。一旦两个主机可能发送信息给同一个地址从机，而地址有时涉及多个从机，那么仲裁必须继续进入到数据阶段  </p>
 <p>仲裁一般很少发生，但是对一些特定的多主机支持是必须的，就像时钟延展一样，不是所有设备都支持仲裁。如果支持，通常会贴上支持“多主机”通信的标签  </p>
 <p>一个主机可能会因为接收到的消息而失去仲裁，并且必须及时将其角色从主机变为从机，以确认其自己的地址</p>
 <p>在极其罕见的情况下，两个主机同时发送相同的消息，双方都认为通信时成功的，但是总计只能识别到一个信息。因此，当一个从机可以被多个主机访问时，从机识别的每一条命令要么是幂等（都一样的意思）的，要么必须保证永远都不会是两个主机同一时间发出（比如，一个命令是由一个主机发出的就不是幂等，当某种互斥机制确保在任何给定的时间只能由一个主机发出的命令也不是幂等）  </p>
-<p>除了START（起始）信号和STOP（停止）信号，SDA线只在SCL线为低状态时发生改变，传输一个数据位时，先保持SDA线稳定在所需的状态然后拉高。当SCL处于低状态时，发送方（通常指主机）将SDA设置为所需的状态然后释放SCL，（一个小延迟后让值传播）让SCL变为高状态，主机等待SCL线自动变为高。SCL的上升时间有一定的延迟（取决上拉电阻的RC时间常数和总线的寄生电容），或者进入了从机的始终延展。一旦SCL变为高，主机将等待一个最小时间（主机是SCL的发送方），标准IIC速度为4μs，来确保该数据为被发送出去/被从机接收到，然后再次拉低SCL，这就是传输一个数据位的过程  </p>
+<h2 id="时序补充说明"><a href="#时序补充说明" class="headerlink" title="时序补充说明"></a>时序补充说明</h2><p>除了START（起始）信号和STOP（停止）信号，SDA线只在SCL线为低状态时发生改变，传输一个数据位时，先保持SDA线稳定在所需的状态然后拉高SCL。当SCL处于低状态时，发送方（通常指主机）将SDA设置为所需的状态然后释放SCL，（一个小延迟后让值传播）让SCL变为高状态，主机等待SCL线自动变为高。SCL的上升时间有一定的延迟（取决上拉电阻的RC时间常数和总线的寄生电容），或者进入了从机的始终延展。一旦SCL变为高，主机将等待一个最小时间（主机是SCL的发送方），标准IIC速度为4μs，来确保该数据为被发送出去/被从机接收到，然后再次拉低SCL，这就是传输一个数据位的过程  </p>
 <p>在一个方向上每8个数据位之后，一个应答位由另一个方向发送，发送方和接收方因为这个应答为而交换角色，原本的接收方会发送一个信号”0”作为应答，如果发送的是“1”：  </p>
 <ul>
 <li>（如果是主机发送给从机）从机无法接收数据。没有这样的从机、命令无法解析或不能接收更多的数据  </li>
@@ -604,7 +606,7 @@
   <p><span>本文标题:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/">嵌入式硬件通讯接口-IIC</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年02月19日 - 23:02</p>
-  <p><span>最后更新:</span>2019年03月04日 - 22:03</p>
+  <p><span>最后更新:</span>2019年03月05日 - 22:03</p>
   <p><span>原始链接:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/" title="嵌入式硬件通讯接口-IIC">http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/"  aria-label="复制成功！"></i></span>
   </p>
@@ -893,7 +895,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议特点"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议版本"><span class="nav-number">1.3.</span> <span class="nav-text">IIC协议版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议时序"><span class="nav-number">2.</span> <span class="nav-text">IIC协议时序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC的起始-amp-结束时序"><span class="nav-number">2.1.</span> <span class="nav-text">IIC的起始&amp;结束时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据阶段时序"><span class="nav-number">2.2.</span> <span class="nav-text">数据阶段时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟延展时序"><span class="nav-number">2.3.</span> <span class="nav-text">时钟延展时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA总裁时序"><span class="nav-number">2.4.</span> <span class="nav-text">SDA总裁时序</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议特点"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议版本"><span class="nav-number">1.3.</span> <span class="nav-text">IIC协议版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议时序"><span class="nav-number">2.</span> <span class="nav-text">IIC协议时序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC的起始-amp-结束时序"><span class="nav-number">2.1.</span> <span class="nav-text">IIC的起始&amp;结束时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据阶段时序"><span class="nav-number">2.2.</span> <span class="nav-text">数据阶段时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟延展时序"><span class="nav-number">2.3.</span> <span class="nav-text">时钟延展时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁时序"><span class="nav-number">2.4.</span> <span class="nav-text">SDA仲裁时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时序补充说明"><span class="nav-number">2.5.</span> <span class="nav-text">时序补充说明</span></a></li></ol></li></ol></div>
             
 
           </div>
