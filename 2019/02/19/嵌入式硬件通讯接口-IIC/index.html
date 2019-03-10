@@ -126,7 +126,7 @@
 <meta property="og:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源   IIC协议特点IIC应用只需要两根双向的集电极开路或漏极开路线：串行数据线（SDA）和串行时钟线（SCL）与上拉电阻。虽然系统允许采用各种工作电">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a7-2.png">
-<meta property="og:updated_time" content="2019-03-07T17:26:17.242Z">
+<meta property="og:updated_time" content="2019-03-10T14:57:50.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通讯接口-IIC">
 <meta name="twitter:description" content="IIC协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源   IIC协议特点IIC应用只需要两根双向的集电极开路或漏极开路线：串行数据线（SDA）和串行时钟线（SCL）与上拉电阻。虽然系统允许采用各种工作电">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,785 字
+                  5,279 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  17 分钟
+                  19 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjsywlpu0002l5stkkvzjwrdy"
+                 href="http://02.xiaolinjun.top/0a7-2.png" rel="gallery_cjt31m2k4002ip4tkzym2hsia"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a7-2.png" itemprop="contentUrl"/>
               </a>
@@ -587,28 +587,36 @@
 <li>发送一个STOP（停止）信号：设置SDA为低，把SCL状态变为高，然后让SDA为高，释放IIC总线  </li>
 <li>发送一个重复STSRT（起始）信号，设置SDA为高，把SCL状态变为高，拉低SDA。这是重新开始一个IIC总线消息而不是释放总线  </li>
 </ul>
-<h1 id="软件实现"><a href="#软件实现" class="headerlink" title="软件实现"></a>软件实现</h1><p><img src="http://02.xiaolinjun.top/0a7-9.png" alt="">   </p>
+<h1 id="软件实现"><a href="#软件实现" class="headerlink" title="软件实现"></a>软件实现</h1><p>本文的IIC软件实现部分采用STM32F103C8T6学习板作为主机，BM1383AGLV（大气压传感器）作为从机进行通信讲解，主要分析IIC相关部分，实际的传感器通信过程可以参考源码<br><em>注：本次的例子为单主机&amp;单从机的通信，在多主机或多从机通信中，本例子不适用</em><br><img src="http://02.xiaolinjun.top/0a7-9.png" alt="">   </p>
 <h2 id="起始-amp-停止时序软件实现"><a href="#起始-amp-停止时序软件实现" class="headerlink" title="起始&amp;停止时序软件实现"></a>起始&amp;停止时序软件实现</h2><p>IIC的起始条件。总线空闲的情况下，SCL与SDA线都因为上拉电阻而处于高电平状态，在SCL处于高电平状态期间，SDA由高电平状态转为低电平状态时，IIC总线上产生一个起始信号，SDA与SCL的数据建立与保持需要一定的时间（根据通讯速度而定），软件实现如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * @函数名       IIC_Start</span><br><span class="line">  * @功  能       IIC起始条件</span><br><span class="line">  * @参  数       无</span><br><span class="line">  * @返回值       IIC状态</span><br><span class="line">  */</span><br><span class="line">void IIC_Start(void)</span><br><span class="line">&#123;</span><br><span class="line">	IIC_SDA_HIGH;				//拉高SDA线</span><br><span class="line">	IIC_Delay();				//延迟</span><br><span class="line">	IIC_SCL_HIGH;				//拉高SCL线</span><br><span class="line">	IIC_Delay();				//延迟，重复起始建立时间，最小4.7μs</span><br><span class="line">	IIC_SDA_LOW;				//SCL为高期间，SDA线由1-&gt;0，产生起始信号</span><br><span class="line">	IIC_Delay();				//延迟</span><br><span class="line">	IIC_SCL_LOW;				//拉低SCL，准备进入数据传输阶段</span><br><span class="line">	IIC_Delay();				//延迟</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>IIC的停止条件。当总线通信数据传输完成后，需要一个停止条件来结束此次的通信，在SCL处于高电平状态期间，SDA由低电平状态转为高电平状态时，IIC总线上产生一个结束信号，SDA与SCL的数据建立与保持需要一定的时间（根据通讯速度而定），软件实现如下  </p>
-<pre><code>/**
-  * @函数名       IIC_Stop
-  * @功  能       IIC停止条件
-  * @参  数       无
-  * @返回值       无
-  */
-void IIC_Stop(void)
-{
-    IIC_SCL_LOW;                //拉低SCL
-    IIC_Delay();                //延迟
-    IIC_SDA_LOW;                //拉低SDA线
-    IIC_Delay();                //延迟
-    IIC_SCL_HIGH;                //拉高SCL线
-    IIC_Delay();                //延迟
-    IIC_SDA_HIGH;                //SCL为高期间，SDA线由0-&gt;1，产生结束信号
-    IIC_Delay();                //延迟
-}
-</code></pre><p><em>注：通讯过程起始信号与结束信号都由通信主机发起</em></p>
-<h2 id="应答检测-发送时序软件实现"><a href="#应答检测-发送时序软件实现" class="headerlink" title="应答检测/发送时序软件实现"></a>应答检测/发送时序软件实现</h2><h2 id="数据读-写时序软件实现"><a href="#数据读-写时序软件实现" class="headerlink" title="数据读/写时序软件实现"></a>数据读/写时序软件实现</h2><h2 id="实际通信软件实现"><a href="#实际通信软件实现" class="headerlink" title="实际通信软件实现"></a>实际通信软件实现</h2>
+<p>IIC的停止条件。当总线通信数据传输完成后，需要一个停止条件来结束此次的通信，在SCL处于高电平状态期间，SDA由低电平状态转为高电平状态时，IIC总线上产生一个结束信号，SDA与SCL的数据建立与保持需要一定的时间（根据通讯速度而定），软件实现如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">  * @函数名       IIC_Stop</span><br><span class="line">  * @功  能       IIC停止条件</span><br><span class="line">  * @参  数       无</span><br><span class="line">  * @返回值       无</span><br><span class="line">  */</span><br><span class="line">void IIC_Stop(void)</span><br><span class="line">&#123;</span><br><span class="line">	IIC_SCL_LOW;				//拉低SCL</span><br><span class="line">	IIC_Delay();				//延迟</span><br><span class="line">	IIC_SDA_LOW;				//拉低SDA线</span><br><span class="line">	IIC_Delay();				//延迟</span><br><span class="line">	IIC_SCL_HIGH;				//拉高SCL线</span><br><span class="line">	IIC_Delay();				//延迟</span><br><span class="line">	IIC_SDA_HIGH;				//SCL为高期间，SDA线由0-&gt;1，产生结束信号</span><br><span class="line">	IIC_Delay();				//延迟</span><br><span class="line">&#125;</span><br><span class="line">```  </span><br><span class="line">*注：通讯过程起始信号与结束信号都由通信主机发起*</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 发送时序&amp;应答检测软件实现  </span><br><span class="line"></span><br><span class="line">IIC总线数据发送过程中，高位线发送，SDA数据建立在SCL处于低状态，SDA数据保持在SCL处于高状态，SCL低状态（至少保持一定时间）到高状态（至少保持一定时间）为一个脉冲，接收方每接收一字节数据，需要发送一个应答信号给主机</span><br></pre></td></tr></table></figure></p>
+<p>/**</p>
+<ul>
+<li>@函数名       IIC_WirteByte</li>
+<li>@功  能       IIC写一个字节</li>
+<li>@参  数       无</li>
+<li><p>@返回值       et_IIC_ERROR：IIC状态<br>*/<br>et_IIC_ERROR IIC_WirteByte(uint8_t TxByte)<br>{<br>et_IIC_ERROR error = IIC_NO_ERROR;            //枚举变量记录IIC通信状态，初始为NO_ERROR<br>uint8_t mask;                                                        //定义变量</p>
+<p>for(mask = 0x80; mask &gt; 0; mssk &gt;&gt;= 1)    //循环8次传输一字节数据，高位先发送<br>{</p>
+<pre><code>if((mask &amp; TxByte) == 0)                            //根据位状态来控制SDA线        
+    IIC_SDA_LOW;
+else
+    IIC_SDA_HIGH;
+
+IIC_Delay();                                                    //延迟，数据保持稳定需要时间
+IIC_SCL_HIGH;                                                    //拉高SCL线，传输SDA线上的数据
+IIC_Delay();                                                    //延迟，数据保持最少4μs，让接收方有充足时间读取
+IIC_SCL_LOW;                                                    //拉低SCL，准备下一个bit传输
+IIC_Delay();                                                    //延迟，SDA数据建立需要时间
+</code></pre><p>}</p>
+<p>IIC_SDA_HIGH;                                                        //数据传输结束，释放SDA线<br>IIC_SCL_HIGH;                                                        //拉高SCL，产生一个脉冲，读取接收方发送的应答位<br>IIC_Delay();                                                        //延迟，SDA数据建立需要时间</p>
+<p>if(IIC_SDA_READ)                                                //读取SDA应答位，如果SDA = 1，则接收方无应答</p>
+<pre><code>error = IIC_NACK_ERROR;
+</code></pre><p>IIC_SCL_LOW;                                                        //拉低SCL，结束当前写数据通信<br>IIC_Delay();                                                        //延迟</p>
+<p>return error;                                                        //返回IIC状态<br>}<br><code>`</code><br><em>注：每次发送完，需要把SCL拉低以避免引起总线时序错误</em></p>
+</li>
+</ul>
+<h2 id="读取时序-amp-发送应答软件实现"><a href="#读取时序-amp-发送应答软件实现" class="headerlink" title="读取时序&amp;发送应答软件实现"></a>读取时序&amp;发送应答软件实现</h2><p>IIC总线主机接收数据过程中，</p>
+<h2 id="实际通信软件实现"><a href="#实际通信软件实现" class="headerlink" title="实际通信软件实现"></a>实际通信软件实现</h2>
       
     </div>
     
@@ -627,7 +635,7 @@ void IIC_Stop(void)
   <p><span>本文标题:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/">嵌入式硬件通讯接口-IIC</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年02月19日 - 23:02</p>
-  <p><span>最后更新:</span>2019年03月08日 - 01:03</p>
+  <p><span>最后更新:</span>2019年03月10日 - 22:03</p>
   <p><span>原始链接:</span><a href="/2019/02/19/嵌入式硬件通讯接口-IIC/" title="嵌入式硬件通讯接口-IIC">http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/02/19/嵌入式硬件通讯接口-IIC/"  aria-label="复制成功！"></i></span>
   </p>
@@ -916,7 +924,7 @@ void IIC_Stop(void)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议特点"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议版本"><span class="nav-number">1.3.</span> <span class="nav-text">IIC协议版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议时序"><span class="nav-number">2.</span> <span class="nav-text">IIC协议时序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC的起始-amp-结束时序"><span class="nav-number">2.1.</span> <span class="nav-text">IIC的起始&amp;结束时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据阶段时序"><span class="nav-number">2.2.</span> <span class="nav-text">数据阶段时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟延展时序"><span class="nav-number">2.3.</span> <span class="nav-text">时钟延展时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁时序"><span class="nav-number">2.4.</span> <span class="nav-text">SDA仲裁时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时序补充说明"><span class="nav-number">2.5.</span> <span class="nav-text">时序补充说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件实现"><span class="nav-number">3.</span> <span class="nav-text">软件实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#起始-amp-停止时序软件实现"><span class="nav-number">3.1.</span> <span class="nav-text">起始&amp;停止时序软件实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应答检测-发送时序软件实现"><span class="nav-number">3.2.</span> <span class="nav-text">应答检测/发送时序软件实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据读-写时序软件实现"><span class="nav-number">3.3.</span> <span class="nav-text">数据读/写时序软件实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际通信软件实现"><span class="nav-number">3.4.</span> <span class="nav-text">实际通信软件实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议简介"><span class="nav-number">1.</span> <span class="nav-text">IIC协议简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议特点"><span class="nav-number">1.1.</span> <span class="nav-text">IIC协议特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议应用"><span class="nav-number">1.2.</span> <span class="nav-text">IIC协议应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC协议版本"><span class="nav-number">1.3.</span> <span class="nav-text">IIC协议版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IIC协议时序"><span class="nav-number">2.</span> <span class="nav-text">IIC协议时序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IIC的起始-amp-结束时序"><span class="nav-number">2.1.</span> <span class="nav-text">IIC的起始&amp;结束时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据阶段时序"><span class="nav-number">2.2.</span> <span class="nav-text">数据阶段时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时钟延展时序"><span class="nav-number">2.3.</span> <span class="nav-text">时钟延展时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SDA仲裁时序"><span class="nav-number">2.4.</span> <span class="nav-text">SDA仲裁时序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时序补充说明"><span class="nav-number">2.5.</span> <span class="nav-text">时序补充说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件实现"><span class="nav-number">3.</span> <span class="nav-text">软件实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#起始-amp-停止时序软件实现"><span class="nav-number">3.1.</span> <span class="nav-text">起始&amp;停止时序软件实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取时序-amp-发送应答软件实现"><span class="nav-number">3.2.</span> <span class="nav-text">读取时序&amp;发送应答软件实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际通信软件实现"><span class="nav-number">3.3.</span> <span class="nav-text">实际通信软件实现</span></a></li></ol></li></ol></div>
             
 
           </div>
