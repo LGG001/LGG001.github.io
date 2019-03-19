@@ -3,7 +3,7 @@
   <entry>
     <title></title>
     <url>%2F2019%2F03%2F19%2F%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3-UART%2F</url>
-    <content type="text"><![CDATA[title: 嵌入式硬件通信接口-UARTcopyright: truedate: 2019-03-19 22:28:03categories: mcu编程类tags: 嵌入式硬件通信接口copytight: LGG001photos: http://02.xiaolinjun.top/0a7-2.png 协议简介协议特点协议应用协议扩展协议时序数据帧结构通信速率软件协议UART在MCU中的特性通信数据协议制定环形队列应用]]></content>
+    <content type="text"><![CDATA[title: 嵌入式硬件通信接口-UARTcopyright: truedate: 2019-03-19 22:28:03categories: mcu编程类tags: 嵌入式硬件通信接口copytight: LGG001photos: http://02.xiaolinjun.top/0a8-0.png 协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 协议特点协议应用协议扩展协议时序数据帧结构通信速率软件协议UART在MCU中的特性通信数据协议制定环形队列应用]]></content>
   </entry>
   <entry>
     <title><![CDATA[嵌入式硬件通信接口-IIC]]></title>
