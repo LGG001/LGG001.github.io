@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[uFun学习之路开航篇]]></title>
-    <url>%2F2019%2F03%2F30%2FuFun%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF%E5%BC%80%E8%88%AA%E7%AF%87%2F</url>
-    <content type="text"><![CDATA[uFun学习板与我因最近刚好有点时间，再逛电子发烧友论坛是发现了uFun申请使用的活动，于是就尝试申请来学习，在此也非常感谢uFun作者与审核人员的认可。uFun学习板采用STM32F103RCT6为核心设计，4*6cm的板子搭载了众多外设：LED+LED-RGB、BUZZ、mini_pci_e接口、USB转TTL芯片CH340T、加速度传感器LIS3DH、4路触摸芯片TTP224N-BSB、MCP6001通用运放设计电路等等。需要注意的是，STM32F103RCT6的HSE时钟与CH340公用12M晶振，板子上有一条跳线 uFun开箱体验uFun的PCB采用沉金工艺，视觉上给人一种酷炫的感觉，加上小巧的板子上布满排列有序的元器件，足以体现作者的硬件功底，同时在线路板的关键地方上设计了测试点（TP1~TP20） uFun的正面有开关、触摸按键、加速度传感器、RGB、超级电容、蜂鸣器…等等，引出SW下载接口，两个BOOT引脚使用拨码开关控制（灵活的程序下载方式） uFun的背面有mini_pci_e接口、STM32F103RCT6、CH340、LED、TF卡槽（上面的TF卡是我买的）…等等，背面主要放置IC为主 uFun学习计划uFun的学习计划时间为两月，根据个人的情况进行如下安排： uFun学习板初体验（用时计划1周） uFun学习板简介 uFun学习板开发环境搭建 uFun学习板程序烧录&amp;仿真介绍 uFun学习板硬件设计原理（用时计划2周） STM32F103RCT6最小系统硬件电路设计 USB转TTL（CH340）硬件电路设计 触摸芯片TTP224N-BSBN硬件电路设计 RGB&amp;蜂鸣器硬件电路设计 MCP6001通用运放电路设计 MCP6001通用运放电路设计 其他部分电路设计 uFun学习板初级编程（用时计划4-5周） uFun编程入门-Demo工程建立 uFun编程入门-GPIO功能&amp;应用 uFun编程入门-Systick定时器功能&amp;应用 uFun编程入门-Timer功能&amp;应用 uFun编程入门-PWM功能&amp;应用 uFun编程入门-UART功能&amp;应用 uFun编程入门-ADC功能&amp;应用 uFun编程入门-IIC功能&amp;应用 uFun编程入门-RTC功能&amp;应用 uFun学习板高级编程（用时计划2-4周） uFun编程提高-SDIO功能&amp;应用 uFun编程提高-RTOS-RTX移植 uFun编程提高-RTOS-UCOSII移植 uFun编程提高-RTOS-RTThread移植]]></content>
-      <categories>
-        <category>其他</category>
-      </categories>
-      <tags>
-        <tag>uFun</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[嵌入式硬件通信接口-UART]]></title>
     <url>%2F2019%2F03%2F19%2F%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3-UART%2F</url>
     <content type="text"><![CDATA[UART协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 UART协议特点UART协议应用UART协议扩展UART协议时序数据帧结构通信速率UART软件协议实现UART在MCU中的特性通信数据协议制定环形队列应用]]></content>
