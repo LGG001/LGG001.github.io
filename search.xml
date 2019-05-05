@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[嵌入式硬件通信接口-UART]]></title>
     <url>%2F2019%2F03%2F19%2F%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%A1%AC%E4%BB%B6%E9%80%9A%E4%BF%A1%E6%8E%A5%E5%8F%A3-UART%2F</url>
-    <content type="text"><![CDATA[UART协议简介IIC（Inter-Integrated Circuit）也叫I2C，集成电路总线。在1982年由飞利浦半导体公司（现在叫恩智浦半导体）发明的一种同步的，多主机，多从机，数据包交换，半双工，串行计算机总线。于2006-10-10正式开源 UART协议特点UART协议应用UART协议扩展UART协议时序数据帧结构通信速率UART软件协议实现UART在MCU中的特性通信数据协议制定环形队列应用]]></content>
+    <content type="text"><![CDATA[UART协议简介UART(Universal Asynchronous Receiver/Transmitter)，通用异步收发器。UART在一开始发明出来的时候用作电脑硬件的一部分，主要作用是将数据通过串行通信和并行通信间作传输转换，后来UART作为微处理器的外设应用非常广泛，同时在UART上追加同步的时钟信号，称为USART（Universal Synchronous Asynchronous Receiver Transmitter）。UART它包括RS232、RS449、RS422和RS485等接口标准规范和总线规范，是异步串行通信口的总称。可以理解为UART通信协议是软件上的通信网络中的数据链路层，表示数据传输协议。而RS232、RS485是通信接口的电器特性和连接特性、机械特性等硬件上的范畴，属于物理层 UART协议特点UART通信可以是半双工、全双工，在空闲状态（没有数据传输期间）保持高电平， UART协议应用UART协议扩展UART协议时序数据帧结构通信速率UART软件协议实现UART在MCU中的特性通信数据协议制定环形队列应用]]></content>
       <categories>
         <category>mcu编程类</category>
       </categories>
