@@ -126,7 +126,7 @@
 <meta property="og:description" content="UART协议简介UART(Universal Asynchronous Receiver/Transmitter)，通用异步收发器。UART在一开始发明出来的时候用作电脑硬件的一部分，主要作用是将数据通过串行通信和并行通信间作传输转换，后来UART作为微处理器的外设应用非常广泛，同时在UART上追加同步的时钟信号，称为USART（Universal Synchronous Asynchronous">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a8-0.png">
-<meta property="og:updated_time" content="2019-05-05T15:08:29.487Z">
+<meta property="og:updated_time" content="2019-05-07T09:11:27.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通信接口-UART">
 <meta name="twitter:description" content="UART协议简介UART(Universal Asynchronous Receiver/Transmitter)，通用异步收发器。UART在一开始发明出来的时候用作电脑硬件的一部分，主要作用是将数据通过串行通信和并行通信间作传输转换，后来UART作为微处理器的外设应用非常广泛，同时在UART上追加同步的时钟信号，称为USART（Universal Synchronous Asynchronous">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  438 字
+                  696 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a8-0.png" rel="gallery_cjvb2mwkv001jf0tki4df9yrw"
+                 href="http://02.xiaolinjun.top/0a8-0.png" rel="gallery_cjvdkrluy001j70tkz93161n0"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a8-0.png" itemprop="contentUrl"/>
               </a>
@@ -487,7 +487,29 @@
         <h1 id="UART协议简介"><a href="#UART协议简介" class="headerlink" title="UART协议简介"></a>UART协议简介</h1><p>UART(Universal Asynchronous Receiver/Transmitter)，通用异步收发器。UART在一开始发明出来的时候用作电脑硬件的一部分，主要作用是将数据通过串行通信和并行通信间作传输转换，后来UART作为微处理器的外设应用非常广泛，同时在UART上追加同步的时钟信号，称为USART（Universal Synchronous Asynchronous Receiver Transmitter）。UART它包括RS232、RS449、RS422和RS485等接口标准规范和总线规范，是异步串行通信口的总称。可以理解为UART通信协议是软件上的通信网络中的数据链路层，表示数据传输协议。而RS232、RS485是通信接口的电器特性和连接特性、机械特性等硬件上的范畴，属于物理层  </p>
 <h2 id="UART协议特点"><a href="#UART协议特点" class="headerlink" title="UART协议特点"></a>UART协议特点</h2><p>UART通信可以是半双工、全双工，在空闲状态（没有数据传输期间）保持高电平，表示传输线路正常。每一个字符为一帧数据，以逻辑低电平为开始比特，然后是数据比特，可选的奇偶校验比特，最后是一个或多个停止比特（逻辑高电平）。大部分的应用都是先传输低位数据比特  </p>
 <h2 id="UART协议应用"><a href="#UART协议应用" class="headerlink" title="UART协议应用"></a>UART协议应用</h2><p>UART应用是非常广泛的，在早期的电脑中都会带一个RS232的接口，后来变为USB口。目前市场上绝大部分的微处理器（MCU）都带有UART硬件，可用于通信或应用程序下载。需要注意的是MCU上的UART是TTL电平  </p>
-<h1 id="UART协议时序"><a href="#UART协议时序" class="headerlink" title="UART协议时序"></a>UART协议时序</h1><h2 id="数据帧结构"><a href="#数据帧结构" class="headerlink" title="数据帧结构"></a>数据帧结构</h2><h2 id="通信速率"><a href="#通信速率" class="headerlink" title="通信速率"></a>通信速率</h2><h1 id="UART软件协议实现"><a href="#UART软件协议实现" class="headerlink" title="UART软件协议实现"></a>UART软件协议实现</h1><h2 id="UART在MCU中的特性"><a href="#UART在MCU中的特性" class="headerlink" title="UART在MCU中的特性"></a>UART在MCU中的特性</h2><h2 id="通信数据协议制定"><a href="#通信数据协议制定" class="headerlink" title="通信数据协议制定"></a>通信数据协议制定</h2><h2 id="环形队列应用"><a href="#环形队列应用" class="headerlink" title="环形队列应用"></a>环形队列应用</h2>
+<h1 id="UART协议时序"><a href="#UART协议时序" class="headerlink" title="UART协议时序"></a>UART协议时序</h1><p>UART时序包含：起始位、数据位、奇偶校验位（可选）、停止位。在无数据传输的期间（空闲状态下），数据线保持高电平；通信过程中，先发送1bit起始位（低电平），接着发送数据位（数据位多少由用户配置决定，通常为8bit，也就是1Byte），发送完数据位后接着发送1bit奇偶校验位1bit（根据通信决定可选择不发送，一般都配置为无奇偶校验），最后发送停止位(通常位1bit)。数据位选择、奇偶校验位选择和停止位选择如下表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">起始位</th>
+<th style="text-align:center">数据位</th>
+<th style="text-align:center">奇偶校验位</th>
+<th style="text-align:center">停止位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1(bit)</td>
+<td style="text-align:center">5、6、7、8(bit)</td>
+<td style="text-align:center">奇校验或偶校验(1bit)、无</td>
+<td style="text-align:center">1、1.5、2(bit)</td>
+</tr>
+</tbody>
+</table>
+<p><em>注：奇偶校验位-当配置为奇校验时，数据位中数据‘1’的个数+奇偶校验位 = 奇数；偶校验同理</em></p>
+<h2 id="数据帧结构"><a href="#数据帧结构" class="headerlink" title="数据帧结构"></a>数据帧结构</h2><p>UART通信配置：起始位1bit+数据位8bit+无奇偶校验+停止位1bit。通信数据帧如下图：  </p>
+<p><img src="http://02.xiaolinjun.top/0a8-1.png" alt=""></p>
+<h2 id="通信速率"><a href="#通信速率" class="headerlink" title="通信速率"></a>通信速率</h2><h1 id="UART软件协议实现"><a href="#UART软件协议实现" class="headerlink" title="UART软件协议实现"></a>UART软件协议实现</h1><h2 id="UART在MCU中的特性"><a href="#UART在MCU中的特性" class="headerlink" title="UART在MCU中的特性"></a>UART在MCU中的特性</h2><h2 id="通信数据协议制定"><a href="#通信数据协议制定" class="headerlink" title="通信数据协议制定"></a>通信数据协议制定</h2><h2 id="环形队列应用"><a href="#环形队列应用" class="headerlink" title="环形队列应用"></a>环形队列应用</h2>
       
     </div>
     
@@ -506,7 +528,7 @@
   <p><span>本文标题:</span><a href="/2019/03/19/嵌入式硬件通信接口-UART/">嵌入式硬件通信接口-UART</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年03月19日 - 23:03</p>
-  <p><span>最后更新:</span>2019年05月05日 - 23:05</p>
+  <p><span>最后更新:</span>2019年05月07日 - 17:05</p>
   <p><span>原始链接:</span><a href="/2019/03/19/嵌入式硬件通信接口-UART/" title="嵌入式硬件通信接口-UART">http://yoursite.com/2019/03/19/嵌入式硬件通信接口-UART/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/03/19/嵌入式硬件通信接口-UART/"  aria-label="复制成功！"></i></span>
   </p>
