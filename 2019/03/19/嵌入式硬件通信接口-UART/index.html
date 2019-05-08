@@ -126,7 +126,7 @@
 <meta property="og:description" content="UART协议简介UART(Universal Asynchronous Receiver/Transmitter)，通用异步收发器。UART在一开始发明出来的时候用作电脑硬件的一部分，主要作用是将数据通过串行通信和并行通信间作传输转换，后来UART作为微处理器的外设应用非常广泛，同时在UART上追加同步的时钟信号，称为USART（Universal Synchronous Asynchronous">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a8-0.png">
-<meta property="og:updated_time" content="2019-05-08T02:27:47.500Z">
+<meta property="og:updated_time" content="2019-05-08T03:02:51.580Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嵌入式硬件通信接口-UART">
 <meta name="twitter:description" content="UART协议简介UART(Universal Asynchronous Receiver/Transmitter)，通用异步收发器。UART在一开始发明出来的时候用作电脑硬件的一部分，主要作用是将数据通过串行通信和并行通信间作传输转换，后来UART作为微处理器的外设应用非常广泛，同时在UART上追加同步的时钟信号，称为USART（Universal Synchronous Asynchronous">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,052 字
+                  1,120 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a8-0.png" rel="gallery_cjvels6pj001cv8tkgv7a9kzu"
+                 href="http://02.xiaolinjun.top/0a8-0.png" rel="gallery_cjven13nw001i4gtkefo9zb23"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a8-0.png" itemprop="contentUrl"/>
               </a>
@@ -513,7 +513,14 @@
 <p>UART通信中，1个bit表现为高电平或低电平，在这种情况下是9600bps = 9600bit的，一帧数据 = 起始位1bit+数据位8bit+无奇偶校验+停止位1bit = 10bit，9600bps的实际有效数据就是9600/10 = 960Byte  </p>
 <p><em>注：当一个一个码元符号表示两个bit时，比特率 = 波特率 x 2</em></p>
 <h1 id="UART协议在MCU中的应用"><a href="#UART协议在MCU中的应用" class="headerlink" title="UART协议在MCU中的应用"></a>UART协议在MCU中的应用</h1><p>目前市场上大部分的MCU都带有UART外设，以STM32F103RCT6型号为例，该型号MCU带有数个USART（Universal Synchronous Asynchronous Receiver Transmitter），比UART多了一个时钟同步信号线（该功能比较少用），还有有CTS与RTS信号引脚，可用于流控[^有软件和硬件两种]。UART大量应用在数据收发的通信场合，因此一个好的算法处理收发过程的数据是很必要的，下面介绍一个常用的队列结构在UART收发上的应用  </p>
-<p>例子中</p>
+<p>下面例子使用的环境如下：  </p>
+<ul>
+<li>Windows10  </li>
+<li>ARM KEIL MDK V5.25</li>
+<li>Thermal Printer MainBoard V1.0（STM32F103RC开发板也可以直接使用）</li>
+<li>DAPLink（或其他支持SWD下载方式的下载器,如ST-LINK）</li>
+<li>友善串口调试助手（支持串口调试的终端都可以）</li>
+</ul>
 <h2 id="环形队列应用"><a href="#环形队列应用" class="headerlink" title="环形队列应用"></a>环形队列应用</h2>
       
     </div>
@@ -533,7 +540,7 @@
   <p><span>本文标题:</span><a href="/2019/03/19/嵌入式硬件通信接口-UART/">嵌入式硬件通信接口-UART</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年03月19日 - 23:03</p>
-  <p><span>最后更新:</span>2019年05月08日 - 10:05</p>
+  <p><span>最后更新:</span>2019年05月08日 - 11:05</p>
   <p><span>原始链接:</span><a href="/2019/03/19/嵌入式硬件通信接口-UART/" title="嵌入式硬件通信接口-UART">http://yoursite.com/2019/03/19/嵌入式硬件通信接口-UART/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/03/19/嵌入式硬件通信接口-UART/"  aria-label="复制成功！"></i></span>
   </p>
