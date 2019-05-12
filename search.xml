@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Linear speed control of stepper motor]]></title>
     <url>%2F2019%2F05%2F12%2FLinear%20speed%20control%20of%20stepper%20motor%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛。–百度百科]]></content>
       <categories>
         <category>嵌入式应用</category>
       </categories>
