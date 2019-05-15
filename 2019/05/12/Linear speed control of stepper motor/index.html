@@ -126,7 +126,7 @@
 <meta property="og:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a9-0.jpg">
-<meta property="og:updated_time" content="2019-05-15T15:45:03.119Z">
+<meta property="og:updated_time" content="2019-05-15T15:51:03.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear speed control of stepper motor">
 <meta name="twitter:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  631 字
+                  635 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjvpecatq000a1otk8c5hg5ev"
+                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjvpek2y50005sctkhgaa1a42"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a9-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -495,9 +495,9 @@
 <h1 id="Introduce"><a href="#Introduce" class="headerlink" title="Introduce"></a>Introduce</h1><p>本文主要描述怎样去实现步进电机的线速度控制，步进电机是一个电磁设备将数字脉冲转换为机械轴转动，使用这种电机有很多优点，例如因为没有电刷与触点存在所以使用跟简单、低成本、高可靠性、低速时转矩大、运动精度高，许多具有步进电机的系统在改变速度的时候需要控制加速度/减速度。本文也会提供一个例程，能够控制加速度、减速度、最大速度以及位置。内容大部分参考上面提供的相关参考资料  </p>
 <p>这种线性速度控制是基于2005年1月“嵌入式系统编程”提出的一种算法，D. Austin的一篇“实时生成步进电机速度曲线”文章。该算法只使用简单的定点算术运算没有数据表，可以实时地进行参数化和计算  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-4.png" alt=""></p>
-<h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><h2 id="Stepper-Motor"><a href="#Stepper-Motor" class="headerlink" title="Stepper Motor"></a>Stepper Motor</h2><p>本文内容涵盖了步进电机线速度控制原理以及在微控制器中的实现，这里默认读者已经熟悉步进电机的相关操作，如果想了解更多步进电机相关的内容可以参考下面D.W.Jones的一篇文章：Control of Stepper Motors   </p>
+<h1 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h1><h2 id="Stepper-motor"><a href="#Stepper-motor" class="headerlink" title="Stepper motor"></a>Stepper motor</h2><p>本文内容涵盖了步进电机线速度控制原理以及在微控制器中的实现，这里默认读者已经熟悉步进电机的相关操作，如果想了解更多步进电机相关的内容可以参考下面D.W.Jones的一篇文章：Control of Stepper Motors   </p>
 <p><a href="http://02.xiaolinjun.top/0a9-5.pdf" target="_blank" rel="noopener">Control of Stepper Motors</a></p>
-<p>trol</p>
+<h3 id="Full-vs-half-stepping"><a href="#Full-vs-half-stepping" class="headerlink" title="Full vs. half stepping"></a>Full vs. half stepping</h3><p>trol</p>
 
       
     </div>
@@ -806,7 +806,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduce"><span class="nav-number">1.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">2.</span> <span class="nav-text">Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stepper-Motor"><span class="nav-number">2.1.</span> <span class="nav-text">Stepper Motor</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduce"><span class="nav-number">1.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">2.</span> <span class="nav-text">Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stepper-motor"><span class="nav-number">2.1.</span> <span class="nav-text">Stepper motor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-vs-half-stepping"><span class="nav-number">2.1.1.</span> <span class="nav-text">Full vs. half stepping</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
