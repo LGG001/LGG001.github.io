@@ -126,7 +126,7 @@
 <meta property="og:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a9-0.jpg">
-<meta property="og:updated_time" content="2019-05-16T15:24:05.975Z">
+<meta property="og:updated_time" content="2019-05-16T15:37:26.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear speed control of stepper motor">
 <meta name="twitter:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  950 字
+                  981 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjvqt2aat0000i8tk5wk2vspn"
+                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjvqtib730008ootky11zdlvy"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a9-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -501,7 +501,61 @@
 <p><img src="http://02.xiaolinjun.top/0a9-6.png" alt=""></p>
 <p>双极型步进电机需要电流在两个方向上通过绕组驱动，需要一个完整的桥驱动器。单极步进电机允许一个更简单的驱动电路，限制电流向一个方向流动，单极步进电机的主要缺点是有限的能力去激励所有的绕组，导致较低的扭矩，单极步进电机可以通过断开中心抽头当做双极步进电机使用    </p>
 <p><img src="http://02.xiaolinjun.top/0a9-7.png" alt=""></p>
-<h3 id="Full-vs-half-stepping-1"><a href="#Full-vs-half-stepping-1" class="headerlink" title="Full vs. half stepping"></a>Full vs. half stepping</h3><p>步进电机使用全步进模式依次对每个线圈通电，这样有四种不同的设置，如Full-stepping行显示。通过同时驱动两个绕组，步进电机被困在全步的中间位置，也就是我们所知的半步，这给出了8个位置，如下表中的Half-stepping行显示，当为两个绕组供电时，转矩比一个绕组高出约1.4倍，但是以两倍的功耗为代价，一个机械周期通常包括一系列电气周期</p>
+<h3 id="Full-vs-half-stepping-1"><a href="#Full-vs-half-stepping-1" class="headerlink" title="Full vs. half stepping"></a>Full vs. half stepping</h3><p>步进电机使用全步进模式依次对每个线圈通电，这样有四种不同的位置，如Full-stepping行显示。而通过同时驱动两个绕组，步进电机被困在全步的中间位置，也就是我们所知的半步。半步有8个位置，如Half-stepping行显示，当为两个绕组供电时，转矩比一个绕组高出约1.4倍，但是以两倍的功耗为代价。一个机械周期（转动）通常包括数个电气周期，可以理解为步进电机转动一个步距角需要数个电脉冲脉冲  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Electric polarity</th>
+<th style="text-align:center">Winding A</th>
+<th style="text-align:center">+</th>
+<th style="text-align:center">+</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center">-</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"><strong>Winding B</strong></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><strong>+</strong></td>
+<td style="text-align:center"><strong>+</strong></td>
+<td style="text-align:center"><strong>+</strong></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><strong>-</strong></td>
+<td style="text-align:center"><strong>-</strong></td>
+<td style="text-align:center"><strong>-</strong></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Electrical cycle part</strong></td>
+<td style="text-align:center"><strong>Full-stepping</strong></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">3</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">4</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"><strong>Half-stepping</strong></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">8</td>
+</tr>
+</tbody>
+</table>
 <p>trol</p>
 
       
