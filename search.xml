@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Python应用-PyQt5串口助手]]></title>
     <url>%2F2019%2F07%2F01%2FPython%E5%BA%94%E7%94%A8-PyQt5%E4%B8%B2%E5%8F%A3%E5%8A%A9%E6%89%8B%2F</url>
-    <content type="text"><![CDATA[PyQt5]]></content>
+    <content type="text"><![CDATA[PyQt5环境安装PC环境介绍123Window 10Python 3.7PyCharm PyQt5环境安装 安装Sip 1pip3 install Sip 安装PyQt5 1pip3 install PyQt5 安装PyQt5 Tool 1pip install PyQt5-tools -i http://pypi.douban.com/simple --trusted-host=pypi.douban.com 安装pyserial 1pip install pyserial 添加环境变量 12QT_QPA_PLATFORM_PLUGIN_PATHC:\Python\Python37\Lib\site-packages\PyQt5\Qt\plugins PyQt5设计流程 Requirement 1功能需求。在设计之前先想好要做怎样的一个东西，它包含哪些功能，把功能做一个列表 UI Design 1UI设计分为两部分：Component(组件)和Layout(布局) Component 1组件。根据功能合理使用相应的组件 Layout 1布局。合理布局可以使得UI更加美观，操作更直观 UI Test 1UI测试。在使用UI组件和布局时，应该用实时预览功能测试组件使用是否符合预期，以便修改 Logical Code 1逻辑代码。编程过程使用逻辑与UI代码分离，逻辑代码实现预期的功能 Optimize 1优化。在测试代码过程中会发现很多小细节被遗漏，需要一步一步进行优化 PyQt5实战-Serial Tool V1.0]]></content>
       <categories>
         <category>Python</category>
       </categories>
