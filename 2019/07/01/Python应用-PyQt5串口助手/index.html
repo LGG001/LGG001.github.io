@@ -126,7 +126,7 @@
 <meta property="og:description" content="PyQt5环境安装PC环境介绍123Window 10Python 3.7PyCharm PyQt5环境安装 安装Sip 1pip3 install Sip  安装PyQt5 1pip3 install PyQt5  安装PyQt5 Tool 1pip install PyQt5-tools -i http://pypi.douban.com/simple --trusted-host=pypi.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://03.xiaolinjun.top/0c6-0.jpg">
-<meta property="og:updated_time" content="2019-07-01T11:25:11.227Z">
+<meta property="og:updated_time" content="2019-07-01T11:37:31.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python应用-PyQt5串口助手">
 <meta name="twitter:description" content="PyQt5环境安装PC环境介绍123Window 10Python 3.7PyCharm PyQt5环境安装 安装Sip 1pip3 install Sip  安装PyQt5 1pip3 install PyQt5  安装PyQt5 Tool 1pip install PyQt5-tools -i http://pypi.douban.com/simple --trusted-host=pypi.">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  308 字
+                  1,853 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  7 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://03.xiaolinjun.top/0c6-0.jpg" rel="gallery_cjxkarb690006hwtk9bkhejd5"
+                 href="http://03.xiaolinjun.top/0c6-0.jpg" rel="gallery_cjxkb71cn000a8otkv5y3r7gd"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://03.xiaolinjun.top/0c6-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -528,7 +528,54 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">优化。在测试代码过程中会发现很多小细节被遗漏，需要一步一步进行优化</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="PyQt5实战-Serial-Tool-V1-0"><a href="#PyQt5实战-Serial-Tool-V1-0" class="headerlink" title="PyQt5实战-Serial Tool V1.0"></a>PyQt5实战-Serial Tool V1.0</h1>
+<h1 id="PyQt5实战-Serial-Tool-V1-0"><a href="#PyQt5实战-Serial-Tool-V1-0" class="headerlink" title="PyQt5实战-Serial Tool V1.0"></a>PyQt5实战-Serial Tool V1.0</h1><p>MCU应用工程师/嵌入式开发工程师在实际的工作中需要经常对设备进行调试，一般情况是通过上位机对下位机进行调试。本文使用PyQt5快速开发一个特定功能的串口上位机Serial Tool V1.0，环境搭建可以参考第一部分的介绍</p>
+<h2 id="功能规划"><a href="#功能规划" class="headerlink" title="功能规划"></a>功能规划</h2><p>Serial Tool V1.0上位机根据需求实现一下功能：</p>
+<ol>
+<li>实现与下位机串口通信（参数不可变）</li>
+<li>可配置特定的输入通道、输出通道和和三组数据（0~1023）输出给下位机</li>
+<li>能接收下位机发送的信息，并格式化显示</li>
+</ol>
+<h2 id="UI-设计"><a href="#UI-设计" class="headerlink" title="UI 设计"></a>UI 设计</h2><p>功能明确后，开始进行UI设计。UI设计使用designer.exe，位于C:\Python37\Lib\site-packages\pyqt5_tools目录下，打开时建议以管理员身份运行</p>
+<p><em>注意：这里使用的是作者的Python的安装目录</em></p>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><p>UI designer中的组件非常丰富，对于Serial Tool V1.0只是用了其中很少的组件。组件提供了很多的事件接口，如按钮的按下和松开都可以出发一个事件，用户可以灵活地设计功能。UI designer中还支持信号槽，即通过某个组件的事件来触发一个行为，如按下按钮改变标签的内容。下面介绍Serial Tool V1.0中使用的相关组件</p>
+<p>Widget。小窗口，一般简单的GUI可以只使用Widget就够了。点击Nwe–&gt;Widget创建，然后在右边的Property Editor窗口修改相关属性（窗口大小，背景颜色…等等）  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-2.gif" alt="http://03.xiaolinjun.top/0c6-2.gif"></p>
+<p>QLabel。标签，使用率非常高的组件，通常配合其他组件用作说明、标识等等用途。在左边的组件栏选择QLabel组件拖放置到窗口中，然后双击修改内容，或者在在右边的Property Editor窗口修改内容及其相关属性（字体，字体大小，颜色，居中…等等），然后Ctrl+R可以预览窗口  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-3.gif" alt="http://03.xiaolinjun.top/0c6-3.gif"></p>
+<p>QComboBox。下拉列表框，通常用于有限选择的选项列表。在左边组件栏选择QComboBox组件拖放到窗口中，然后双击添加下拉列表内容，同理也可以在右边的Property Editor窗口修改内容及其相关属性（字体，字体大小，颜色，居中…等等），然后Ctrl+R预览窗口   </p>
+<p><img src="http://03.xiaolinjun.top/0c6-4.gif" alt="http://03.xiaolinjun.top/0c6-4.gif"></p>
+<p>QPushButton。按钮，用作与开关量，在UI设计中最常见的组件之一。在左边组件栏选择QPushButton组件拖放到窗口中，然后双击修改按键标题，同理也可以在右边的Property Editor窗口修改内容及其相关属性（字体，字体大小，颜色，居中…等等），然后Ctrl+R预览窗口  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-5.gif" alt="http://03.xiaolinjun.top/0c6-5.gif"></p>
+<p>QTextEdit。文本编辑框，用于输入文本或者接收文本显示使用。在左边组件栏选择QTextEdit组件拖放到窗口中，在右边的Property Editor窗口修改内容及其相关属性（字体，字体大小，颜色，居中…等等），然后Ctrl+R预览窗口  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-6.gif" alt="http://03.xiaolinjun.top/0c6-6.gif"></p>
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>组件选好后就开始布局，布局有以下四种</p>
+<p>Vertical Layout。垂直布局，让组件垂直排列。选择要垂直排列的组件，然后点击菜单栏的垂直布局的图标进行垂直布局  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-7.gif" alt="http://03.xiaolinjun.top/0c6-7.gif"></p>
+<p>Horizontal Layout。水平布局，让组件水平排列。选择要水平排列的组件，然后点击菜单栏的水平布局的图标进行水平布局  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-8.gif" alt="http://03.xiaolinjun.top/0c6-8.gif"></p>
+<p>Grid Layout。网格布局，让组件像网格一样有序排列。择要网格排列的组件，然后点击菜单栏的网格布局的图标进行网格布局  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-9.gif" alt="http://03.xiaolinjun.top/0c6-9.gif"></p>
+<p>Form Layout。表格布局，让组件像表格一样排列。择要表格排列的组件，然后点击菜单栏的表格布局的图标进行表格布局   </p>
+<p><img src="http://03.xiaolinjun.top/0c6-10.gif" alt="http://03.xiaolinjun.top/0c6-10.gif"></p>
+<p>布局决定了应用的美观，在一个窗口中通常由很多的组件组成，组件之间可以组成一个一个功能模块，因此布局在其中的应用也是多种方式组合的，下图为Serial Tool V1.0应用的组件和布局窗口  </p>
+<p><img src="http://03.xiaolinjun.top/0c6-11.png" alt="http://03.xiaolinjun.top/0c6-11.png"></p>
+<h1 id="PyQt5代码实现"><a href="#PyQt5代码实现" class="headerlink" title="PyQt5代码实现"></a>PyQt5代码实现</h1><p>UI设计好后，需要把.ui文件转为.py文件然后再应用。首先打开CMD命令行，然后切换到.ui文件所在的目录下，输入命令  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyuic5 -x -o my_ui.py my_ui.ui</span><br></pre></td></tr></table></figure>
+<p><em>注：上面的命令是把my_ui.ui文件转换为my_ui.py文件，用户根据需要修改文件名</em></p>
+<p>转换完成后使用PyCharm打开文件（或者使用python的IDLE打开），运行文件查看效果   </p>
+<p><img src="http://03.xiaolinjun.top/0c6-12.gif" alt="http://03.xiaolinjun.top/0c6-12.gif"></p>
+<p><em>注：pycharm打开单独的文件可能需要配置python解释器才能运行，具体操作可以百度一下</em></p>
+<p>到目前位置，根据预想的功能实现了Serial Tool V1.0的UI设计，并转换为py文件运行参看效果，从UI中可以知道后面需要用代码实现如下功能：</p>
+<ol>
+<li>扫描介入PC端的串口设备并显示在COM下拉列表框中</li>
+<li>当有设备接入时，按UI中的参数点击Open按钮打开串口，如果没有发现设备点击了Open需要提示错误信息</li>
+<li>打开串口后，修改左下相关参数点击Send按钮能把参数按一定的格式发送出去</li>
+<li>打开串口后，如果接收到信息，需要在文本编辑框中按一定的格式显示出来</li>
+</ol>
+<p>使用PyCharm新建Serial Tool V1.0工程，然后把ui文件复制到工程目录下，再新建一个用于存放逻辑代码的py文件（my_main.py），下面内容开始讲述相关的逻辑代码实现</p>
+<h2 id="导入相关库"><a href="#导入相关库" class="headerlink" title="导入相关库"></a>导入相关库</h2><p>程序中会使用很多python库，如果对python比较熟悉都是使用相关函数再导入与之相关的库，下面列出工程中需要导入的python库  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5 <span class="keyword">import</span> QtCore, QtGui, QtWidgets</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtCore <span class="keyword">import</span> QTimer</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtWidgets <span class="keyword">import</span> QApplication, QMessageBox</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> my_ui <span class="keyword">import</span> Ui_Form</span><br><span class="line"><span class="keyword">from</span> serial.tools.list_ports <span class="keyword">import</span> comports</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> serial</span><br></pre></td></tr></table></figure>
+<h2 id="Serial-Tool-V1-0运行流程"><a href="#Serial-Tool-V1-0运行流程" class="headerlink" title="Serial Tool V1.0运行流程"></a>Serial Tool V1.0运行流程</h2>
       
     </div>
     
@@ -836,7 +883,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5环境安装"><span class="nav-number">1.</span> <span class="nav-text">PyQt5环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PC环境介绍"><span class="nav-number">1.1.</span> <span class="nav-text">PC环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyQt5环境安装-1"><span class="nav-number">1.2.</span> <span class="nav-text">PyQt5环境安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5设计流程"><span class="nav-number">2.</span> <span class="nav-text">PyQt5设计流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5实战-Serial-Tool-V1-0"><span class="nav-number">3.</span> <span class="nav-text">PyQt5实战-Serial Tool V1.0</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5环境安装"><span class="nav-number">1.</span> <span class="nav-text">PyQt5环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PC环境介绍"><span class="nav-number">1.1.</span> <span class="nav-text">PC环境介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyQt5环境安装-1"><span class="nav-number">1.2.</span> <span class="nav-text">PyQt5环境安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5设计流程"><span class="nav-number">2.</span> <span class="nav-text">PyQt5设计流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5实战-Serial-Tool-V1-0"><span class="nav-number">3.</span> <span class="nav-text">PyQt5实战-Serial Tool V1.0</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#功能规划"><span class="nav-number">3.1.</span> <span class="nav-text">功能规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UI-设计"><span class="nav-number">3.2.</span> <span class="nav-text">UI 设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件"><span class="nav-number">3.2.1.</span> <span class="nav-text">组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layout"><span class="nav-number">3.2.2.</span> <span class="nav-text">Layout</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt5代码实现"><span class="nav-number">4.</span> <span class="nav-text">PyQt5代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入相关库"><span class="nav-number">4.1.</span> <span class="nav-text">导入相关库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Serial-Tool-V1-0运行流程"><span class="nav-number">4.2.</span> <span class="nav-text">Serial Tool V1.0运行流程</span></a></li></ol></li></ol></div>
             
 
           </div>
