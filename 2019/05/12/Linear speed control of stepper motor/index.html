@@ -126,7 +126,7 @@
 <meta property="og:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a9-0.jpg">
-<meta property="og:updated_time" content="2019-07-02T11:29:16.119Z">
+<meta property="og:updated_time" content="2019-07-02T11:48:46.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear speed control of stepper motor">
 <meta name="twitter:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,176 字
+                  1,206 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjxlqc8au0006mktkvjlbnmae"
+                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjxlr1bbf0006oktk7lyxyyde"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a9-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -561,7 +561,9 @@
 <h2 id="Fundamental-stepper-motor-equations"><a href="#Fundamental-stepper-motor-equations" class="headerlink" title="Fundamental stepper motor equations"></a>Fundamental stepper motor equations</h2><p>要使得步进电机转动，经过线圈的电流必须按照一定的顺序改变，可以通过一个特定方向的脉冲来实现。要使电机恒速装懂，那么给电机的脉冲也是在一定频率上的</p>
 <p><img src="http://02.xiaolinjun.top/0a9-9.png" alt="http://02.xiaolinjun.top/0a9-9.png"></p>
 <p>一个人计数器用于产生脉冲，计数器频率为f~t~[Hz]。计数器c产生延迟：</p>
-<p>$$<br>x+1\over\sqrt{1-x^2}\label{ref1}<br>$$</p>
+<p>δt = Ct~t~ = C/f</p>
+<p>步进电机的步距角为α，位置为θ，速度为ω，可以得到：</p>
+<p>α = 2Π/spr [rad]            θ = nα [rad]            ω = α/δt [rad/sec]</p>
 
       
     </div>
