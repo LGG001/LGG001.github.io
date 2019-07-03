@@ -126,7 +126,7 @@
 <meta property="og:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a9-0.jpg">
-<meta property="og:updated_time" content="2019-07-03T01:28:23.150Z">
+<meta property="og:updated_time" content="2019-07-03T01:34:53.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear speed control of stepper motor">
 <meta name="twitter:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,685 字
+                  1,674 字
                 </span>
               
 
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjxmkbn86002hh8tkyn0nr49g"
+                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjxmkjr47000z68tk12rhirhi"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a9-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -560,7 +560,7 @@
 <p><img src="http://02.xiaolinjun.top/0a9-8.png" alt=""></p>
 <h2 id="Fundamental-stepper-motor-equations"><a href="#Fundamental-stepper-motor-equations" class="headerlink" title="Fundamental stepper motor equations"></a>Fundamental stepper motor equations</h2><p>要使得步进电机转动，经过线圈的电流必须按照一定的顺序改变，可以通过一个特定方向的脉冲来实现。要使电机恒速装懂，那么给电机的脉冲也是在一定频率上的</p>
 <p><img src="http://02.xiaolinjun.top/0a9-9.png" alt="http://02.xiaolinjun.top/0a9-9.png"></p>
-<p>一个人计数器用于产生脉冲，计数器频率为f~t~[Hz]。计数器c产生延迟：  </p>
+<p>一个人计数器用于产生脉冲，计数器频率为ft[Hz]。计数器c产生延迟：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-10.png" alt="http://02.xiaolinjun.top/0a9-10.png"></p>
 <p>步进电机的步距角为α，位置为θ，速度为ω，可以得到：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-11.png" alt="http://02.xiaolinjun.top/0a9-11.png"></p>
@@ -569,12 +569,12 @@
 <p><img src="http://02.xiaolinjun.top/0a9-12.png" alt="http://02.xiaolinjun.top/0a9-12.png"></p>
 <p>步进电机脉冲之间的延迟δt控制转速，为了步进电机尽可能的接近速度斜率，必须计算这些时间延迟。通过定时器的频率决定每步之间的时间从而解决时间延迟的问题，实现离散步长控制步进电机运动  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-13.png" alt="http://02.xiaolinjun.top/0a9-13.png"></p>
-<h3 id="Exact-calculations-of-the-inter-step-delay"><a href="#Exact-calculations-of-the-inter-step-delay" class="headerlink" title="Exact calculations of the inter-step delay"></a>Exact calculations of the inter-step delay</h3><p>第一个计数器延迟C~0~以及之后的C~n~：  </p>
+<h3 id="Exact-calculations-of-the-inter-step-delay"><a href="#Exact-calculations-of-the-inter-step-delay" class="headerlink" title="Exact calculations of the inter-step delay"></a>Exact calculations of the inter-step delay</h3><p>第一个计数器延迟C0以及之后的Cn：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-14.png" alt="http://02.xiaolinjun.top/0a9-14.png"></p>
 <p>MCU的计算能力有限，计算开方运算是非常耗时的，因此需要考虑减少复杂度。当计数值为n时，使用泰勒公式展开得到：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-15.png" alt="http://02.xiaolinjun.top/0a9-15.png"></p>
-<p>这样的计算比开放要快得多，但是在n = 1时会引进0.44的误差，通过将C~0~乘以0.676的方法来进行补偿  </p>
-<h3 id="Change-in-acceleration"><a href="#Change-in-acceleration" class="headerlink" title="Change in acceleration"></a>Change in acceleration</h3><p>如后面的附录所示，加速度由C~0~和n给出，如果加速度或减速度发生变化，必须计算一个新的n值。时间t~n~和n作为电机加速度、速度和步距角的函数，得：   </p>
+<p>这样的计算比开放要快得多，但是在n = 1时会引进0.44的误差，通过将C0乘以0.676的方法来进行补偿  </p>
+<h3 id="Change-in-acceleration"><a href="#Change-in-acceleration" class="headerlink" title="Change in acceleration"></a>Change in acceleration</h3><p>如后面的附录所示，加速度由C0和n给出，如果加速度或减速度发生变化，必须计算一个新的n值。时间tn和n作为电机加速度、速度和步距角的函数，得：   </p>
 <p><img src="http://02.xiaolinjun.top/0a9-16.png" alt="http://02.xiaolinjun.top/0a9-16.png"></p>
 <p>整合方程得：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-17.png" alt="http://02.xiaolinjun.top/0a9-17.png"></p>
@@ -582,7 +582,7 @@
 <p><img src="http://02.xiaolinjun.top/0a9-18.png" alt="http://02.xiaolinjun.top/0a9-18.png"></p>
 <p>意味着可以通过n来改变加速度或减速度：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-19.png" alt="http://02.xiaolinjun.top/0a9-19.png"></p>
-<p>移动一个给定得部署，减速必须在正确得步数开始到0速度结束，可以统辖下面公式得到n~1~：  </p>
+<p>移动一个给定得部署，减速必须在正确得步数开始到0速度结束，可以通过下面公式得到n1：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-20.png" alt="http://02.xiaolinjun.top/0a9-20.png"></p>
 <h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><h2 id="Counter-delay"><a href="#Counter-delay" class="headerlink" title="Counter delay"></a>Counter delay</h2><p>给定时刻的速度为：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-21.png" alt="http://02.xiaolinjun.top/0a9-21.png"></p>
