@@ -126,7 +126,7 @@
 <meta property="og:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://02.xiaolinjun.top/0a9-0.jpg">
-<meta property="og:updated_time" content="2019-07-03T08:51:22.968Z">
+<meta property="og:updated_time" content="2019-07-03T12:10:43.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear speed control of stepper motor">
 <meta name="twitter:description" content="步进电机是步进电机是将电脉冲信号转变为角位移或线位移的开环控制电机，是现代数字程序控制系统中的主要执行元件，应用极为广泛–百度百科     步进电机的特点就是能够通过脉冲精准控制位置并能提供大扭力，输入一个脉冲转动一个角度（称为步距角）。步进电机的特点使得应用场合非常广泛，如ATM机、刻字机、医疗设备、机器人等等    步进电机带大负载工作时，如果让步进电机均速运行会出现一个抖动的现象（这是由于惯">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,734 字
+                  3,578 字
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  10 分钟
+                  13 分钟
                 </span>
               
             </div>
@@ -471,7 +471,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjxn0534p002itstk2p8qvqan"
+                 href="http://02.xiaolinjun.top/0a9-0.jpg" rel="gallery_cjxn79ghl002umstkoefkahzo"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://02.xiaolinjun.top/0a9-0.jpg" itemprop="contentUrl"/>
               </a>
@@ -574,7 +574,7 @@
 <p>MCU的计算能力有限，计算开方运算是非常耗时的，因此需要考虑减少复杂度。当计数值为n时，使用泰勒公式展开得到：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-15.png" alt="http://02.xiaolinjun.top/0a9-15.png"></p>
 <p>这样的计算比开放要快得多，但是在n = 1时会引进0.44的误差，通过将C0乘以0.676的方法来进行补偿  </p>
-<h3 id="Change-in-acceleration"><a href="#Change-in-acceleration" class="headerlink" title="Change in acceleration"></a>Change in acceleration</h3><p>如后面的附录所示，加速度由C0和n给出，如果加速度或减速度发生变化，必须计算一个新的n值。时间tn和n作为电机加速度、速度和步距角的函数，得：   </p>
+<h3 id="Change-in-acceleration"><a href="#Change-in-acceleration" class="headerlink" title="Change in acceleration"></a>Change in acceleration</h3><p>如后面的Appendix所示，加速度由C0和n给出，如果加速度或减速度发生变化，必须计算一个新的n值。时间tn和n作为电机加速度、速度和步距角的函数，得：   </p>
 <p><img src="http://02.xiaolinjun.top/0a9-16.png" alt="http://02.xiaolinjun.top/0a9-16.png"></p>
 <p>整合方程得：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-17.png" alt="http://02.xiaolinjun.top/0a9-17.png"></p>
@@ -633,8 +633,33 @@
 <p><img src="http://02.xiaolinjun.top/0a9-36.png" alt="http://02.xiaolinjun.top/0a9-36.png"></p>
 <p>accel_lim是减速开始前得步数  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-37.png" alt="http://02.xiaolinjun.top/0a9-37.png"></p>
-<p>如果max_s_lim小于accel_lim，加速度被期望得速度限制，decel_val值为  </p>
+<p>如果max_s_lim小于accel_lim，加速度被最大速度限制，decal_val为    </p>
 <p><img src="http://02.xiaolinjun.top/0a9-38.png" alt="http://02.xiaolinjun.top/0a9-38.png"></p>
+<h4 id="Deceleration-starts-before-desired-speed-is-reached"><a href="#Deceleration-starts-before-desired-speed-is-reached" class="headerlink" title="Deceleration starts before desired speed is reached"></a>Deceleration starts before desired speed is reached</h4><p>在达到期望速度之前开始减速  </p>
+<p><img src="http://02.xiaolinjun.top/0a9-39.png" alt="http://02.xiaolinjun.top/0a9-39.png"></p>
+<p>如果max_s_lim大于accel_lim，加速度受限于减速开始，decal_val为   </p>
+<p><img src="http://02.xiaolinjun.top/0a9-40.png" alt="http://02.xiaolinjun.top/0a9-40.png"></p>
+<h3 id="Timer-interrupt"><a href="#Timer-interrupt" class="headerlink" title="Timer interrupt"></a>Timer interrupt</h3><p>定时器中断产生步进脉冲（调用StepCounter()）函数，并且只有当步进电机运行时才会产生中断，定时器中断按照速度曲线运行在电机得四种不同得状态下  </p>
+<p><img src="http://02.xiaolinjun.top/0a9-41.png" alt="http://02.xiaolinjun.top/0a9-41.png"></p>
+<p>在中断中实现四种状态得切换  </p>
+<p><img src="http://02.xiaolinjun.top/0a9-42.png" alt="http://02.xiaolinjun.top/0a9-42.png"></p>
+<p>当程序开始或步进电机停止时，处于STOP状态下。当计算完成，一个新的状态置位并且使能中断。当移动得步数大于1，状态变为ACCEL，如果只有一步，状态变为DECEL  </p>
+<p>当处于ACCEL状态时，步进电机会加速到期望得速度进入RUN状态或者必须开始减速而进入DECEL状态。当处于RUN状态时，步进电机保持在最大速度知道必须开始减速而进入DECEL状态  </p>
+<p>最后保持DECEL状态运行完减速得步数后速度变为0进入STOP状态</p>
+<h4 id="Calculations-and-counters"><a href="#Calculations-and-counters" class="headerlink" title="Calculations and counters"></a>Calculations and counters</h4><p>在加速和减速过程得每一步，必须计算出来一个新的延迟值。计算结果会有一个余数，为了提高精度，该余数会累计到下一个计算中   </p>
+<p><img src="http://02.xiaolinjun.top/0a9-43.png" alt="http://02.xiaolinjun.top/0a9-43.png"></p>
+<p>为了追踪位置和改变状态，需要一些用于计数得变量  </p>
+<p><img src="http://02.xiaolinjun.top/0a9-44.png" alt="http://02.xiaolinjun.top/0a9-44.png"></p>
+<p>step_count。记录步数，在加速过程从0开始并在减速完成后与设定得步数值一致  </p>
+<p>accel_count。用于控制加速/减速。在ACCEL状态时不断递增直到ZCCEL状态结束。在DECEL状态时，它被设置为decel_val（该值是一个负数）一直递增到0运动结束，状态被设为STOP  </p>
+<p>decel_start。告知何时开始减速，当step_count等于decel_start时进入DECEL状态</p>
+<h2 id="Stepper-motor-driver"><a href="#Stepper-motor-driver" class="headerlink" title="Stepper motor driver"></a>Stepper motor driver</h2><p>步进电机驱动生成一个正确得脉冲序号开控制步进电机按照命令方向进行移动，步进电机驱动框图如下  </p>
+<p><img src="http://02.xiaolinjun.top/0a9-45.png" alt="http://02.xiaolinjun.top/0a9-45.png"></p>
+<p>在每次调用Step_Counter时，步数计数器都会递增或递减（跟方向有关），当使用全步时，计数器值从0到3，使用半步则是从0到7。这个值等于步进电机在一个电循环中的不同位置。用作步骤表的索引，并且给出正确的信号</p>
+<h2 id="Code-size-and-speed"><a href="#Code-size-and-speed" class="headerlink" title="Code size and speed"></a>Code size and speed</h2><p>完整得例程占用4K大小程序存储器，速度控制和步进电机驱动占了1.5K，删除预编译得参数可以使得代码减速（运行速度可能会变慢）</p>
+<p>当调用Move()时，在定时器中断开始前就完成计算，从调用函数到步进电机的启动其中大约会有1.5ms的延迟，定时器中断在执行加减速计算过程中，每运算一次大约需要200us，运行在恒速的时候计算一次大约需要35us。最大的速度受到加减速的限制，对于一个400步每圈的步进电机来说，最大速度为  </p>
+<p><img src="http://02.xiaolinjun.top/0a9-46.png" alt="http://02.xiaolinjun.top/0a9-46.png"></p>
+<p>在其他应用上执行此代码，必须考虑中断的问题。如果步进电机的定时器中断被另一个中断给打断，步进电机的速度会变化（非预期变化），在特定的应用程序中可能不是很关键，但是让程序运行稳定总是对的</p>
 <h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><h2 id="Counter-delay"><a href="#Counter-delay" class="headerlink" title="Counter delay"></a>Counter delay</h2><p>给定时刻的速度为：  </p>
 <p><img src="http://02.xiaolinjun.top/0a9-21.png" alt="http://02.xiaolinjun.top/0a9-21.png"></p>
 <p>位置可由下面公式得到：  </p>
@@ -672,7 +697,7 @@
   <p><span>本文标题:</span><a href="/2019/05/12/Linear speed control of stepper motor/">Linear speed control of stepper motor</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 LGG001 的个人博客">LGG001</a></p>
   <p><span>发布时间:</span>2019年05月12日 - 22:05</p>
-  <p><span>最后更新:</span>2019年07月03日 - 16:07</p>
+  <p><span>最后更新:</span>2019年07月03日 - 20:07</p>
   <p><span>原始链接:</span><a href="/2019/05/12/Linear speed control of stepper motor/" title="Linear speed control of stepper motor">http://yoursite.com/2019/05/12/Linear speed control of stepper motor/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/05/12/Linear speed control of stepper motor/"  aria-label="复制成功！"></i></span>
   </p>
@@ -965,7 +990,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduce"><span class="nav-number">1.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">2.</span> <span class="nav-text">Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stepper-motor"><span class="nav-number">2.1.</span> <span class="nav-text">Stepper motor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-vs-half-stepping"><span class="nav-number">2.1.1.</span> <span class="nav-text">Full vs. half stepping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-vs-half-stepping-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">Full vs. half stepping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Speed-properties"><span class="nav-number">2.1.3.</span> <span class="nav-text">Speed properties</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fundamental-stepper-motor-equations"><span class="nav-number">2.2.</span> <span class="nav-text">Fundamental stepper motor equations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-speed-ramp"><span class="nav-number">2.3.</span> <span class="nav-text">Linear speed ramp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exact-calculations-of-the-inter-step-delay"><span class="nav-number">2.3.1.</span> <span class="nav-text">Exact calculations of the inter-step delay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-in-acceleration"><span class="nav-number">2.3.2.</span> <span class="nav-text">Change in acceleration</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Menu-and-command-interface"><span class="nav-number">3.1.</span> <span class="nav-text">Menu and command interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speed-controller"><span class="nav-number">3.2.</span> <span class="nav-text">Speed controller</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-calculations"><span class="nav-number">3.2.1.</span> <span class="nav-text">Setup calculations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Acceleration-continues-until-desired-speed-is-reached"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">Acceleration continues until desired speed is reached</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-delay"><span class="nav-number">4.1.</span> <span class="nav-text">Counter delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inter-step-delay"><span class="nav-number">4.2.</span> <span class="nav-text">Inter-step delay</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduce"><span class="nav-number">1.</span> <span class="nav-text">Introduce</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Theory"><span class="nav-number">2.</span> <span class="nav-text">Theory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Stepper-motor"><span class="nav-number">2.1.</span> <span class="nav-text">Stepper motor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-vs-half-stepping"><span class="nav-number">2.1.1.</span> <span class="nav-text">Full vs. half stepping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-vs-half-stepping-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">Full vs. half stepping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Speed-properties"><span class="nav-number">2.1.3.</span> <span class="nav-text">Speed properties</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fundamental-stepper-motor-equations"><span class="nav-number">2.2.</span> <span class="nav-text">Fundamental stepper motor equations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-speed-ramp"><span class="nav-number">2.3.</span> <span class="nav-text">Linear speed ramp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Exact-calculations-of-the-inter-step-delay"><span class="nav-number">2.3.1.</span> <span class="nav-text">Exact calculations of the inter-step delay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Change-in-acceleration"><span class="nav-number">2.3.2.</span> <span class="nav-text">Change in acceleration</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Menu-and-command-interface"><span class="nav-number">3.1.</span> <span class="nav-text">Menu and command interface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Speed-controller"><span class="nav-number">3.2.</span> <span class="nav-text">Speed controller</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Setup-calculations"><span class="nav-number">3.2.1.</span> <span class="nav-text">Setup calculations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Acceleration-continues-until-desired-speed-is-reached"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">Acceleration continues until desired speed is reached</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deceleration-starts-before-desired-speed-is-reached"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">Deceleration starts before desired speed is reached</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timer-interrupt"><span class="nav-number">3.2.2.</span> <span class="nav-text">Timer interrupt</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Calculations-and-counters"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">Calculations and counters</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stepper-motor-driver"><span class="nav-number">3.3.</span> <span class="nav-text">Stepper motor driver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Code-size-and-speed"><span class="nav-number">3.4.</span> <span class="nav-text">Code size and speed</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Counter-delay"><span class="nav-number">4.1.</span> <span class="nav-text">Counter delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inter-step-delay"><span class="nav-number">4.2.</span> <span class="nav-text">Inter-step delay</span></a></li></ol></li></ol></div>
             
 
           </div>
